@@ -24,4 +24,24 @@ struct BrandItemsList: View {
 }
 
 #Preview {
+    BrandItemsList(
+        brands: [
+            Brand(
+                id: 1,
+                name: "Nike",
+                imageUrl: nil
+            ),
+            Brand(
+                id: 1,
+                name: "Nike",
+                imageUrl: nil
+            ),
+            Brand(
+                id: 1,
+                name: "Nike",
+                imageUrl: nil
+            )
+        ]
+    )
+    .padding()
 }

@@ -33,4 +33,13 @@ struct BrandSectionView: View {
 }
 
 #Preview {
+    BrandSectionView(
+        brands: [
+            Brand(id: 1, name: "Nike", imageUrl: nil),
+            Brand(id: 2, name: "Adidas", imageUrl: nil),
+            Brand(id: 3, name: "Puma", imageUrl: nil)
+        ],
+        onTap: { print("see all tapped") }
+    )
+    .padding()
 }

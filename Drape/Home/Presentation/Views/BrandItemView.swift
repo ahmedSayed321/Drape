@@ -51,4 +51,14 @@ struct BrandItemView: View {
 }
 
 #Preview {
+    BrandItemView(
+        brand: Brand(
+            id: 1,
+            name: "Nike",
+            imageUrl: nil
+        ),
+        onTap: { print("brand tapped") }
+    )
+    .padding()
+    .previewLayout(.sizeThatFits)
 }

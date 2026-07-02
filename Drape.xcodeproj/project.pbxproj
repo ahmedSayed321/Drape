@@ -16,6 +16,10 @@
 		4133DE562FF4103800291657 /* Color+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4133DE552FF4103800291657 /* Color+Extenstion.swift */; };
 		4133DE582FF4118400291657 /* BrandItemsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4133DE572FF4118400291657 /* BrandItemsList.swift */; };
 		4133DE5A2FF4129900291657 /* BrandSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4133DE592FF4129900291657 /* BrandSectionView.swift */; };
+		41AA270C2FF69FF700BF6DA0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 41AA270B2FF69FF700BF6DA0 /* Alamofire */; };
+		41AA27102FF6A50E00BF6DA0 /* RangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA270F2FF6A50E00BF6DA0 /* RangeSliderView.swift */; };
+		41AA27122FF6A55E00BF6DA0 /* FilterSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA27112FF6A55E00BF6DA0 /* FilterSheetView.swift */; };
+		41AA27172FF6A8C100BF6DA0 /* OptionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA27162FF6A8C100BF6DA0 /* OptionDTO.swift */; };
 		41B03E8F2FEFCE2A00521C14 /* DrapeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B03E8E2FEFCE2A00521C14 /* DrapeApp.swift */; };
 		41B03E912FEFCE2A00521C14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B03E902FEFCE2A00521C14 /* ContentView.swift */; };
 		41B03E952FEFCE2E00521C14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41B03E942FEFCE2E00521C14 /* Assets.xcassets */; };
@@ -32,7 +36,6 @@
 		9F4DDE6A2FF06F4700B9D2F0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */; };
 		9F7F65BB2FF0B4AA00974E84 /* HomeProductsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7F65BA2FF0B4AA00974E84 /* HomeProductsGridView.swift */; };
 		9FB047E22FF5C1C200F24615 /* ShopifyNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB047E12FF5C1C200F24615 /* ShopifyNetworkManager.swift */; };
-		9FB047E52FF5C45E00F24615 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9FB047E42FF5C45E00F24615 /* Alamofire */; };
 		9FB047EB2FF5D21D00F24615 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9FB047EA2FF5D21D00F24615 /* Secrets.xcconfig */; };
 		9FB047EE2FF5DC5200F24615 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB047ED2FF5DC5200F24615 /* APIConfig.swift */; };
 		9FB047F02FF5F0A000F24615 /* ShopifyNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB047EF2FF5F0A000F24615 /* ShopifyNetworkService.swift */; };
@@ -77,6 +80,9 @@
 		4133DE552FF4103800291657 /* Color+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extenstion.swift"; sourceTree = "<group>"; };
 		4133DE572FF4118400291657 /* BrandItemsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandItemsList.swift; sourceTree = "<group>"; };
 		4133DE592FF4129900291657 /* BrandSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandSectionView.swift; sourceTree = "<group>"; };
+		41AA270F2FF6A50E00BF6DA0 /* RangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSliderView.swift; sourceTree = "<group>"; };
+		41AA27112FF6A55E00BF6DA0 /* FilterSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheetView.swift; sourceTree = "<group>"; };
+		41AA27162FF6A8C100BF6DA0 /* OptionDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionDTO.swift; sourceTree = "<group>"; };
 		41B03E8B2FEFCE2A00521C14 /* Drape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B03E8E2FEFCE2A00521C14 /* DrapeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrapeApp.swift; sourceTree = "<group>"; };
 		41B03E902FEFCE2A00521C14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,7 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB047E52FF5C45E00F24615 /* Alamofire in Frameworks */,
+				41AA270C2FF69FF700BF6DA0 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +267,8 @@
 				4133DE522FF40ECA00291657 /* BrandItemView.swift */,
 				4133DE572FF4118400291657 /* BrandItemsList.swift */,
 				4133DE592FF4129900291657 /* BrandSectionView.swift */,
+				41AA270F2FF6A50E00BF6DA0 /* RangeSliderView.swift */,
+				41AA27112FF6A55E00BF6DA0 /* FilterSheetView.swift */,
 			);
 			name = Components;
 			path = Views;
@@ -371,6 +379,7 @@
 				9FB0C0122FF59D8F005DE79C /* ProductDTO.swift */,
 				9FD014B82FF6EB8F00602339 /* VendorDTO.swift */,
 				9FD014BA2FF6ED2C00602339 /* ImageDTO.swift */,
+				41AA27162FF6A8C100BF6DA0 /* OptionDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -391,6 +400,9 @@
 			dependencies = (
 			);
 			name = Drape;
+			packageProductDependencies = (
+				41AA270B2FF69FF700BF6DA0 /* Alamofire */,
+			);
 			productName = Drape;
 			productReference = 41B03E8B2FEFCE2A00521C14 /* Drape.app */;
 			productType = "com.apple.product-type.application";
@@ -464,7 +476,7 @@
 			);
 			mainGroup = 41B03E822FEFCE2A00521C14;
 			packageReferences = (
-				41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				41AA270A2FF69FF000BF6DA0 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 41B03E8C2FEFCE2A00521C14 /* Products */;
 			projectDirPath = "";
@@ -512,6 +524,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FD014C12FF707C000602339 /* GetAllCategoriesUseCase.swift in Sources */,
+				41AA27102FF6A50E00BF6DA0 /* RangeSliderView.swift in Sources */,
+				41AA27122FF6A55E00BF6DA0 /* FilterSheetView.swift in Sources */,
 				41B03EC92FEFE34200521C14 /* CustomTextField.swift in Sources */,
 				9FB047F02FF5F0A000F24615 /* ShopifyNetworkService.swift in Sources */,
 				9FB047FA2FF5FB4E00F24615 /* HomeRepositoryProtocol.swift in Sources */,
@@ -525,6 +539,7 @@
 				9FB048002FF5FE7E00F24615 /* HomeViewModel.swift in Sources */,
 				41B9B8F02FF39625002CF176 /* CategoryChipView.swift in Sources */,
 				9FB047E22FF5C1C200F24615 /* ShopifyNetworkManager.swift in Sources */,
+				41AA27172FF6A8C100BF6DA0 /* OptionDTO.swift in Sources */,
 				9FD014BD2FF6EEF400602339 /* Brand.swift in Sources */,
 				41B03E912FEFCE2A00521C14 /* ContentView.swift in Sources */,
 				4133DE532FF40ECA00291657 /* BrandItemView.swift in Sources */,
@@ -762,6 +777,7 @@
 		};
 		41B03EB52FEFCE2F00521C14 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FB047EA2FF5D21D00F24615 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -781,6 +797,7 @@
 		};
 		41B03EB62FEFCE2F00521C14 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FB047EA2FF5D21D00F24615 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -800,6 +817,7 @@
 		};
 		41B03EB82FEFCE2F00521C14 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FB047EA2FF5D21D00F24615 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -817,6 +835,7 @@
 		};
 		41B03EB92FEFCE2F00521C14 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FB047EA2FF5D21D00F24615 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -874,7 +893,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		41AA270A2FF69FF000BF6DA0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -885,9 +904,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9FB047E42FF5C45E00F24615 /* Alamofire */ = {
+		41AA270B2FF69FF700BF6DA0 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 41AA270A2FF69FF000BF6DA0 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */

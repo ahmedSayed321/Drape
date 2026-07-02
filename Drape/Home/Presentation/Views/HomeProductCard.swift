@@ -96,4 +96,19 @@ struct HomeProductCard: View {
 
 
 #Preview {
+    HomeProductCard(
+        product: Product(
+            id: 1,
+            name: "Sample Product",
+            brand: "sasd",
+            productType: "Shoes",
+            price: "$49.99",
+            imageUrl: nil,
+            sizes: []
+        ),
+        onFavTap: { print("fav tapped") },
+        onCardTap: { print("card tapped") }
+    )
+    .padding()
+    .previewLayout(.sizeThatFits)
 }
