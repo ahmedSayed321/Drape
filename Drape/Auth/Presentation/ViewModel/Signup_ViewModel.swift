@@ -25,6 +25,7 @@ final class SignupViewModel {
     var isLoading = false
     var signUpError: String?
     var signedUpUser: AppUser?
+    var showAlert = false
     
     private let signUpUseCase = SignUpUseCase(
         authRepository: FirebaseAuthRepository(),
@@ -86,11 +87,16 @@ final class SignupViewModel {
             signedUpUser = user
             print("Signup succeeded for user: \(user)")
             // TODO: navigate to next screen now that signup succeeded
+        }catch let error as LocalizedError {
+            signUpError = error.errorDescription ?? "Something went wrong."
+            showAlert = true
         } catch {
             
             signUpError = error.localizedDescription
             print(signUpError)
             print("this is my error : \(signUpError)")
+            showAlert = true
+            
         }
     }
     

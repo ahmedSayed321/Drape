@@ -24,6 +24,14 @@ struct SignupView: View {
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 28)
+        .alert(
+            "Sign Up Failed",
+            isPresented: $viewModel.showAlert
+        ) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(viewModel.signUpError ?? "Unknown error")
+        }
     }
        
     
@@ -85,6 +93,7 @@ struct SignupView: View {
             text: "Create an Account",
             action: {
                 Task{ await viewModel.signUp()}
+                router.showSignIn()
             },
             status: viewModel.isFormValid ? .enable : .disable
         )
