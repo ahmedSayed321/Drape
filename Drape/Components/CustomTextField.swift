@@ -40,7 +40,7 @@ struct CustomTextField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: 16, weight: .medium))
 
             HStack {
                 if isPassword && isSecure {
@@ -77,7 +77,7 @@ struct CustomTextField: View {
                     .foregroundStyle(.red)
             }
         }
-        .padding(.horizontal)
+       // .padding(.horizontal,5)
     }
 }
 

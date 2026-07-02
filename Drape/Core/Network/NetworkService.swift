@@ -27,6 +27,10 @@ final class NetworkService: NetworkServiceProtocol {
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         endpoint.headers.forEach { request.setValue($1, forHTTPHeaderField: $0) }
+        
+        if let body = endpoint.body {
+            request.httpBody = try JSONEncoder().encode(AnyEncodable(body))
+        }
 
         do {
             let (data, response) = try await session.data(for: request)
