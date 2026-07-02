@@ -17,7 +17,7 @@ struct CategoryChipView: View {
     }
     
     var body: some View {
-        Text(title)
+        Text(title.uppercased())
             .font(.system(size: 16, weight: .medium))
             .padding(.horizontal, 20)
             .padding(.vertical, 7)

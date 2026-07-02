@@ -16,13 +16,14 @@ class GetAllCategoriesUseCase {
     }
     
     func execute() async throws -> [String] {
-        
         let products = try await homeRepository.fetchProducts()
-        
-        
-        let categories: [String] = products.map { $0.productType }
+
+        let categories: [String] = products
+            .map { $0.productType.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }                    
+
         let uniqueCategories = NSOrderedSet(array: categories).array as? [String] ?? []
-        
+
         return uniqueCategories
     }
 }
