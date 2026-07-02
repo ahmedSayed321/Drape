@@ -87,6 +87,7 @@ final class SignupViewModel {
             print("Signup succeeded for user: \(user)")
             // TODO: navigate to next screen now that signup succeeded
         } catch {
+            
             signUpError = error.localizedDescription
             print(signUpError)
             print("this is my error : \(signUpError)")

@@ -27,12 +27,7 @@ enum ShopifyAuthEndpoint: APIEndpoint {
         }
     }
 
-    var headers: [String: String] {
-        [
-            "X-Shopify-Access-Token": ShopifyConfig.accessToken,
-            "Content-Type": "application/json"
-        ]
-    }
+   
 
     var queryParameters: [String: String]? {
         switch self {
