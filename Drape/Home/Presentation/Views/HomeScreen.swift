@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeScreen: View {
     
     @StateObject private var viewModel: HomeViewModel = HomeViewModel()
+    @State private var showFilters = false
+    @State private var filterDetent: PresentationDetent = .fraction(0.5)
     
     var body: some View {
         VStack(spacing: 0) {
@@ -22,7 +24,9 @@ struct HomeScreen: View {
 
                 HStack(spacing: 8) {
                     CustomSearchField()
-                    SliderFilterView(onTap: {})
+                    SliderFilterView(onTap: {
+                        showFilters.toggle()
+                    })
                 }
                 .padding(.horizontal, 16.0)
                 .padding(.bottom, 16.0)
@@ -77,6 +81,11 @@ struct HomeScreen: View {
                 .scrollIndicators(.hidden) 
             }
         }
+        .sheet(isPresented: $showFilters) {
+               FilterSheetView(viewModel: viewModel, selectedDetent: $filterDetent)
+                   .presentationDetents([.fraction(0.5), .fraction(0.85)], selection: $filterDetent)
+                   .presentationDragIndicator(.visible)
+           }
         .task {
             await viewModel.loadHomeData()
         }
@@ -84,4 +93,6 @@ struct HomeScreen: View {
 }
 
 
-#Preview {}
+#Preview {
+    HomeScreen()
+}
