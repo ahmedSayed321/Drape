@@ -8,9 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var selectedTab = 0
+    
     var body: some View {
-        Text("Hello world")
-    }
+        TabView {
+            // First Tab
+            HomeScreen()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }.tag(0)
+            
+            // Second Tab
+            FavouriteView()
+                .tabItem {
+                    Label("Faourite", systemImage: "heart.fill")
+                }.tag(1)
+            
+            // Third Tab
+            CartView()
+                .tabItem {
+                    Label("Cart", systemImage: "cart.fill")
+                }.tag(2)
+            
+            // Fourth Tab
+            AccountView()
+                .tabItem {
+                    Label("Account", systemImage: "person.fill")
+                }.tag(3)
+        }
+        .accentColor(.black)
+}
 
 }
 

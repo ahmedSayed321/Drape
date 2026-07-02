@@ -11,7 +11,7 @@ import SwiftUI
 struct DrapeApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeScreen()
+            ContentView()
         }
     }
 }
