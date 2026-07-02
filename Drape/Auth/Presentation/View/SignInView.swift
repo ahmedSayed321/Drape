@@ -110,10 +110,7 @@ struct SignInView: View {
                 ),
                 text: "Login with Google",
                 action: {
-                    Task{
-                        await viewModel.signIn()
-                       
-                    }
+                    
                 },
                 leading: Image("google")
             )
@@ -134,6 +131,27 @@ struct SignInView: View {
                 },
                 leading: Image("facebook")
             )
+            .padding(.bottom, 15)
+
+            
+            CustomButton(
+                type: .custom(
+                    textColor: .black,
+                    buttonColor: .white
+                ),
+                text: "Guest",
+                action: {
+                    
+                }
+               
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 2)
+            }
+            
+         
+            
         }
     }
  
