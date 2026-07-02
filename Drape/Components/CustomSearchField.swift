@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct CustomSearchField: View {
-    @State private var searchTextValue: String = ""
+    @Binding var text: String
+    var onTextChanged: (String) -> Void = { _ in }
     @FocusState private var isTyping: Bool
+    
     
     private var borderColor: Color {
         isTyping ? .black : .gray.opacity(0.4)
@@ -23,8 +25,11 @@ struct CustomSearchField: View {
                     .foregroundStyle(.gray.opacity(0.8))
 
    
-                TextField("Search for clothes...", text: $searchTextValue)
+                TextField("Search for clothes...", text: $text)
                     .focused($isTyping)
+                    .onChange(of: text) { oldValue, newValue in
+                        onTextChanged(newValue)
+                    }
                 
                 Spacer()
                 
@@ -53,5 +58,5 @@ struct CustomSearchField: View {
 
 
 #Preview {
-    CustomSearchField()
+    CustomSearchField(text: .constant(""))
 }
