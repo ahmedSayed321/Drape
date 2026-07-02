@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = SearchViewModel()
     var onBellTap: () -> Void = {}
     
@@ -42,6 +43,7 @@ struct SearchView: View {
             }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: onBellTap){
@@ -52,11 +54,13 @@ struct SearchView: View {
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {
-                    
+                    Button(action: {
+                        dismiss()
+                    }){
                         Image(systemName: "chevron.backward")
                             .font(.system(size: 20, weight: .medium))
                             .foregroundStyle(.black)
-                    
+                    }
                 }
                 
                 ToolbarItem(placement: .principal) {
