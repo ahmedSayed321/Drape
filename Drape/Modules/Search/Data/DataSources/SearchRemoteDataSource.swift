@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SearchRemoteDataSourceProtocol {
-    func fetchAllProducts(limit: Int, sortOrder: String) async throws -> ProductsResponseDTO
+    func fetchAllProducts(limit: Int, sortOrder: String) async throws -> ProductsResponse
 }
 
 class SearchRemoteDataSource : SearchRemoteDataSourceProtocol {
@@ -18,7 +18,7 @@ class SearchRemoteDataSource : SearchRemoteDataSourceProtocol {
         self.networkService = networkService
     }
     
-    func fetchAllProducts(limit: Int = 50, sortOrder: String = "created_at desc") async throws -> ProductsResponseDTO {
+    func fetchAllProducts(limit: Int = 50, sortOrder: String = "created_at desc") async throws -> ProductsResponse {
         let endPoint = SearchEndpoint.fetchAll(limit: limit, sortOrder: sortOrder)
         return try await networkService.request(endPoint)
     }

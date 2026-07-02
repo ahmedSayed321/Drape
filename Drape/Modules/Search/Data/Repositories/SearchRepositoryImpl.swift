@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+	
 final class SearchRepositoryImpl: SearchRepositoryProtocol {
     private let remoteDataSource: SearchRemoteDataSourceProtocol
 
@@ -14,22 +14,22 @@ final class SearchRepositoryImpl: SearchRepositoryProtocol {
         self.remoteDataSource = remoteDataSource
     }
 
-    func fetchAllProducts() async throws -> [Product] {
+    func fetchAllProducts() async throws -> [ProductSearch] {
         let response = try await remoteDataSource.fetchAllProducts(limit: 50, sortOrder: "created_at desc")
         return response.products.map { $0.toDomain() }
     }
 }
 
 private extension ProductDTO {
-    func toDomain() -> Product {
-        Product(
+    func toDomain() -> ProductSearch {
+        ProductSearch(
             id: id,
             title: title,
             vendor: vendor,
             productType: productType,
             price: variants.first?.price ?? "0.00",
             compareAtPrice: variants.first?.compareAtPrice,
-            imageURL: images.first?.src ?? ""
+            imageURL: image?.src ?? ""
         )
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 enum SearchState {
     case loading
     case recentResults
-    case success([Product])
+    case success([ProductSearch])
     case noResult
 }
 
@@ -21,7 +21,7 @@ final class SearchViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var recentSearches: [String] = []
 
-    private var products: [Product] = []
+    private var products: [ProductSearch] = []
     private var hasFetchedProducts: Bool = false
 
     private let useCase: FetchAllProductsUseCaseProtocol

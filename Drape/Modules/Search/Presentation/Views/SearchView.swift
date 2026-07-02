@@ -12,7 +12,6 @@ struct SearchView: View {
     var onBellTap: () -> Void = {}
     
     var body: some View {
-        NavigationStack {
             VStack {
                 CustomSearchField(
                     text: $viewModel.searchText,
@@ -52,6 +51,14 @@ struct SearchView: View {
                     }
                 }
                 
+                ToolbarItem(placement: .topBarLeading) {
+                    
+                        Image(systemName: "chevron.backward")
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundStyle(.black)
+                    
+                }
+                
                 ToolbarItem(placement: .principal) {
                     Text("Search")
                         .font(.system(size: 24, weight: .semibold))
@@ -59,9 +66,8 @@ struct SearchView: View {
                 }
             }
         }
-        
-    }
 }
+
 
 #Preview {
     SearchView()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VariantDTO: Decodable {
+struct VariantDTO: Codable {
     let id: Int
     let price: String
     let compareAtPrice: String?

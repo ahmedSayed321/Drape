@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FetchAllProductsUseCaseProtocol {
-    func execute() async throws -> [Product]
+    func execute() async throws -> [ProductSearch]
 }
 
 final class FetchAllProductsUseCase: FetchAllProductsUseCaseProtocol {
@@ -18,7 +18,7 @@ final class FetchAllProductsUseCase: FetchAllProductsUseCaseProtocol {
         self.repository = repository
     }
 
-    func execute() async throws -> [Product] {
+    func execute() async throws -> [ProductSearch] {
         try await repository.fetchAllProducts()
     }
 }

@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-// Temprary product model
-struct TempProduct: Identifiable {
-    var id: Int
-    
-    
-    let title: String
-    let price: String
-    let imageURL: String
-}
-
 struct HomeProductsGridView: View {
     
     let products: [Product]
