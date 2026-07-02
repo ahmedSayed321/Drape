@@ -9,9 +9,7 @@ import SwiftUI
 
 struct HomeProductCard: View {
     
-    let title: String
-    let price: String
-    let imageUrl: String
+    let product: Product
     
     @State private var isFavorited: Bool = false
     var onFavTap: () -> Void
@@ -22,49 +20,49 @@ struct HomeProductCard: View {
         ZStack {
             
             // Product details
-            VStack {
+            VStack(alignment: .leading, spacing: 4) {
                 ZStack {
                     
                     RoundedRectangle(cornerRadius: 16)
                         .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
                         .frame(height: 224)
                         .overlay(
-                            AsyncImage(url: URL(string: imageUrl)) { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView()
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                case .failure(_):
+                            Group {
+                                if let imageUrl = product.imageUrl, let url = URL(string: imageUrl) {
+                                    AsyncImage(url: url) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                        case .failure(_):
+                                            Image(systemName: "photo.fill")
+                                                .foregroundColor(.gray.opacity(0.6))
+                                        @unknown default:
+                                            EmptyView()
+                                        }
+                                    }
+                                } else {
                                     Image(systemName: "photo.fill")
                                         .foregroundColor(.gray.opacity(0.6))
-                                @unknown default:
-                                    EmptyView()
                                 }
                             }
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
-                HStack{
-                    Text(title)
-                        .font(.system(size: 14))
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
-                        .padding(.bottom, 4)
-                    Spacer()
-                }
-                .padding(.horizontal, 4)
-                HStack {
-                    Text(price)
-                        .font(.system(size: 13))
-                        .fontWeight(.medium)
-                        .foregroundColor(.gray)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal, 4)
+                Text(product.name)
+                    .font(.system(size: 16))
+                    .fontWeight(.bold)
+                    .lineLimit(1)
+                    .padding(.horizontal, 4)
+                    .padding(.top, 4)
+                Text(product.price)
+                    .font(.system(size: 14))
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+                    .padding(.horizontal, 4)
             }
             // right top button
             VStack {
@@ -98,5 +96,4 @@ struct HomeProductCard: View {
 
 
 #Preview {
-    HomeProductCard(title: "Nike Shoes", price: "$ 200", imageUrl: "https://cdn.shopify.com/s/files/1/0768/0314/5914/files/product_29_image1.jpg?v=1782057713", onFavTap: {}, onCardTap: {})
 }

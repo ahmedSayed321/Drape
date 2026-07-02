@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct VendorSectionView: View {
+struct BrandSectionView: View {
+    let brands: [Brand]
     var onTap: () -> Void = {}
     var body: some View {
         VStack(alignment: .leading,spacing: 16.0) {
@@ -26,11 +27,10 @@ struct VendorSectionView: View {
                 
             }
             
-            VendorItemsList()
+            BrandItemsList(brands: brands)
         }
     }
 }
 
 #Preview {
-    VendorSectionView()
 }

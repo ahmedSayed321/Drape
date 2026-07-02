@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct CategoryChipListView: View {
-    // will be replaced with real data later
-    let categories = ["All", "Tshirts", "Jeans", "Shoes", "Accessories"]
-    @State private var selectedCategory = "All"
+    @ObservedObject var viewModel: HomeViewModel
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(categories, id: \.self) { category in
+                ForEach(viewModel.categories, id: \.self) { category in
                     CategoryChipView(
                         title: category,
-                        isSelected: selectedCategory == category,
-                        onTap: { selectedCategory = category }
+                        isSelected: viewModel.selectedCategory == category,
+                        onTap: { viewModel.selectedCategory = category }
                     )
                 }
             }
@@ -29,5 +27,4 @@ struct CategoryChipListView: View {
 }
 
 #Preview {
-    CategoryChipListView()
 }
