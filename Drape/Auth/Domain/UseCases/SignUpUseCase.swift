@@ -24,7 +24,7 @@ final class SignUpUseCase {
             // 1. Firebase signup → saves UID + token to Keychain internally
             _ = try await authRepository.signUp(email: email, password: password)
         } catch SignUpError.emailAlreadyInUse {
-            // Ignore
+            // Ignore to create shopify <Thinking about SignIn here -- if existing email but wrong password>
             print("Firebase user already exists")
         }catch {
             print("Error happen in Firebase")

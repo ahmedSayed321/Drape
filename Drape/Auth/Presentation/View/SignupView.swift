@@ -24,6 +24,11 @@ struct SignupView: View {
         }
         .padding(.horizontal, 24)
         .padding(.vertical, 28)
+        .onChange(of: viewModel.didSignUpSuccessfully) {
+            if viewModel.didSignUpSuccessfully {
+                router.showSignIn()
+            }
+        }
         .alert(
             "Sign Up Failed",
             isPresented: $viewModel.showAlert
@@ -93,7 +98,6 @@ struct SignupView: View {
             text: "Create an Account",
             action: {
                 Task{ await viewModel.signUp()}
-                router.showSignIn()
             },
             status: viewModel.isFormValid ? .enable : .disable
         )
