@@ -7,17 +7,9 @@
 
 import SwiftUI
 
-//struct TempSearchProduct: Identifiable {
-//    var id: Int
-//    let title: String
-//    let price: String
-//    let discount: String?   
-//    let imageURL: String
-//}
-
 struct SearchListView: View {
-//    let results: [TempSearchProduct]
-    let results: [Product]
+    
+    let results: [ProductSearch]
     let onTap: () -> Void
 
     var body: some View {

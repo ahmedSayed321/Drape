@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct SearchView: View {
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = SearchViewModel()
     var onBellTap: () -> Void = {}
     
     var body: some View {
-        NavigationStack {
             VStack {
                 CustomSearchField(
                     text: $viewModel.searchText,
@@ -43,10 +43,21 @@ struct SearchView: View {
             }
             .padding(.horizontal, 16)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: onBellTap){
                         Image(systemName: "bell")
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundStyle(.black)
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }){
+                        Image(systemName: "chevron.backward")
                             .font(.system(size: 20, weight: .medium))
                             .foregroundStyle(.black)
                     }
@@ -59,9 +70,8 @@ struct SearchView: View {
                 }
             }
         }
-        
-    }
 }
+
 
 #Preview {
     SearchView()
