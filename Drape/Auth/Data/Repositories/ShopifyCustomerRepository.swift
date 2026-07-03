@@ -47,7 +47,7 @@ final class ShopifyCustomerRepository: CustomerRepositoryProtocol {
                 alreadyExisted: true
             )
         }
-
+        print("Trying to create shopify acc in repo")
         return try await createCustomer(fullName: fullName, email: email)
     }
 
