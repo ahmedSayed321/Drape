@@ -189,3 +189,5 @@ keys/*
 *.config
 # End of https://www.gitignore.io/api/xcode,swift,macos,objective-c,fastlane
 Secrets.xcconfig
+Drape/Auth/Data/Storage/Secrets.swift
+Drape/Auth/Data/Storage/Secrets.swift

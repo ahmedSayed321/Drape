@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct OnBoardingScreen: View {
+    
+    @Environment(AppRouter.self) private var router
+
+    @AppStorage("isFirstLaunch")
+    private var isFirstLaunch = true
     var body: some View {
         VStack(spacing: 0) {
             
@@ -27,24 +32,17 @@ struct OnBoardingScreen: View {
                     .padding(.leading, 24)
                 
             }
+            .padding(.bottom,10)
             
-            Button(action: {
-                
-            }) {
-                HStack {
-                    Text("Get Started")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.white)
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(.white)
+            CustomButton(type: .primary, text: "Get Started", action: {
+                withAnimation {
+                    isFirstLaunch = false
+                    router.showSignIn()
+                    //router.currentScreen = .signIn
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 56)
-                .background(Color.black)
-                .cornerRadius(12)
-                .padding(.horizontal, 24)
-            }
-            .padding(.top, 24)
+            },trailing: Image(systemName: "arrow.right"))
+            .padding(.all,15)
+            
         }
         .ignoresSafeArea(edges: .top)
         .background(Color.white)

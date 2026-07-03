@@ -8,32 +8,49 @@
 import SwiftUI
 
 struct SplashScreen: View {
-    @State private var showOnboarding = false
+
+    @Environment(AppRouter.self) private var router
+
+    @AppStorage("isFirstLaunch")
+    private var isFirstLaunch = true
     
+    private let tokenStorage = KeychainTokenStorage()
+
     var body: some View {
-        if showOnboarding {
-            OnBoardingScreen()
-        } else {
-            ZStack {
-                Color.black
-                    .ignoresSafeArea()
-                
-                Image("drape_icon")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-            }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    withAnimation(.easeInOut) {
-                        showOnboarding = true
-                    }
-                }
-            }
+
+        ZStack {
+
+            Color.black
+                .ignoresSafeArea()
+
+            Image("drape_icon")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+
+        }
+        .task {
+
+            try? await Task.sleep(for: .seconds(3))
+
+            navigateAfterSplash()
+
         }
     }
-}
+    
+    private func navigateAfterSplash() {
 
-#Preview {
-    SplashScreen()
+        if isFirstLaunch {
+            router.showOnBoarding()
+            return
+        }
+
+        let customerID = tokenStorage.getShopifyCustomerID()
+
+        if let customerID, !customerID.isEmpty {
+            //router.showHome()
+        } else {
+            router.showSignIn()
+        }
+    }
 }
