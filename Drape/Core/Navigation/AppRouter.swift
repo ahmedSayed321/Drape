@@ -29,7 +29,7 @@ final class AppRouter {
         currentScreen = .signUp
     }
 
-//    func showHome() {
-//        currentScreen = .home
-//    }
+    func showHome() {
+        currentScreen = .home
+    }
 }

@@ -11,7 +11,7 @@ enum AppScreen {
     case splash
     case signIn
     case signUp
-    //case home
+    case home
     case onBoarding
 
 }

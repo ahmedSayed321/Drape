@@ -37,9 +37,9 @@ struct DrapeApp: App {
             case .onBoarding:
                 OnBoardingScreen()
                     .environment(router)
-//            case .home:
-//                HomeView()
-//                    .environment(router)
+            case .home:
+                ContentView()
+                    .environment(router)
             }
 
         }

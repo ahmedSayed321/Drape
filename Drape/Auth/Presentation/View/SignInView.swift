@@ -141,7 +141,7 @@ struct SignInView: View {
                 ),
                 text: "Guest",
                 action: {
-                    
+                    router.showHome()
                 }
                
             )

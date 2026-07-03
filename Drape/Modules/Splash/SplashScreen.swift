@@ -48,7 +48,7 @@ struct SplashScreen: View {
         let customerID = tokenStorage.getShopifyCustomerID()
 
         if let customerID, !customerID.isEmpty {
-            //router.showHome()
+            router.showHome()
         } else {
             router.showSignIn()
         }
