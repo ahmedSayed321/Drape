@@ -32,4 +32,8 @@ final class AppRouter {
     func showHome() {
         currentScreen = .home
     }
+    
+    func showCheckout() {
+        currentScreen = .checkout
+    }
 }

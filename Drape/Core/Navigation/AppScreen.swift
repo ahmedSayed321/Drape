@@ -13,5 +13,6 @@ enum AppScreen {
     case signUp
     case home
     case onBoarding
+    case checkout
 
 }

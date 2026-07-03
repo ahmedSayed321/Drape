@@ -40,6 +40,9 @@ struct DrapeApp: App {
             case .home:
                 ContentView()
                     .environment(router)
+            case .checkout:
+                CheckoutView()
+                    .environment(router)
             }
 
         }
