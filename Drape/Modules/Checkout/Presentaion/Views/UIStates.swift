@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreLocation
+import SwiftUI
 
 enum PaymentOption: String, CaseIterable, Identifiable {
     case card
@@ -62,4 +64,28 @@ struct CheckoutUiState {
             return !isPlacingOrder
         }
     }
+}
+
+struct AddAddressUiState {
+    var nickname: String = ""
+    var fullAddress: String = ""
+
+    var nicknameState: TextFieldState = .normal
+    var fullAddressState: TextFieldState = .normal
+
+    var selectedCoordinate: CLLocationCoordinate2D?
+    var isSaving: Bool = false
+    var isSuccessVisible: Bool = false
+
+    var isAddEnabled: Bool {
+        !nickname.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        !fullAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        selectedCoordinate != nil &&
+        !isSaving
+    }
+}
+
+struct PickedLocationItem: Identifiable {
+    let id = UUID()
+    let coordinate: CLLocationCoordinate2D
 }

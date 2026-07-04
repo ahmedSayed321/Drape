@@ -15,6 +15,6 @@ enum AppScreen {
     case onBoarding
     case checkout
     case address
-    //case addAddress
+    case addAddress
 
 }

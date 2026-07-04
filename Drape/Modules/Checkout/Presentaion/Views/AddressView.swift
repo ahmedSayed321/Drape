@@ -30,7 +30,7 @@ struct AddressView: View {
                 }
 
                 Button {
-                    print("navigate to new address screen")
+                    router.showAddAddress()
                 } label: {
                     HStack(spacing: 10) {
                         Image(systemName: "plus")
