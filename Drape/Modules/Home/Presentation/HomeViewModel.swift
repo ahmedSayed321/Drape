@@ -17,6 +17,7 @@ class HomeViewModel: ObservableObject {
     @Published var selectedCategory: String = "All"
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
+    @Published var isLoadingMore: Bool = false
     
     @Published var sortOption: SortOption = .relevance
     @Published var priceRange: ClosedRange<Double> = 0...200
@@ -63,18 +64,18 @@ class HomeViewModel: ObservableObject {
         return result
     }
     
-    private let getAllProductsUseCase: GetAllProductsUseCase
-    private let getAllBrandsUseCase: GetAllBrandsUseCase
-    private let getAllCategories: GetAllCategoriesUseCase
+    private let pageSize = 20
+    private var canLoadMore = true // becomes false once Shopify returns fewer items than requested
+    
+    private let getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol
+    private let loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol
     
     init(
-        getAllProductsUseCase: GetAllProductsUseCase = GetAllProductsUseCase(),
-        getAllBrandsUseCase: GetAllBrandsUseCase = GetAllBrandsUseCase(),
-        getAllCategories: GetAllCategoriesUseCase = GetAllCategoriesUseCase()
+        getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol = GetHomeScreenDataUseCase(),
+        loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol = LoadMoreProductsUseCase()
     ) {
-        self.getAllProductsUseCase = getAllProductsUseCase
-        self.getAllBrandsUseCase = getAllBrandsUseCase
-        self.getAllCategories = getAllCategories
+        self.getHomeScreenDataUseCase = getHomeScreenDataUseCase
+        self.loadMoreProductsUseCase = loadMoreProductsUseCase
     }
     
     func loadHomeData() async {
@@ -82,12 +83,17 @@ class HomeViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            self.products = try await getAllProductsUseCase.execute()
-            self.brands = try await getAllBrandsUseCase.execute()
-            let categories: [String] = try await getAllCategories.execute()
-            self.categories = ["All"] + categories
+            // 1. Fetch the single response struct
+            let homeData = try await getHomeScreenDataUseCase.execute()
+            
+            // 2. Map the properties directly onto your published fields
+            self.products = homeData.products
+            self.brands = homeData.brands
+            self.categories = ["All"] + homeData.categories
 
+            self.canLoadMore = homeData.products.count == pageSize
             priceRange = 0...maxProductPrice
+            
 
             isLoading = false
         } catch {
@@ -107,5 +113,51 @@ class HomeViewModel: ObservableObject {
         }
 
         return lhs.localizedStandardCompare(rhs) == .orderedAscending
+    }
+        
+    private var isFilteringActive: Bool {
+        selectedCategory != "All"
+            || priceRange != (0...maxProductPrice)
+            || !selectedSizes.isEmpty
+    }
+        
+    /// Call this when the user scrolls near the bottom.
+    func loadMoreProductsIfNeeded(currentItem product: Product) {
+        guard !isFilteringActive else { return }
+        // Trigger when the user reaches the last few displayed products
+        guard let index = products.firstIndex(where: { $0.id == product.id }) else { return }
+        let thresholdIndex = products.index(products.endIndex, offsetBy: -3, limitedBy: products.startIndex) ?? products.startIndex
+        guard index >= thresholdIndex else { return }
+        
+        Task { await loadMoreProducts() }
+    }
+    
+    func loadMoreProducts() async {
+        guard !isLoadingMore, !isLoading, canLoadMore else { return }
+        isLoadingMore = true
+        defer { isLoadingMore = false }
+        
+        let requestLimit = products.count + pageSize
+        
+        do {
+            let refetched = try await loadMoreProductsUseCase.execute(limit: requestLimit)
+            
+            // Nothing new came back -> we've hit the end of the catalog
+            guard refetched.count > products.count else {
+                canLoadMore = false
+                return
+            }
+            
+            // Drop the ones already displayed, append only the new tail
+            let newProducts = Array(refetched.suffix(from: products.count))
+            products.append(contentsOf: newProducts)
+            
+            // Shopify returned fewer than requested -> no more pages left
+            if refetched.count < requestLimit {
+                canLoadMore = false
+            }
+        } catch {
+            errorMessage = "Failed to load more products: \(error.localizedDescription)"
+        }
     }
 }
