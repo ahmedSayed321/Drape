@@ -44,7 +44,7 @@ final class PromoCodeRepository: PromoCodeRepositoryProtocol {
             code: lookup.code,
             priceRuleId: lookup.priceRuleId,
             discountCodeId: lookup.id,
-            valueType: rule.value_type,
+            valueType: rule.valueType,
             value: abs(magnitude)
         )
     }
@@ -52,11 +52,11 @@ final class PromoCodeRepository: PromoCodeRepositoryProtocol {
     private func checkDateValidity(_ rule: ShopifyPriceRuleDTO) throws {
         let formatter = ISO8601DateFormatter()
 
-        if let startsAt = formatter.date(from: rule.starts_at), Date() < startsAt {
+        if let startsAt = formatter.date(from: rule.startsAt), Date() < startsAt {
             throw PromoCodeError.notYetActive
         }
 
-        if let endsAtString = rule.ends_at,
+        if let endsAtString = rule.endsAt,
            let endsAt = formatter.date(from: endsAtString),
            Date() > endsAt {
             throw PromoCodeError.expired

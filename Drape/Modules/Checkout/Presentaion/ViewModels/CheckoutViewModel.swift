@@ -119,7 +119,8 @@ final class CheckoutViewModel {
                 customerFirstName: customerFirstName,
                 customerLastName: customerLastName,
                 customerPhone: customerPhone,
-                promo: state.appliedPromo
+                promo: state.appliedPromo,
+                discountAmount: state.discountAmount
             )
             
             let paymentPending = state.selectedPaymentOption == .cash

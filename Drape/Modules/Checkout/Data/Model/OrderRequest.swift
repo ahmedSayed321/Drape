@@ -38,6 +38,7 @@ struct ShopifyDraftOrderRequestDTO: Encodable {
         let value: String         // "15.0" — magnitude, not sign
         let value_type: String    // "percentage" or "fixed_amount"
         let title: String         // the code itself, shown on the order
+        let amount: String
     }
 
     let draft_order: DraftOrderBody

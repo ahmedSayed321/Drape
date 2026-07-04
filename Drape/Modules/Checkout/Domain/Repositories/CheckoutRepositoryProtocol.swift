@@ -14,7 +14,8 @@ protocol CheckoutRepositoryProtocol {
         customerFirstName: String,
         customerLastName: String,
         customerPhone: String?,
-        promo: ValidatedPromoCode?
+        promo: ValidatedPromoCode?,
+        discountAmount: Double
     ) async throws -> DraftOrder
     func completeOrder(draftOrderId: Int, paymentPending: Bool) async throws -> DraftOrder
     func fetchDraftOrder(id: Int) async throws -> DraftOrder

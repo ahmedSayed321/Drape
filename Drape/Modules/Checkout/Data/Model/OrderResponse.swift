@@ -9,11 +9,6 @@ import Foundation
 
 struct ShopifyDraftOrderResponseDTO: Decodable {
     let draftOrder: ShopifyDraftOrderDTO
-    
-    enum CodingKeys: String, CodingKey {
-        case draftOrder = "draft_order"
-    }
-    
 }
 
 struct ShopifyDraftOrderDTO: Decodable {
@@ -50,9 +45,9 @@ struct ShopifyOrderResponseDTO: Decodable {
 struct ShopifyOrderDTO: Decodable {
     let id: Int
     let name: String
-    let total_price: String
-    let financial_status: String
-    let fulfillment_status: String?
+    let totalPrice: String
+    let financialStatus: String
+    let fulfillmentStatus: String?
 }
 
 struct ShopifyCustomerOrdersResponseDTO: Decodable {

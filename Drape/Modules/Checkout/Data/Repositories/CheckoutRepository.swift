@@ -22,7 +22,8 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
         customerFirstName: String,
         customerLastName: String,
         customerPhone: String?,
-        promo: ValidatedPromoCode?
+        promo: ValidatedPromoCode?,
+        discountAmount: Double
     ) async throws -> DraftOrder {
 
         let shippingAddress = address.toShippingAddress(
@@ -40,7 +41,8 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
                         description: "Promo code \($0.code)",
                         value: String($0.value),
                         value_type: $0.valueType,
-                        title: $0.code
+                        title: $0.code,
+                        amount: String(discountAmount)
                     )
                 },
                 email: nil,

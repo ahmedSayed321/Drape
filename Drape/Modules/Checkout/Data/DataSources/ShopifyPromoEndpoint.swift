@@ -36,10 +36,6 @@ enum ShopifyPromoEndpoint: APIEndpoint {
 
 struct ShopifyDiscountLookupResponseDTO: Decodable {
     let discountCode: ShopifyDiscountLookupDTO
-    
-    enum CodingKeys: String, CodingKey {
-        case discountCode = "discount_code"
-    }
 }
 
 struct ShopifyDiscountLookupDTO: Decodable {
@@ -50,16 +46,13 @@ struct ShopifyDiscountLookupDTO: Decodable {
 
 struct ShopifyPriceRuleResponseDTO: Decodable {
     let priceRule: ShopifyPriceRuleDTO
-    enum CodingKeys: String, CodingKey {
-        case priceRule = "price_rule"
-    }
 }
 
 struct ShopifyPriceRuleDTO: Decodable {
     let id: Int
-    let value_type: String   // "percentage" or "fixed_amount"
-    let value: String        // Shopify returns this as a string, e.g. "-15.0"
-    let target_type: String
-    let starts_at: String
-    let ends_at: String?
+    let valueType: String
+    let value: String
+    let targetType: String
+    let startsAt: String
+    let endsAt: String?
 }
