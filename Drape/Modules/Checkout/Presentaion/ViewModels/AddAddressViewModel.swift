@@ -56,7 +56,9 @@ final class AddAddressViewModel {
             id: UUID(),
             title: state.nickname,
             details: state.fullAddress,
-            isDefault: false
+            isDefault: false,
+            latitude: state.selectedCoordinate?.latitude,
+            longitude: state.selectedCoordinate?.longitude
         )
     }
 }
