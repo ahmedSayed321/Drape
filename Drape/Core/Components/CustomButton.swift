@@ -72,6 +72,7 @@ struct CustomButton: View {
                 .fontWeight(.medium)
             if trailing != nil {
                 trailing
+                    .font(.system(size: 14))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 32)
