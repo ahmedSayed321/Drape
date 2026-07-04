@@ -100,7 +100,7 @@ private extension CheckoutView {
                     Spacer()
 
                     Button {
-                        // edit/select card
+                        router.showPayment()
                     } label: {
                         Image(systemName: "pencil")
                             .foregroundStyle(.black)

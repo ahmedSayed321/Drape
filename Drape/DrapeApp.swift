@@ -49,6 +49,9 @@ struct DrapeApp: App {
             case .addAddress:
                 AddAddressView()
                     .environment(router)
+            case .payment:
+                PaymentMethodView()
+                    .environment(router)
             }
 
         }

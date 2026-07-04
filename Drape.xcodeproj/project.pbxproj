@@ -82,6 +82,8 @@
 		6D1E88292FF880AD005D6386 /* AddressRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E88282FF880AD005D6386 /* AddressRowView.swift */; };
 		6D1E882E2FF8B143005D6386 /* AddAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E882D2FF8B143005D6386 /* AddAddressViewModel.swift */; };
 		6D1E88302FF8B180005D6386 /* AddAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E882F2FF8B180005D6386 /* AddAddressView.swift */; };
+		6D1E88322FF8D0E5005D6386 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E88312FF8D0E5005D6386 /* PaymentMethodView.swift */; };
+		6D1E88342FF8D127005D6386 /* PaymentMethodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E88332FF8D127005D6386 /* PaymentMethodViewModel.swift */; };
 		6D46B38A2FF5FAFC00586940 /* ShopifyRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B3892FF5FAFC00586940 /* ShopifyRemoteDataSource.swift */; };
 		6D46B38C2FF600A800586940 /* ShopifyAuthEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B38B2FF600A800586940 /* ShopifyAuthEndpoint.swift */; };
 		6D718AC12FF2C4FA009263ED /* Signup_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D718AC02FF2C4FA009263ED /* Signup_ViewModel.swift */; };
@@ -208,6 +210,8 @@
 		6D1E88282FF880AD005D6386 /* AddressRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressRowView.swift; sourceTree = "<group>"; };
 		6D1E882D2FF8B143005D6386 /* AddAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewModel.swift; sourceTree = "<group>"; };
 		6D1E882F2FF8B180005D6386 /* AddAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressView.swift; sourceTree = "<group>"; };
+		6D1E88312FF8D0E5005D6386 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
+		6D1E88332FF8D127005D6386 /* PaymentMethodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewModel.swift; sourceTree = "<group>"; };
 		6D46B3862FF5FA2000586940 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		6D46B3892FF5FAFC00586940 /* ShopifyRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyRemoteDataSource.swift; sourceTree = "<group>"; };
 		6D46B38B2FF600A800586940 /* ShopifyAuthEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthEndpoint.swift; sourceTree = "<group>"; };
@@ -707,6 +711,7 @@
 				6D1E88262FF88042005D6386 /* AddressView.swift */,
 				6D1E88282FF880AD005D6386 /* AddressRowView.swift */,
 				6D1E882F2FF8B180005D6386 /* AddAddressView.swift */,
+				6D1E88312FF8D0E5005D6386 /* PaymentMethodView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -717,6 +722,7 @@
 				6D1E881E2FF86139005D6386 /* CheckoutViewModel.swift */,
 				6D1E88242FF87FC6005D6386 /* AddressViewModel.swift */,
 				6D1E882D2FF8B143005D6386 /* AddAddressViewModel.swift */,
+				6D1E88332FF8D127005D6386 /* PaymentMethodViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1111,6 +1117,7 @@
 				6D9C9A8B2FF430D700C8AA09 /* AppUser.swift in Sources */,
 				3E15609B2FF02ACB00684C6A /* SignInView.swift in Sources */,
 				6D718AC12FF2C4FA009263ED /* Signup_ViewModel.swift in Sources */,
+				6D1E88342FF8D127005D6386 /* PaymentMethodViewModel.swift in Sources */,
 				6D1E881F2FF86139005D6386 /* CheckoutViewModel.swift in Sources */,
 				6D9C9AA22FF4329100C8AA09 /* ShopifyCustomerRepository.swift in Sources */,
 				6D9C9AA02FF4326000C8AA09 /* FirebaseAuthRepository.swift in Sources */,
@@ -1127,6 +1134,7 @@
 				41B9B8EE2FF39604002CF176 /* CustomSearchField.swift in Sources */,
 				3EFC6E052FEFEF1B002FBB9B /* OnBoardingScreen.swift in Sources */,
 				41B9B8EC2FF395DA002CF176 /* CategoryChipListView.swift in Sources */,
+				6D1E88322FF8D0E5005D6386 /* PaymentMethodView.swift in Sources */,
 				3E2212A12FF5581000770211 /* SignInError.swift in Sources */,
 				6D9C9A982FF431D200C8AA09 /* SignUpError.swift in Sources */,
 				6D9C9A9B2FF431FC00C8AA09 /* KeychainStorage.swift in Sources */,

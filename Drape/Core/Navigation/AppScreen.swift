@@ -16,5 +16,6 @@ enum AppScreen {
     case checkout
     case address
     case addAddress
+    case payment
 
 }
