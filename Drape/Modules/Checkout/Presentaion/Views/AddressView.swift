@@ -70,7 +70,9 @@ struct AddressView: View {
             StandardAppBar(
                 title: "Address",
                 trailingSystemImage: "bell",
-                onBackTapped: {},
+                onBackTapped: {
+                    router.showCheckout()
+                },
                 onTrailingTapped: {}
             )
             .background(.white)

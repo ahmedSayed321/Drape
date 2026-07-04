@@ -13,25 +13,37 @@ struct CheckoutView: View {
     
     var body: some View {
         ZStack {
-            VStack(alignment: .leading, spacing: 20) {
-                addressSection
-                Divider()
-                paymentSection
-                Divider()
-                summarySection
-                Divider()
-                promoSection
-                Spacer()
-                CustomButton(
-                    type: .primary,
-                    text: viewModel.state.isPlacingOrder ? "Placing..." : "Place Order",
-                    action: {
-                        Task { await viewModel.placeOrder() }
+            VStack(alignment: .leading, spacing: 0) {
+
+                StandardAppBar(
+                    title: "Checkout",
+                    trailingSystemImage: "bell",
+                    onBackTapped: {
+                        // TODO: wire up back navigation
                     },
-                    status: viewModel.state.isPlaceOrderEnabled ? .enable : .disable
+                    onTrailingTapped: { }
                 )
+
+                VStack(alignment: .leading, spacing: 20) {
+                    addressSection
+                    Divider()
+                    paymentSection
+                    Divider()
+                    summarySection
+                    Divider()
+                    promoSection
+                    Spacer()
+                    CustomButton(
+                        type: .primary,
+                        text: viewModel.state.isPlacingOrder ? "Placing..." : "Place Order",
+                        action: {
+                            Task { await viewModel.placeOrder() }
+                        },
+                        status: viewModel.state.isPlaceOrderEnabled ? .enable : .disable
+                    )
+                }
+                .padding()
             }
-            .padding()
             .background(Color.white)
             
             //TODO: Show order Success pop up
