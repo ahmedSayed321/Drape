@@ -10,7 +10,7 @@ import SwiftUI
 struct AddressView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel = AddressViewModel()
-    let checkoutViewModel: CheckoutViewModel = CheckoutViewModel()
+    @State private var checkoutViewModel = CheckoutViewModel()
 
     var body: some View {
         ScrollView {
@@ -19,29 +19,25 @@ struct AddressView: View {
                     .font(.system(size: 18, weight: .semibold))
                     .padding(.top, 8)
 
-                if viewModel.addresses.isEmpty {
-                    emptyAddressRow
-                } else {
-                    ForEach(viewModel.addresses) { address in
-                        HStack(spacing: 12) {
-                            AddressRowView(
-                                address: address,
-                                isSelected: viewModel.selectedAddressID == address.id,
-                                onTap: {
-                                    viewModel.selectAddress(address)
-                                }
-                            )
-
-                            // Delete button
-                            Button {
-                                viewModel.deleteAddress(id: address.id)
-                            } label: {
-                                Image(systemName: "trash.fill")
-                                    .foregroundStyle(.red)
-                                    .font(.system(size: 14))
+                ForEach(viewModel.addresses) { address in
+                    HStack(spacing: 12) {
+                        AddressRowView(
+                            address: address,
+                            isSelected: viewModel.selectedAddressID == address.id,
+                            onTap: {
+                                viewModel.selectAddress(address)
                             }
-                            .padding(.trailing, 8)
+                        )
+
+                        // Delete button
+                        Button {
+                            viewModel.deleteAddress(id: address.id)
+                        } label: {
+                            Image(systemName: "trash.fill")
+                                .foregroundStyle(.red)
+                                .font(.system(size: 14))
                         }
+                        .padding(.trailing, 8)
                     }
                 }
 
@@ -93,31 +89,5 @@ struct AddressView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
-        .onAppear {
-            viewModel.reload()
-        }
-    }
-}
-
-private extension AddressView {
-    var emptyAddressRow: some View {
-        HStack {
-            Text("No address added")
-                .foregroundStyle(.gray)
-
-            Spacer()
-
-            Button {
-                router.showAddAddress()
-            } label: {
-                Image(systemName: "pencil")
-                    .foregroundStyle(.black)
-            }
-        }
-        .padding()
-        .overlay {
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.gray.opacity(0.3))
-        }
     }
 }

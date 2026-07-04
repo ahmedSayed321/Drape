@@ -20,8 +20,6 @@ struct AddAddressView: View {
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
 
-    let onAddressAdded: (AddressItem) -> Void = { _ in }
-
     var body: some View {
 
         ZStack {
@@ -220,14 +218,15 @@ private extension AddAddressView {
                     type: .primary,
                     text: "Thanks",
                     action: {
-
-                        let address = viewModel.makeAddressItem()
-
-                        onAddressAdded(address)
-
+                        let newAddress = viewModel.makeAddressItem()
+                        
+                        var addresses = CheckoutStorage.shared.loadAddresses()
+                        addresses.append(newAddress)
+                        CheckoutStorage.shared.saveAddresses(addresses)
+                        
                         viewModel.dismissSuccess()
                         isSheetPresented = false
-
+                        
                         router.showAddress()
                     },
                     status: .enable

@@ -13,47 +13,54 @@ struct AddressRowView: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
-            HStack(alignment: .top, spacing: 12) {
-                Image(systemName: "location")
-                    .foregroundStyle(.gray)
-                    .padding(.top, 4)
-
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack(spacing: 6) {
-                        Text(address.title)
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(.black)
-
-                        if address.isDefault {
-                            Text("Default")
-                                .font(.system(size: 10, weight: .medium))
-                                .foregroundStyle(.gray)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(Color.gray.opacity(0.12))
-                                .cornerRadius(8)
-                        }
-                    }
+        Button {
+            onTap()
+        } label: {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(address.title)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.black)
 
                     Text(address.details)
-                        .font(.system(size: 13))
+                        .font(.footnote)
                         .foregroundStyle(.gray)
-                        .multilineTextAlignment(.leading)
+                        .lineLimit(2)
+
+                    if address.isDefault {
+                        Text("Default")
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundStyle(.green)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.green.opacity(0.12))
+                            .clipShape(Capsule())
+                    }
                 }
 
                 Spacer()
 
-                Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
-                    .foregroundStyle(isSelected ? .black : .gray.opacity(0.6))
-                    .padding(.top, 4)
+                ZStack {
+                    Circle()
+                        .stroke(isSelected ? .black : .gray.opacity(0.5), lineWidth: 1.5)
+                        .frame(width: 22, height: 22)
+
+                    if isSelected {
+                        Circle()
+                            .fill(.black)
+                            .frame(width: 10, height: 10)
+                    }
+                }
             }
-            .padding(16)
+            .padding(.horizontal, 14)
+            .frame(height: 80)
             .background(.white)
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray.opacity(0.25))
             }
         }
+        .buttonStyle(.plain)
     }
 }

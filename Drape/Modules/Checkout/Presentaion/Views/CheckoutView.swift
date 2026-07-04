@@ -91,11 +91,15 @@ private extension CheckoutView {
                 paymentChip(title: "Apple Pay", option: .applePay)
             }
 
-            if viewModel.state.selectedPaymentOption == .card,
-               let card = viewModel.state.selectedCard {
+            if viewModel.state.selectedPaymentOption == .card {
                 HStack {
-                    Text("\(card.brand)  \(card.maskedNumber)")
-                        .fontWeight(.medium)
+                    if let card = viewModel.state.selectedCard {
+                        Text("\(card.brand)  \(card.maskedNumber)")
+                            .fontWeight(.medium)
+                    } else {
+                        Text("No card added")
+                            .foregroundStyle(.gray)
+                    }
 
                     Spacer()
 

@@ -18,18 +18,26 @@ enum PaymentOption: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
-struct AddressItem: Identifiable, Equatable ,Hashable {
+struct AddressItem: Identifiable, Equatable, Hashable, Codable {
     let id: UUID
-    let title: String
-    let details: String
-    let isDefault: Bool
+    var title: String
+    var details: String
+    var isDefault: Bool
+    // Optional coordinates (stored when picked on map)
+    var latitude: Double?
+    var longitude: Double?
+
+    // Provide CodingKeys to maintain compatibility
+    enum CodingKeys: String, CodingKey {
+        case id, title, details, isDefault, latitude, longitude
+    }
 }
 
-struct CardItem: Identifiable, Equatable {
+struct CardItem: Identifiable, Equatable, Codable {
     let id: UUID
-    let brand: String
-    let maskedNumber: String
-    let isDefault: Bool
+    var brand: String
+    var maskedNumber: String
+    var isDefault: Bool
 }
 
 struct CheckoutUiState {

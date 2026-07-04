@@ -11,8 +11,6 @@ struct AddCardView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel = AddCardViewModel()
 
-    let onCardAdded: (CardItem) -> Void = {_ in}
-
     var body: some View {
         ZStack {
             ScrollView {
@@ -123,7 +121,7 @@ private extension AddCardView {
                     text: "Thanks",
                     action: {
                         let card = viewModel.makeCardItem()
-                        onCardAdded(card)
+                        PaymentMethodViewModel.shared.addCard(card)
                         viewModel.dismissSuccess()
                         router.showPayment()
                     },

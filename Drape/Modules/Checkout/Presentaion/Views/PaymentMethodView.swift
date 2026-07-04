@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PaymentMethodView: View {
     @Environment(AppRouter.self) private var router
-    @State private var viewModel = PaymentMethodViewModel()
+    @State private var viewModel = PaymentMethodViewModel.shared
     let checkoutViewModel: CheckoutViewModel = CheckoutViewModel()
 
     var body: some View {
@@ -18,15 +18,43 @@ struct PaymentMethodView: View {
                 Text("Saved Cards")
                     .font(.system(size: 18, weight: .semibold))
                     .padding(.top, 8)
-
-                ForEach(viewModel.cards) { card in
-                    PaymentCardRowView(
-                        card: card,
-                        isSelected: viewModel.selectedCardID == card.id,
-                        onTap: {
-                            viewModel.selectCard(card)
+                if viewModel.cards.isEmpty {
+                    VStack(spacing: 12) {
+                        Image(systemName: "creditcard")
+                            .font(.system(size: 40))
+                            .foregroundStyle(.gray)
+                        Text("No saved cards yet")
+                            .foregroundStyle(.gray)
+                            .font(.subheadline)
+                        Button(action: { router.showAddCard() }) {
+                            Text("Add a card")
+                                .fontWeight(.medium)
                         }
-                    )
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 24)
+                } else {
+                    ForEach(viewModel.cards) { card in
+                        HStack(spacing: 12) {
+                            PaymentCardRowView(
+                                card: card,
+                                isSelected: viewModel.selectedCardID == card.id,
+                                onTap: {
+                                    viewModel.selectCard(card)
+                                }
+                            )
+
+                            // Delete button
+                            Button {
+                                viewModel.deleteCard(id: card.id)
+                            } label: {
+                                Image(systemName: "trash.fill")
+                                    .foregroundStyle(.red)
+                                    .font(.system(size: 14))
+                            }
+                            .padding(.trailing, 8)
+                        }
+                    }
                 }
 
                 Button {
@@ -54,7 +82,7 @@ struct PaymentMethodView: View {
                     text: "Apply",
                     action: {
                         guard let card = viewModel.selectedCard else { return }
-                       // checkoutViewModel.updateSelectedCard(card)
+                        checkoutViewModel.updateSelectedCard(card)
                         router.showCheckout()
                     },
                     status: viewModel.isApplyEnabled ? .enable : .disable
@@ -80,9 +108,6 @@ struct PaymentMethodView: View {
     }
 }
 
-
-
-
 import SwiftUI
 
 struct PaymentCardRowView: View {
@@ -107,10 +132,10 @@ struct PaymentCardRowView: View {
                     if card.isDefault {
                         Text("Default")
                             .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.green)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
-                            .background(Color.gray.opacity(0.12))
+                            .background(Color.green.opacity(0.12))
                             .clipShape(Capsule())
                     }
                 }
