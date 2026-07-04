@@ -144,10 +144,21 @@ private extension CheckoutView {
         VStack(alignment: .leading, spacing: 12) {
             Text("Order Summary")
                 .font(.headline)
-
+            
             summaryRow(title: "Sub-total", value: viewModel.state.subTotal)
             summaryRow(title: "VAT (%)", value: viewModel.state.vat)
             summaryRow(title: "Shipping fee", value: viewModel.state.shippingFee)
+            if viewModel.state.discountAmount > 0 {
+                HStack {
+                    Text("Discount")
+                        .foregroundStyle(.gray)
+                    
+                    Spacer()
+                    
+                    Text("- $ \(Int(viewModel.state.discountAmount))")
+                        .foregroundStyle(.green)
+                }
+            }
             summaryRow(title: "Total", value: viewModel.state.total, isBold: true)
         }
     }

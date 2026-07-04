@@ -18,21 +18,6 @@ enum PaymentOption: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
-struct AddressItem: Identifiable, Equatable, Hashable, Codable {
-    let id: UUID
-    var title: String
-    var details: String
-    var isDefault: Bool
-    // Optional coordinates (stored when picked on map)
-    var latitude: Double?
-    var longitude: Double?
-
-    // Provide CodingKeys to maintain compatibility
-    enum CodingKeys: String, CodingKey {
-        case id, title, details, isDefault, latitude, longitude
-    }
-}
-
 struct CardItem: Identifiable, Equatable, Codable {
     let id: UUID
     var brand: String
@@ -54,9 +39,12 @@ struct CheckoutUiState {
     var isPlacingOrder: Bool = false
     var isOrderSuccessVisible: Bool = false
     var errorMessage: String?
+    
+    var appliedPromo: ValidatedPromoCode?
+    var discountAmount: Double = 0
 
     var total: Double {
-        subTotal + vat + shippingFee
+        max(0, subTotal + vat + shippingFee - discountAmount)
     }
 
     var isPromoButtonEnabled: Bool {
@@ -121,5 +109,19 @@ struct AddCardUiState {
 
     var cardNumberDigits: String {
         cardNumber.filter(\.isNumber)
+    }
+}
+
+struct CartItem: Identifiable, Equatable {
+    let id: UUID
+    let variantId: Int
+    let title: String
+    let price: Double
+    let quantity: Int
+    let imageURL: URL?
+}
+extension Array where Element == CartItem {
+    var subtotal: Double {
+        reduce(0) { $0 + ($1.price * Double($1.quantity)) }
     }
 }

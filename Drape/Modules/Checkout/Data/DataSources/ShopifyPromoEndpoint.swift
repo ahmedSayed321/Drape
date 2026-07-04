@@ -10,9 +10,9 @@ import Foundation
 enum ShopifyPromoEndpoint: APIEndpoint {
     case lookupDiscountCode(code: String)
     case getPriceRule(priceRuleId: Int)
-
+    
     var baseURL: String { ShopifyConfig.baseURL }
-
+    
     var path: String {
         switch self {
         case .lookupDiscountCode:
@@ -21,9 +21,9 @@ enum ShopifyPromoEndpoint: APIEndpoint {
             return "/price_rules/\(priceRuleId).json"
         }
     }
-
+    
     var method: HTTPMethod { .get }
-
+    
     var queryParameters: [String: String]? {
         switch self {
         case .lookupDiscountCode(let code):
@@ -34,14 +34,25 @@ enum ShopifyPromoEndpoint: APIEndpoint {
     }
 }
 
+struct ShopifyDiscountLookupResponseDTO: Decodable {
+    let discountCode: ShopifyDiscountLookupDTO
+    
+    enum CodingKeys: String, CodingKey {
+        case discountCode = "discount_code"
+    }
+}
+
 struct ShopifyDiscountLookupDTO: Decodable {
-    let price_rule_id: Int
-    let id: Int          // discount_code_id
+    let id: Int
+    let priceRuleId: Int
     let code: String
 }
 
 struct ShopifyPriceRuleResponseDTO: Decodable {
-    let price_rule: ShopifyPriceRuleDTO
+    let priceRule: ShopifyPriceRuleDTO
+    enum CodingKeys: String, CodingKey {
+        case priceRule = "price_rule"
+    }
 }
 
 struct ShopifyPriceRuleDTO: Decodable {

@@ -8,34 +8,40 @@
 import Foundation
 
 struct ShopifyDraftOrderResponseDTO: Decodable {
-    let draft_order: ShopifyDraftOrderDTO
+    let draftOrder: ShopifyDraftOrderDTO
+    
+    enum CodingKeys: String, CodingKey {
+        case draftOrder = "draft_order"
+    }
+    
 }
 
 struct ShopifyDraftOrderDTO: Decodable {
     let id: Int
     let name: String
-    let total_price: String
-    let subtotal_price: String
-    let total_tax: String
-    let applied_discount: AppliedDiscountDTO?
-    let line_items: [LineItemDTO]
-    let order_id: Int?   // populated once completed
-
+    let totalPrice: String
+    let subtotalPrice: String
+    let totalTax: String
+    let appliedDiscount: AppliedDiscountDTO?
+    let lineItems: [LineItemDTO]
+    let orderId: Int?
+    
     struct AppliedDiscountDTO: Decodable {
         let title: String
         let value: String
-        let value_type: String
+        let valueType: String
         let amount: String
     }
-
+    
     struct LineItemDTO: Decodable {
         let id: Int
-        let variant_id: Int?
+        let variantId: Int?
         let title: String
         let quantity: Int
         let price: String
     }
 }
+
 
 struct ShopifyOrderResponseDTO: Decodable {
     let order: ShopifyOrderDTO

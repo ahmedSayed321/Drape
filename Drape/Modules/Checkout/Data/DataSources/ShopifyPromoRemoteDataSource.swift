@@ -15,7 +15,7 @@ final class ShopifyPromoRemoteDataSource {
         self.networkService = networkService
     }
 
-    func lookupDiscountCode(_ code: String) async throws -> ShopifyDiscountLookupDTO {
+    func lookupDiscountCode(_ code: String) async throws -> ShopifyDiscountLookupResponseDTO {
         try await networkService.request(ShopifyPromoEndpoint.lookupDiscountCode(code: code))
     }
 
