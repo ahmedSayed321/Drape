@@ -23,3 +23,14 @@ extension Product {
         return Double(filtered) ?? 0
     }
 }
+
+extension Product {
+    func toSavedProduct() -> SavedProduct {
+        SavedProduct(
+            id: id,
+            title: name,
+            imageURL: imageUrl,
+            price: price
+        )
+    }
+}

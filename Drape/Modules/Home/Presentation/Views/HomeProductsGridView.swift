@@ -10,6 +10,9 @@ import SwiftUI
 struct HomeProductsGridView: View {
     
     let products: [Product]
+    var onProductAppear: (Product) -> Void = { _ in }
+    var isFavorited: (Product) -> Bool = { _ in false }      // NEW
+    var onFavoriteTap: (Product) -> Void = { _ in }          // NEW
      
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -20,7 +23,15 @@ struct HomeProductsGridView: View {
         
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(products) { product in
-                HomeProductCard(product: product, onFavTap: {}, onCardTap: {})
+                HomeProductCard(
+                    uiState: product.toUIState(),
+                    isFavorited: isFavorited(product),        // NEW
+                    onFavTap: { onFavoriteTap(product) },      // NEW
+                    onCardTap: {}
+                )
+                .onAppear {
+                    onProductAppear(product)
+                }
             }
         }
         

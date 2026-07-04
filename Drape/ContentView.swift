@@ -14,13 +14,13 @@ struct ContentView: View {
     var body: some View {
         TabView {
             // First Tab
-            HomeScreen()
+            HomeEntryPoint()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }.tag(0)
             
             // Second Tab
-            FavouriteView()
+            FavoriteEntryPoint()
                 .tabItem {
                     Label("Faourite", systemImage: "heart.fill")
                 }.tag(1)
@@ -44,4 +44,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .modelContainer(for: SavedProductModel.self, inMemory: true)
 }

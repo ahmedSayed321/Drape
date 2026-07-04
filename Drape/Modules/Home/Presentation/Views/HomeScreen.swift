@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @StateObject private var viewModel: HomeViewModel = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
     @State private var showFilters = false
     @State private var filterDetent: PresentationDetent = .fraction(0.5)
     
@@ -43,7 +43,7 @@ struct HomeScreen: View {
                     // Now max height expands perfectly to fill the remaining screen space
                     VStack {
                         Spacer()
-                        ProgressView("Loading")
+                        ProgressView()
                         Spacer()
                     }
                         
@@ -65,24 +65,32 @@ struct HomeScreen: View {
                         LazyVStack(pinnedViews: [.sectionHeaders]) { 
                             Section {
                                 BrandSectionView(brands: viewModel.brands)
-                                    .padding(.horizontal, 16.0)
                                     .padding(.bottom, 16.0)
                             }
                             
                             Section {
                                 HomeProductsGridView(
-                                    products: viewModel.filteredProducts
+                                    products: viewModel.filteredProducts,
+                                    onProductAppear: { product in
+                                        viewModel.loadMoreProductsIfNeeded(currentItem: product)
+                                    },
+                                    isFavorited: { viewModel.isFavorited($0) },
+                                    onFavoriteTap: { viewModel.toggleFavorite($0) }
                                 )
+                                .padding(.horizontal, 16.0)
+                                if viewModel.isLoadingMore {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 16)
+                                }
                             } header: {
                                 CategoryChipListView(
                                     viewModel: viewModel
                                 )
-                                    .padding(.leading, 16.0)
                                     .padding(.bottom, 24.0)
                                     .background(.white)
                             }
                         }
-                        .padding(.horizontal, 16.0)
                     }
                     .scrollIndicators(.hidden) 
                 }
@@ -94,12 +102,15 @@ struct HomeScreen: View {
                }
             .task {
                 await viewModel.loadHomeData()
-        }
+            }
+            .navigationDestination(for: Brand.self) { brand in   // NEW
+                BrandProductsEntryPoint(brand: brand.name)
+            }
         }
     }
 }
 
 
 #Preview {
-    HomeScreen()
+    HomeEntryPoint()
 }

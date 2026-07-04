@@ -21,14 +21,16 @@ struct CategoryChipListView: View {
                     )
                 }
             }
+            .padding(.leading, 16) // Only leading on first item
+            .padding(.trailing, 16) // Only trailing on last item
 
         }
     }
 }
 
 #Preview {
-    let viewModel = HomeViewModel()
-    viewModel.categories = ["All", "Men", "Women", "Kids", "Accessories"]
-    return CategoryChipListView(viewModel: viewModel)
-        .padding()
+//    let viewModel = HomeViewModel()
+//    viewModel.categories = ["All", "Men", "Women", "Kids", "Accessories"]
+//    return CategoryChipListView(viewModel: viewModel)
+//        .padding()
 }
