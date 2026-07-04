@@ -9,7 +9,8 @@ import Foundation
 
 enum ShopifyConfig {
     static let hostname = "https://mad46-ios-team8.myshopify.com"
-    static let apiVersion = "2026-01"
+    static let apiVersion = "2024-01"
+    static let defaultLocationId = ""
 
     static var accessToken: String {
         Bundle.main.infoDictionary?["SHOPIFY_ACCESS_TOKEN"] as? String ?? ""
