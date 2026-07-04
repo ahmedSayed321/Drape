@@ -78,7 +78,9 @@ struct SignInView: View {
             type: .primary,
             text: viewModel.isLoading ? "Logging in..." : "Login",
             action: {
-                Task { await viewModel.signIn() }
+                Task { await viewModel.signIn()
+                    router.showHome()
+                }
             },
             status: (viewModel.isFormValid && !viewModel.isLoading) ? .enable : .disable
         )

@@ -94,7 +94,8 @@ struct HomeScreen: View {
                }
             .task {
                 await viewModel.loadHomeData()
-        }
+        }.toolbar(.hidden, for: .navigationBar) 
+
         }
     }
 }
