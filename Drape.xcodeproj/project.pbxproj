@@ -89,6 +89,14 @@
 		6D9C9AA02FF4326000C8AA09 /* FirebaseAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9C9A9F2FF4326000C8AA09 /* FirebaseAuthRepository.swift */; };
 		6D9C9AA22FF4329100C8AA09 /* ShopifyCustomerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9C9AA12FF4329100C8AA09 /* ShopifyCustomerRepository.swift */; };
 		6D9C9AA42FF4406E00C8AA09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */; };
+		9F3FB9C62FF9D8A00000DD67 /* SavedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C52FF9D8A00000DD67 /* SavedProduct.swift */; };
+		9F3FB9C82FF9D8C60000DD67 /* SavedProductsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C72FF9D8C60000DD67 /* SavedProductsRepository.swift */; };
+		9F3FB9CA2FF9D9600000DD67 /* SavedProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C92FF9D9600000DD67 /* SavedProductModel.swift */; };
+		9F3FB9CC2FF9D9FA0000DD67 /* SavedProductsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9CB2FF9D9FA0000DD67 /* SavedProductsRepositoryImpl.swift */; };
+		9F3FB9CE2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9CD2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift */; };
+		9F3FB9D02FF9DC890000DD67 /* SavedProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9CF2FF9DC890000DD67 /* SavedProductsViewModel.swift */; };
+		9F3FB9D22FF9E1A60000DD67 /* FavoriteModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9D12FF9E1A60000DD67 /* FavoriteModuleFactory.swift */; };
+		9F3FB9D42FF9E1BA0000DD67 /* FavoriteEntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9D32FF9E1BA0000DD67 /* FavoriteEntryPoint.swift */; };
 		9F4DDE6A2FF06F4700B9D2F0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */; };
 		9F952CD52FF8EC040007C3F3 /* GetHomeScreenDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */; };
 		9F952CD72FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */; };
@@ -205,9 +213,17 @@
 		6D9C9A9F2FF4326000C8AA09 /* FirebaseAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthRepository.swift; sourceTree = "<group>"; };
 		6D9C9AA12FF4329100C8AA09 /* ShopifyCustomerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCustomerRepository.swift; sourceTree = "<group>"; };
 		6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9F194C4E2FF8FEF500C4AA85 /* Drape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drape.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F194C4F2FF8FEF500C4AA85 /* DrapeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F194C502FF8FEF500C4AA85 /* DrapeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F3FB9BA2FF9D26A0000DD67 /* Drape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drape.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F3FB9BB2FF9D26A0000DD67 /* DrapeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F3FB9BC2FF9D26A0000DD67 /* DrapeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F3FB9C52FF9D8A00000DD67 /* SavedProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProduct.swift; sourceTree = "<group>"; };
+		9F3FB9C72FF9D8C60000DD67 /* SavedProductsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsRepository.swift; sourceTree = "<group>"; };
+		9F3FB9C92FF9D9600000DD67 /* SavedProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductModel.swift; sourceTree = "<group>"; };
+		9F3FB9CB2FF9D9FA0000DD67 /* SavedProductsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsRepositoryImpl.swift; sourceTree = "<group>"; };
+		9F3FB9CD2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSaveProductUseCase.swift; sourceTree = "<group>"; };
+		9F3FB9CF2FF9DC890000DD67 /* SavedProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsViewModel.swift; sourceTree = "<group>"; };
+		9F3FB9D12FF9E1A60000DD67 /* FavoriteModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModuleFactory.swift; sourceTree = "<group>"; };
+		9F3FB9D32FF9E1BA0000DD67 /* FavoriteEntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEntryPoint.swift; sourceTree = "<group>"; };
 		9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHomeScreenDataUseCase.swift; sourceTree = "<group>"; };
 		9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreProductsUseCaseProtocol.swift; sourceTree = "<group>"; };
@@ -256,6 +272,10 @@
 		3E41F38A2FF70CBA00703397 /* Favourite */ = {
 			isa = PBXGroup;
 			children = (
+				9F3FB9D32FF9E1BA0000DD67 /* FavoriteEntryPoint.swift */,
+				9F3FB9D12FF9E1A60000DD67 /* FavoriteModuleFactory.swift */,
+				9F3FB9C02FF9D7F80000DD67 /* Domain */,
+				9F3FB9BD2FF9D6610000DD67 /* Data */,
 				3E41F3932FF70D1900703397 /* Presentation */,
 			);
 			path = Favourite;
@@ -296,6 +316,7 @@
 		3E41F3932FF70D1900703397 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				9F3FB9C42FF9D8240000DD67 /* ViewModels */,
 				3E41F3982FF70D5400703397 /* view */,
 			);
 			path = Presentation;
@@ -359,9 +380,9 @@
 				41B03EAA2FEFCE2F00521C14 /* DrapeUITests */,
 				9FB047E32FF5C45E00F24615 /* Frameworks */,
 				6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */,
-				9F194C4E2FF8FEF500C4AA85 /* Drape.app */,
-				9F194C4F2FF8FEF500C4AA85 /* DrapeTests.xctest */,
-				9F194C502FF8FEF500C4AA85 /* DrapeUITests.xctest */,
+				9F3FB9BA2FF9D26A0000DD67 /* Drape.app */,
+				9F3FB9BB2FF9D26A0000DD67 /* DrapeTests.xctest */,
+				9F3FB9BC2FF9D26A0000DD67 /* DrapeUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -742,6 +763,73 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		9F3FB9BD2FF9D6610000DD67 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9BF2FF9D7E10000DD67 /* Repositories */,
+				9F3FB9BE2FF9D7D40000DD67 /* Persistence */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9F3FB9BE2FF9D7D40000DD67 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9C92FF9D9600000DD67 /* SavedProductModel.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		9F3FB9BF2FF9D7E10000DD67 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9CB2FF9D9FA0000DD67 /* SavedProductsRepositoryImpl.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		9F3FB9C02FF9D7F80000DD67 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9C32FF9D8130000DD67 /* UseCases */,
+				9F3FB9C22FF9D80A0000DD67 /* RepositoryProtocols */,
+				9F3FB9C12FF9D8010000DD67 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9F3FB9C12FF9D8010000DD67 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9C52FF9D8A00000DD67 /* SavedProduct.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		9F3FB9C22FF9D80A0000DD67 /* RepositoryProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9C72FF9D8C60000DD67 /* SavedProductsRepository.swift */,
+			);
+			path = RepositoryProtocols;
+			sourceTree = "<group>";
+		};
+		9F3FB9C32FF9D8130000DD67 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9CD2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		9F3FB9C42FF9D8240000DD67 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9F3FB9CF2FF9DC890000DD67 /* SavedProductsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		9F4DDE682FF06F3700B9D2F0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,7 +973,7 @@
 				6D9ABED42FF4117700C60D08 /* FirebaseFunctions */,
 			);
 			productName = Drape;
-			productReference = 9F194C4E2FF8FEF500C4AA85 /* Drape.app */;
+			productReference = 9F3FB9BA2FF9D26A0000DD67 /* Drape.app */;
 			productType = "com.apple.product-type.application";
 		};
 		41B03E9C2FEFCE2F00521C14 /* DrapeTests */ = {
@@ -903,7 +991,7 @@
 			);
 			name = DrapeTests;
 			productName = DrapeTests;
-			productReference = 9F194C4F2FF8FEF500C4AA85 /* DrapeTests.xctest */;
+			productReference = 9F3FB9BB2FF9D26A0000DD67 /* DrapeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		41B03EA62FEFCE2F00521C14 /* DrapeUITests */ = {
@@ -921,7 +1009,7 @@
 			);
 			name = DrapeUITests;
 			productName = DrapeUITests;
-			productReference = 9F194C502FF8FEF500C4AA85 /* DrapeUITests.xctest */;
+			productReference = 9F3FB9BC2FF9D26A0000DD67 /* DrapeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1015,6 +1103,7 @@
 				41BC1F9C2FF52D0000985A5F /* SearchEndpoint.swift in Sources */,
 				41BC1F902FF52B9B00985A5F /* NetworkService.swift in Sources */,
 				41AA27222FF6DD4F00BF6DA0 /* ProductDTO.swift in Sources */,
+				9F3FB9CC2FF9D9FA0000DD67 /* SavedProductsRepositoryImpl.swift in Sources */,
 				41BC1F8A2FF52B3800985A5F /* HTTPMethod.swift in Sources */,
 				41BC1F822FF50D2500985A5F /* SearchItemView.swift in Sources */,
 				41B0DB312FF5B2510083D212 /* VariantDTO.swift in Sources */,
@@ -1029,6 +1118,8 @@
 				3E2212A32FF5593800770211 /* ShopifyCustomerSearchDto.swift in Sources */,
 				3EFC6DFE2FEFE482002FBB9B /* SplashScreen.swift in Sources */,
 				41B9B8E92FF02858002CF176 /* HomeScreen.swift in Sources */,
+				9F3FB9CA2FF9D9600000DD67 /* SavedProductModel.swift in Sources */,
+				9FB047FD2FF5FC2300F24615 /* GetAllProductsUseCase.swift in Sources */,
 				41B9B8F32FF39890002CF176 /* HeaderHomeScreenView.swift in Sources */,
 				9FB047F32FF5F47400F24615 /* HomeRepositoryImpl.swift in Sources */,
 				9FB048002FF5FE7E00F24615 /* HomeViewModel.swift in Sources */,
@@ -1037,6 +1128,7 @@
 				9FD014BD2FF6EEF400602339 /* Brand.swift in Sources */,
 				4133DE532FF40ECA00291657 /* BrandItemView.swift in Sources */,
 				9FD014B92FF6EB8F00602339 /* VendorDTO.swift in Sources */,
+				9F3FB9C62FF9D8A00000DD67 /* SavedProduct.swift in Sources */,
 				9FD014BB2FF6ED2C00602339 /* ImageDTO.swift in Sources */,
 				3E41F39A2FF70D7300703397 /* CartView.swift in Sources */,
 				41BC1F862FF5111A00985A5F /* NoResultsFoundStateView.swift in Sources */,
@@ -1063,9 +1155,11 @@
 				41BC1F7E2FF5016400985A5F /* RecentSearchSectionView.swift in Sources */,
 				9FAC15E12FF88AA1000EBE26 /* EmptyStateView.swift in Sources */,
 				3EC1E4672FF5D5360047F42E /* AppRouter.swift in Sources */,
+				9F3FB9D02FF9DC890000DD67 /* SavedProductsViewModel.swift in Sources */,
 				3EC1E4682FF5D5360047F42E /* AppScreen.swift in Sources */,
 				41BC1F9A2FF52C7100985A5F /* SearchRemoteDataSource.swift in Sources */,
 				41B0DB3A2FF5B40F0083D212 /* RecentSearchesLocalDataSource.swift in Sources */,
+				9F3FB9D22FF9E1A60000DD67 /* FavoriteModuleFactory.swift in Sources */,
 				41BC1F782FF4FE7700985A5F /* RecentSearchItemView.swift in Sources */,
 				6D9C9A902FF4313A00C8AA09 /* CustomerRepositoryProtocol.swift in Sources */,
 				3E22129F2FF557D100770211 /* SignInUseCase.swift in Sources */,
@@ -1087,8 +1181,11 @@
 				41B9B8EE2FF39604002CF176 /* CustomSearchField.swift in Sources */,
 				3EFC6E052FEFEF1B002FBB9B /* OnBoardingScreen.swift in Sources */,
 				41B9B8EC2FF395DA002CF176 /* CategoryChipListView.swift in Sources */,
+				9F3FB9C82FF9D8C60000DD67 /* SavedProductsRepository.swift in Sources */,
 				3E2212A12FF5581000770211 /* SignInError.swift in Sources */,
+				9F3FB9CE2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift in Sources */,
 				6D9C9A982FF431D200C8AA09 /* SignUpError.swift in Sources */,
+				9F3FB9D42FF9E1BA0000DD67 /* FavoriteEntryPoint.swift in Sources */,
 				6D9C9A9B2FF431FC00C8AA09 /* KeychainStorage.swift in Sources */,
 				6D9C9A9E2FF4323C00C8AA09 /* KeychainTokenStorage.swift in Sources */,
 			);
