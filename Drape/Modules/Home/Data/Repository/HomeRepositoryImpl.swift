@@ -15,8 +15,8 @@ class HomeRepositoryImpl: HomeRepositoryProtocol {
         self.remoteDataSource = remoteDataSource
     }
     
-    func fetchProducts() async throws -> [Product] {
-        let productDTOs = try await remoteDataSource.fetchAllProducts()
+    func fetchProducts(limit: Int) async throws -> [Product] {
+        let productDTOs = try await remoteDataSource.fetchAllProducts(limit: limit)
         return productDTOs.map { $0.convertToEntity() }
     }
     

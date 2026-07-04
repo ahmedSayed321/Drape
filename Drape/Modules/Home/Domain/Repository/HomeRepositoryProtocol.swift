@@ -8,6 +8,6 @@
 import Foundation
 
 protocol HomeRepositoryProtocol {
-    func fetchProducts() async throws -> [Product]
+    func fetchProducts(limit: Int) async throws -> [Product]
     func fetchBrands() async throws -> [Brand]
 }

@@ -43,7 +43,7 @@ struct HomeScreen: View {
                     // Now max height expands perfectly to fill the remaining screen space
                     VStack {
                         Spacer()
-                        ProgressView("Loading")
+                        ProgressView()
                         Spacer()
                     }
                         
@@ -65,24 +65,40 @@ struct HomeScreen: View {
                         LazyVStack(pinnedViews: [.sectionHeaders]) { 
                             Section {
                                 BrandSectionView(brands: viewModel.brands)
-                                    .padding(.horizontal, 16.0)
                                     .padding(.bottom, 16.0)
                             }
                             
                             Section {
                                 HomeProductsGridView(
-                                    products: viewModel.filteredProducts
+                                    products: viewModel.filteredProducts,
+                                    onProductAppear: { product in
+                                        viewModel.loadMoreProductsIfNeeded(currentItem: product)
+                                    }
                                 )
+                                .padding(.horizontal, 16.0)
+                                if viewModel.isLoadingMore {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 16)
+                                } else if viewModel.selectedCategory != "All" {
+                                    HStack(spacing: 6) {
+                                        Image(systemName: "line.3.horizontal.decrease.circle")
+                                            .foregroundStyle(.secondary)
+                                        Text("Clear filters to load more products")
+                                            .font(.footnote)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 16)
+                                }
                             } header: {
                                 CategoryChipListView(
                                     viewModel: viewModel
                                 )
-                                    .padding(.leading, 16.0)
                                     .padding(.bottom, 24.0)
                                     .background(.white)
                             }
                         }
-                        .padding(.horizontal, 16.0)
                     }
                     .scrollIndicators(.hidden) 
                 }

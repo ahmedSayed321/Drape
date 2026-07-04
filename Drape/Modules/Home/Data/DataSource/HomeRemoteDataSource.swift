@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomeRemoteDataSourceProtocol {
-    func fetchAllProducts() async throws -> [ProductDTO]
+    func fetchAllProducts(limit: Int) async throws -> [ProductDTO]
     func fetchVendors() async throws -> [VendorDTO]
 }
 
@@ -20,8 +20,8 @@ class HomeRemoteDataSource: HomeRemoteDataSourceProtocol {
         self.networkService = networkService
     }
 
-    func fetchAllProducts() async throws -> [ProductDTO] {
-        let response: ProductsResponse = try await networkService.request(ProductsEndpoint(limit: 50))
+    func fetchAllProducts(limit: Int) async throws -> [ProductDTO] {
+        let response: ProductsResponse = try await networkService.request(ProductsEndpoint(limit: limit))
         return response.products
     }
 

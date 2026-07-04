@@ -21,6 +21,8 @@ struct CategoryChipListView: View {
                     )
                 }
             }
+            .padding(.leading, 16) // Only leading on first item
+            .padding(.trailing, 16) // Only trailing on last item
 
         }
     }
