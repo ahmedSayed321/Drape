@@ -48,4 +48,7 @@ final class AppRouter {
     func showPayment() {
         currentScreen = .payment
     }
+    func showAddCard() {
+        currentScreen = .addCard
+    }
 }

@@ -84,6 +84,8 @@
 		6D1E88302FF8B180005D6386 /* AddAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E882F2FF8B180005D6386 /* AddAddressView.swift */; };
 		6D1E88322FF8D0E5005D6386 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E88312FF8D0E5005D6386 /* PaymentMethodView.swift */; };
 		6D1E88342FF8D127005D6386 /* PaymentMethodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E88332FF8D127005D6386 /* PaymentMethodViewModel.swift */; };
+		6D1E88362FF8D5C3005D6386 /* AddCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E88352FF8D5C3005D6386 /* AddCardViewModel.swift */; };
+		6D1E88382FF8D5EE005D6386 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E88372FF8D5EE005D6386 /* AddCardView.swift */; };
 		6D46B38A2FF5FAFC00586940 /* ShopifyRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B3892FF5FAFC00586940 /* ShopifyRemoteDataSource.swift */; };
 		6D46B38C2FF600A800586940 /* ShopifyAuthEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B38B2FF600A800586940 /* ShopifyAuthEndpoint.swift */; };
 		6D718AC12FF2C4FA009263ED /* Signup_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D718AC02FF2C4FA009263ED /* Signup_ViewModel.swift */; };
@@ -212,6 +214,8 @@
 		6D1E882F2FF8B180005D6386 /* AddAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressView.swift; sourceTree = "<group>"; };
 		6D1E88312FF8D0E5005D6386 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
 		6D1E88332FF8D127005D6386 /* PaymentMethodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewModel.swift; sourceTree = "<group>"; };
+		6D1E88352FF8D5C3005D6386 /* AddCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewModel.swift; sourceTree = "<group>"; };
+		6D1E88372FF8D5EE005D6386 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		6D46B3862FF5FA2000586940 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		6D46B3892FF5FAFC00586940 /* ShopifyRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyRemoteDataSource.swift; sourceTree = "<group>"; };
 		6D46B38B2FF600A800586940 /* ShopifyAuthEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyAuthEndpoint.swift; sourceTree = "<group>"; };
@@ -712,6 +716,7 @@
 				6D1E88282FF880AD005D6386 /* AddressRowView.swift */,
 				6D1E882F2FF8B180005D6386 /* AddAddressView.swift */,
 				6D1E88312FF8D0E5005D6386 /* PaymentMethodView.swift */,
+				6D1E88372FF8D5EE005D6386 /* AddCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -723,6 +728,7 @@
 				6D1E88242FF87FC6005D6386 /* AddressViewModel.swift */,
 				6D1E882D2FF8B143005D6386 /* AddAddressViewModel.swift */,
 				6D1E88332FF8D127005D6386 /* PaymentMethodViewModel.swift */,
+				6D1E88352FF8D5C3005D6386 /* AddCardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1112,12 +1118,14 @@
 				41BC1F9A2FF52C7100985A5F /* SearchRemoteDataSource.swift in Sources */,
 				41B0DB3A2FF5B40F0083D212 /* RecentSearchesLocalDataSource.swift in Sources */,
 				41BC1F782FF4FE7700985A5F /* RecentSearchItemView.swift in Sources */,
+				6D1E88362FF8D5C3005D6386 /* AddCardViewModel.swift in Sources */,
 				6D9C9A902FF4313A00C8AA09 /* CustomerRepositoryProtocol.swift in Sources */,
 				3E22129F2FF557D100770211 /* SignInUseCase.swift in Sources */,
 				6D9C9A8B2FF430D700C8AA09 /* AppUser.swift in Sources */,
 				3E15609B2FF02ACB00684C6A /* SignInView.swift in Sources */,
 				6D718AC12FF2C4FA009263ED /* Signup_ViewModel.swift in Sources */,
 				6D1E88342FF8D127005D6386 /* PaymentMethodViewModel.swift in Sources */,
+				6D1E88382FF8D5EE005D6386 /* AddCardView.swift in Sources */,
 				6D1E881F2FF86139005D6386 /* CheckoutViewModel.swift in Sources */,
 				6D9C9AA22FF4329100C8AA09 /* ShopifyCustomerRepository.swift in Sources */,
 				6D9C9AA02FF4326000C8AA09 /* FirebaseAuthRepository.swift in Sources */,

@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import SwiftUI
+import Observation
 
 enum PaymentOption: String, CaseIterable, Identifiable {
     case card
@@ -88,4 +89,29 @@ struct AddAddressUiState {
 struct PickedLocationItem: Identifiable {
     let id = UUID()
     let coordinate: CLLocationCoordinate2D
+}
+
+
+struct AddCardUiState {
+    var cardNumber: String = ""
+    var expiryDate: String = ""
+    var securityCode: String = ""
+
+    var cardNumberState: TextFieldState = .normal
+    var expiryDateState: TextFieldState = .normal
+    var securityCodeState: TextFieldState = .normal
+
+    var isSaving: Bool = false
+    var isSuccessVisible: Bool = false
+
+    var isAddEnabled: Bool {
+        cardNumberState == .success &&
+        expiryDateState == .success &&
+        securityCodeState == .success &&
+        !isSaving
+    }
+
+    var cardNumberDigits: String {
+        cardNumber.filter(\.isNumber)
+    }
 }

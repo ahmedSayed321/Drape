@@ -30,7 +30,7 @@ struct PaymentMethodView: View {
                 }
 
                 Button {
-                  //  router.showAddCard()
+                    router.showAddCard()
                 } label: {
                     HStack(spacing: 10) {
                         Image(systemName: "plus")
