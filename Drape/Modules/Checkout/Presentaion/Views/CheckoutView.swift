@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CheckoutView: View {
     @State private var viewModel = CheckoutViewModel()
-
+    @Environment(AppRouter.self) private var router
+    
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 20) {
@@ -20,9 +21,7 @@ struct CheckoutView: View {
                 summarySection
                 Divider()
                 promoSection
-
                 Spacer()
-
                 CustomButton(
                     type: .primary,
                     text: viewModel.state.isPlacingOrder ? "Placing..." : "Place Order",
@@ -34,8 +33,8 @@ struct CheckoutView: View {
             }
             .padding()
             .background(Color.white)
-
-           //TODO: Show order Success pop up
+            
+            //TODO: Show order Success pop up
         }
     }
 }
@@ -50,8 +49,7 @@ private extension CheckoutView {
                 Spacer()
 
                 Button("Change") {
-                    // navigate to address screen
-                }
+                    router.showAddress()                }
                 .underline()
                 .foregroundStyle(.black)
             }

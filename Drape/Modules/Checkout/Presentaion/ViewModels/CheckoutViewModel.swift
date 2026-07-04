@@ -82,4 +82,9 @@ final class CheckoutViewModel {
     func dismissSuccess() {
         state.isOrderSuccessVisible = false
     }
+    
+    func updateSelectedAddress(_ address: AddressItem) {
+        state.selectedAddress = address
+    }
+
 }

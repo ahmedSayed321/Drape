@@ -11,7 +11,7 @@ import Observation
 @Observable
 final class AppRouter {
 
-    var currentScreen: AppScreen = .splash
+    var currentScreen: AppScreen = .checkout
 
     func showSplash() {
         currentScreen = .splash
@@ -36,4 +36,12 @@ final class AppRouter {
     func showCheckout() {
         currentScreen = .checkout
     }
+    
+    func showAddress() {
+        currentScreen = .address
+    }
+    
+//    func showAddAddress() {
+//        currentScreen = .addAddress
+//    }
 }

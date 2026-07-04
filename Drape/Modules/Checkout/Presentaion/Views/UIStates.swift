@@ -15,7 +15,7 @@ enum PaymentOption: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
-struct AddressItem: Identifiable, Equatable {
+struct AddressItem: Identifiable, Equatable ,Hashable {
     let id: UUID
     let title: String
     let details: String

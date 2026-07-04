@@ -43,6 +43,11 @@ struct DrapeApp: App {
             case .checkout:
                 CheckoutView()
                     .environment(router)
+            case .address:
+                AddressView()
+                    .environment(router)
+      //      case .addAddress:
+          //      AddAddressView().environment(router)
             }
 
         }
