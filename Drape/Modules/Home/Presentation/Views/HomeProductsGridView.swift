@@ -20,7 +20,7 @@ struct HomeProductsGridView: View {
         
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(products) { product in
-                HomeProductCard(product: product, onFavTap: {}, onCardTap: {})
+                HomeProductCard(uiState: product.toUIState(), onFavTap: {}, onCardTap: {})
             }
         }
         
