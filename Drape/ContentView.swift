@@ -20,7 +20,7 @@ struct ContentView: View {
                 }.tag(0)
             
             // Second Tab
-            FavouriteView()
+            FavoriteEntryPoint()
                 .tabItem {
                     Label("Faourite", systemImage: "heart.fill")
                 }.tag(1)
