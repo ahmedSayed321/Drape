@@ -32,20 +32,8 @@ final class ShopifyCustomerRepository: CustomerRepositoryProtocol {
     func createShopifyCustomer(fullName: String, email: String) async throws -> AppUser {
         let result = try await dataSource.searchCustomer(byEmail: email)
 
-        if let existing = result.customers.first {
-            print("Customer already exists in Shopify")
-            let shopifyID = String(existing.id)
-            tokenStorage.saveShopifyCustomerID(shopifyID)
-            return AppUser(
-                id: tokenStorage.getFirebaseUID() ?? "",
-                email: existing.email ?? email,
-                fullName: [existing.first_name, existing.last_name]
-                    .compactMap { $0 }
-                    .filter { !$0.isEmpty }
-                    .joined(separator: " "),
-                shopifyCustomerID: shopifyID,
-                alreadyExisted: true
-            )
+        if result.customers.first != nil {
+            throw SignUpError.emailAlreadyInUse
         }
         print("Trying to create shopify acc in repo")
         return try await createCustomer(fullName: fullName, email: email)
