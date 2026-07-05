@@ -9,9 +9,9 @@ import SwiftUI
 
 struct HomeProductCard: View {
     
-    let product: Product
+    let uiState: ProductCardUIState
     
-    @State private var isFavorited: Bool = false
+    let isFavorited: Bool
     var onFavTap: () -> Void
     var onCardTap: () -> Void
     
@@ -28,7 +28,7 @@ struct HomeProductCard: View {
                         .frame(height: 224)
                         .overlay(
                             Group {
-                                if let imageUrl = product.imageUrl, let url = URL(string: imageUrl) {
+                                if let imageUrl = uiState.imageUrl, let url = URL(string: imageUrl) {
                                     AsyncImage(url: url) { phase in
                                         switch phase {
                                         case .empty:
@@ -52,13 +52,13 @@ struct HomeProductCard: View {
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
-                Text(product.name)
+                Text(uiState.name)
                     .font(.system(size: 16))
                     .fontWeight(.bold)
                     .lineLimit(1)
                     .padding(.horizontal, 4)
                     .padding(.top, 4)
-                Text(product.price)
+                Text(uiState.price)
                     .font(.system(size: 14))
                     .fontWeight(.medium)
                     .foregroundColor(.gray)
@@ -69,9 +69,7 @@ struct HomeProductCard: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        isFavorited.toggle()
                         onFavTap()
-                        print("fav button clicked")
                     }) {
                         Image(systemName: isFavorited ? "heart.fill" : "heart")
                             .font(.system(size: 18, weight: .semibold))
@@ -89,7 +87,6 @@ struct HomeProductCard: View {
         .contentShape(Rectangle())
         .onTapGesture {
             onCardTap()
-            print("product card button clicked")
         }
     }
 }

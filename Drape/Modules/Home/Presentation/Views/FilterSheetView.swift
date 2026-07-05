@@ -154,5 +154,5 @@ struct FilterSheetView: View {
 }
 
 #Preview {
-    FilterSheetView(viewModel: HomeViewModel(), selectedDetent: .constant(.fraction(0.5)))
+//    FilterSheetView(viewModel: HomeViewModel(), selectedDetent: .constant(.fraction(0.5)))
 }

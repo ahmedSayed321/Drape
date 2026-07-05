@@ -26,6 +26,7 @@ struct BrandSectionView: View {
                 }
                 
             }
+            .padding(.horizontal, 16)
             
             BrandItemsList(brands: brands)
         }
