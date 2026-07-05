@@ -8,16 +8,19 @@
 import Foundation
 
 protocol CheckoutRepositoryProtocol {
-    func createDraftOrder(
-        lineItems: [CartItem],
-        address: AddressItem,
-        customerFirstName: String,
-        customerLastName: String,
-        customerPhone: String?,
-        promo: ValidatedPromoCode?,
-        discountAmount: Double
-    ) async throws -> DraftOrder
+    func updateDraftOrder(
+            draftOrderId: Int,
+            lineItems: [CartItem],
+            address: AddressItem,
+            customerFirstName: String,
+            customerLastName: String,
+            customerPhone: String?,
+            promo: ValidatedPromoCode?,
+            discountAmount: Double
+        ) async throws -> DraftOrder
+    
     func completeOrder(draftOrderId: Int, paymentPending: Bool) async throws -> DraftOrder
+    
     func fetchDraftOrder(id: Int) async throws -> DraftOrder
 }
 

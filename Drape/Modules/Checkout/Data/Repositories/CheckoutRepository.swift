@@ -16,7 +16,8 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
         self.remoteDataSource = remoteDataSource
     }
 
-    func createDraftOrder(
+    func updateDraftOrder(
+        draftOrderId: Int,
         lineItems: [CartItem],
         address: AddressItem,
         customerFirstName: String,
@@ -26,13 +27,46 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
         discountAmount: Double
     ) async throws -> DraftOrder {
 
+        let requestBody = buildRequestBody(
+            lineItems: lineItems,
+            address: address,
+            customerFirstName: customerFirstName,
+            customerLastName: customerLastName,
+            customerPhone: customerPhone,
+            promo: promo,
+            discountAmount: discountAmount
+        )
+
+        let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
+        return map(response.draftOrder)
+    }
+
+    func completeOrder(draftOrderId: Int, paymentPending: Bool) async throws -> DraftOrder {
+        let response = try await remoteDataSource.completeDraftOrder(id: draftOrderId, paymentPending: paymentPending)
+        return map(response.draftOrder)
+    }
+
+    func fetchDraftOrder(id: Int) async throws -> DraftOrder {
+        let response = try await remoteDataSource.getDraftOrder(id: id)
+        return map(response.draftOrder)
+    }
+
+    private func buildRequestBody(
+        lineItems: [CartItem],
+        address: AddressItem,
+        customerFirstName: String,
+        customerLastName: String,
+        customerPhone: String?,
+        promo: ValidatedPromoCode?,
+        discountAmount: Double
+    ) -> ShopifyDraftOrderRequestDTO {
         let shippingAddress = address.toShippingAddress(
             firstName: customerFirstName,
             lastName: customerLastName,
             phone: customerPhone
         )
 
-        let requestBody = ShopifyDraftOrderRequestDTO(
+        return ShopifyDraftOrderRequestDTO(
             draft_order: .init(
                 line_items: lineItems.map { .init(variant_id: $0.variantId, quantity: $0.quantity) },
                 shipping_address: shippingAddress,
@@ -49,19 +83,6 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
                 note: address.locationNote
             )
         )
-
-        let response = try await remoteDataSource.createDraftOrder(requestBody)
-        return map(response.draftOrder)
-    }
-
-    func completeOrder(draftOrderId: Int, paymentPending: Bool) async throws -> DraftOrder {
-        let response = try await remoteDataSource.completeDraftOrder(id: draftOrderId, paymentPending: paymentPending)
-        return map(response.draftOrder)
-    }
-
-    func fetchDraftOrder(id: Int) async throws -> DraftOrder {
-        let response = try await remoteDataSource.getDraftOrder(id: id)
-        return map(response.draftOrder)
     }
 
     private func map(_ dto: ShopifyDraftOrderDTO) -> DraftOrder {

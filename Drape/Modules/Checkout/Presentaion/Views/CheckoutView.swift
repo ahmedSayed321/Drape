@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct CheckoutView: View {
-    @State private var viewModel = CheckoutViewModel()
     @Environment(AppRouter.self) private var router
+    @State private var viewModel: CheckoutViewModel
+
+    init(cartItems: [CartItem], draftOrderId: String) {
+        _viewModel = State(initialValue: CheckoutViewModel(cartItems: cartItems, draftOrderId: draftOrderId))
+    }
     
     var body: some View {
         ZStack {
@@ -19,7 +23,7 @@ struct CheckoutView: View {
                     title: "Checkout",
                     trailingSystemImage: "bell",
                     onBackTapped: {
-                        // TODO: wire up back navigation
+                        router.showCart()
                     },
                     onTrailingTapped: { }
                 )
@@ -45,6 +49,15 @@ struct CheckoutView: View {
                 .padding()
             }
             .background(Color.white)
+            .onChange(of: router.currentScreen) { _, newScreen in
+                guard newScreen == .checkout else { return }
+                if let address = router.selectedAddress {
+                    viewModel.updateSelectedAddress(address)
+                }
+                if let card = router.selectedCard {
+                    viewModel.updateSelectedCard(card)
+                }
+            }
             
             //TODO: Show order Success pop up
         }

@@ -11,7 +11,11 @@ import Observation
 @Observable
 final class AppRouter {
 
-    var currentScreen: AppScreen = .checkout
+    var currentScreen: AppScreen = .splash
+    var cartItems: [CartItem] = []
+    var draftOrderId: String = ""
+    var selectedAddress: AddressItem?
+    var selectedCard: CardItem?
 
     func showSplash() {
         currentScreen = .splash
@@ -50,5 +54,8 @@ final class AppRouter {
     }
     func showAddCard() {
         currentScreen = .addCard
+    }
+    func showCart() {
+        currentScreen = .cart
     }
 }

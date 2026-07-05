@@ -16,6 +16,8 @@ final class CheckoutViewModel {
     
     // TODO: replace with real cart data once the Cart feature exists.
     private var cartItems: [CartItem]
+    private let draftOrderId: String
+
     
     // TODO: replace with real logged-in customer info from your auth/session store.
     private let customerFirstName: String
@@ -23,6 +25,7 @@ final class CheckoutViewModel {
     private let customerPhone: String?
     
     init(cartItems: [CartItem] = [],
+         draftOrderId: String,
          customerFirstName: String = "Guest",
          customerLastName: String = "Customer",
          customerPhone: String? = nil,
@@ -30,6 +33,7 @@ final class CheckoutViewModel {
          checkoutRepository: CheckoutRepositoryProtocol = CheckoutRepository()
     ) {
         self.cartItems = cartItems
+        self.draftOrderId = draftOrderId
         self.customerFirstName = customerFirstName
         self.customerLastName = customerLastName
         self.customerPhone = customerPhone
@@ -103,17 +107,23 @@ final class CheckoutViewModel {
             state.errorMessage = "Please complete required checkout data."
             return
         }
-        
+
         guard let address = state.selectedAddress else {
             state.errorMessage = "Please select a delivery address."
             return
         }
-        
+
+        guard let draftOrderIdInt = Int(draftOrderId) else {
+            state.errorMessage = "Something went wrong with your cart. Please try again."
+            return
+        }
+
         state.isPlacingOrder = true
         state.errorMessage = nil
-        
+
         do {
-            let draftOrder = try await checkoutRepository.createDraftOrder(
+            let draftOrder = try await checkoutRepository.updateDraftOrder(
+                draftOrderId: draftOrderIdInt,
                 lineItems: cartItems,
                 address: address,
                 customerFirstName: customerFirstName,
@@ -122,19 +132,19 @@ final class CheckoutViewModel {
                 promo: state.appliedPromo,
                 discountAmount: state.discountAmount
             )
-            
+
             let paymentPending = state.selectedPaymentOption == .cash
-            
+
             _ = try await checkoutRepository.completeOrder(
                 draftOrderId: draftOrder.id,
                 paymentPending: paymentPending
             )
-            
+
             state.isOrderSuccessVisible = true
         } catch {
             state.errorMessage = "Couldn't place your order. Please try again."
         }
-        
+
         state.isPlacingOrder = false
     }
     

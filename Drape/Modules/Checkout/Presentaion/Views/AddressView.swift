@@ -10,7 +10,6 @@ import SwiftUI
 struct AddressView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel = AddressViewModel()
-    let checkoutViewModel: CheckoutViewModel = CheckoutViewModel()
 
     var body: some View {
         ScrollView {
@@ -70,7 +69,7 @@ struct AddressView: View {
                     text: "Apply",
                     action: {
                         guard let address = viewModel.selectedAddress else { return }
-                        checkoutViewModel.updateSelectedAddress(address)
+                        router.selectedAddress = address
                         router.showCheckout()
                     },
                     status: viewModel.isApplyEnabled ? .enable : .disable

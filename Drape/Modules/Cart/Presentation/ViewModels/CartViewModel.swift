@@ -25,6 +25,9 @@ final class CartViewModel: ObservableObject {
     private let clearCartUseCase: ClearCartUseCaseProtocol
 
     private var draftOrderId: String?
+    var currentDraftOrderId: String? {
+        draftOrderId
+    }
     private var debounceTasks: [String: Task<Void, Never>] = [:]
 
     init(

@@ -10,7 +10,6 @@ import SwiftUI
 struct PaymentMethodView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel = PaymentMethodViewModel.shared
-    let checkoutViewModel: CheckoutViewModel = CheckoutViewModel()
 
     var body: some View {
         ScrollView {
@@ -82,7 +81,7 @@ struct PaymentMethodView: View {
                     text: "Apply",
                     action: {
                         guard let card = viewModel.selectedCard else { return }
-                        checkoutViewModel.updateSelectedCard(card)
+                        router.selectedCard = card
                         router.showCheckout()
                     },
                     status: viewModel.isApplyEnabled ? .enable : .disable
