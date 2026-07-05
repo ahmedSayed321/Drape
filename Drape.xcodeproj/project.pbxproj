@@ -15,6 +15,9 @@
 		3E41F39A2FF70D7300703397 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F3992FF70D7300703397 /* CartView.swift */; };
 		3E41F39C2FF70D8600703397 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39B2FF70D8600703397 /* AccountView.swift */; };
 		3E41F39E2FF70D9E00703397 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39D2FF70D9E00703397 /* FavouriteView.swift */; };
+		3E88ADFF2FF9DE4C00783ECA /* BannerProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88ADFE2FF9DE4C00783ECA /* BannerProduct.swift */; };
+		3E88AE012FF9E0E600783ECA /* FeaturedProductsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88AE002FF9E0E600783ECA /* FeaturedProductsCarouselView.swift */; };
+		3EA6E02F2FFA962F004FCF0B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3EA6E02E2FFA962F004FCF0B /* Kingfisher */; };
 		3EC1E4672FF5D5360047F42E /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC1E4642FF5D5360047F42E /* AppRouter.swift */; };
 		3EC1E4682FF5D5360047F42E /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC1E4652FF5D5360047F42E /* AppScreen.swift */; };
 		3EFC6DFE2FEFE482002FBB9B /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC6DFD2FEFE482002FBB9B /* SplashScreen.swift */; };
@@ -129,6 +132,11 @@
 		3E41F3992FF70D7300703397 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		3E41F39B2FF70D8600703397 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		3E41F39D2FF70D9E00703397 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
+		3E88ADFB2FF9D9B300783ECA /* Drape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drape.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E88ADFC2FF9D9B300783ECA /* DrapeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E88ADFD2FF9D9B300783ECA /* DrapeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E88ADFE2FF9DE4C00783ECA /* BannerProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerProduct.swift; sourceTree = "<group>"; };
+		3E88AE002FF9E0E600783ECA /* FeaturedProductsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedProductsCarouselView.swift; sourceTree = "<group>"; };
 		3EC1E4642FF5D5360047F42E /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		3EC1E4652FF5D5360047F42E /* AppScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreen.swift; sourceTree = "<group>"; };
 		3EFC6DFD2FEFE482002FBB9B /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -147,14 +155,11 @@
 		41AA27252FF6E4C100BF6DA0 /* ProductSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSearch.swift; sourceTree = "<group>"; };
 		41AA27272FF6E5C300BF6DA0 /* HomeProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductCard.swift; sourceTree = "<group>"; };
 		41AA27292FF6E5E200BF6DA0 /* HomeProductsGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductsGridView.swift; sourceTree = "<group>"; };
-		41B03E8B2FEFCE2A00521C14 /* Drape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Drape.app; path = "/Users/reda/Desktop/Drape/build/Debug-iphoneos/Drape.app"; sourceTree = "<absolute>"; };
 		41B03E8E2FEFCE2A00521C14 /* DrapeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrapeApp.swift; sourceTree = "<group>"; };
 		41B03E902FEFCE2A00521C14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41B03E942FEFCE2E00521C14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41B03E972FEFCE2E00521C14 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		41B03E9D2FEFCE2F00521C14 /* DrapeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = DrapeTests.xctest; path = "/Users/reda/Desktop/Drape/build/Debug-iphoneos/Drape.app/PlugIns/DrapeTests.xctest"; sourceTree = "<absolute>"; };
 		41B03EA12FEFCE2F00521C14 /* DrapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrapeTests.swift; sourceTree = "<group>"; };
-		41B03EA72FEFCE2F00521C14 /* DrapeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = DrapeUITests.xctest; path = "/Users/reda/Desktop/Drape/build/Debug-iphoneos/DrapeUITests-Runner.app/PlugIns/DrapeUITests.xctest"; sourceTree = "<absolute>"; };
 		41B03EAB2FEFCE2F00521C14 /* DrapeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrapeUITests.swift; sourceTree = "<group>"; };
 		41B03EAD2FEFCE2F00521C14 /* DrapeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrapeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		41B03EC82FEFE34200521C14 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -224,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EA6E02F2FFA962F004FCF0B /* Kingfisher in Frameworks */,
 				41AA270C2FF69FF700BF6DA0 /* Alamofire in Frameworks */,
 				6D9ABED32FF4117700C60D08 /* FirebaseAuth in Frameworks */,
 				6D9ABED52FF4117700C60D08 /* FirebaseFunctions in Frameworks */,
@@ -352,6 +358,9 @@
 				41B03EAA2FEFCE2F00521C14 /* DrapeUITests */,
 				9FB047E32FF5C45E00F24615 /* Frameworks */,
 				6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */,
+				3E88ADFB2FF9D9B300783ECA /* Drape.app */,
+				3E88ADFC2FF9D9B300783ECA /* DrapeTests.xctest */,
+				3E88ADFD2FF9D9B300783ECA /* DrapeUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -451,6 +460,7 @@
 				41AA27112FF6A55E00BF6DA0 /* FilterSheetView.swift */,
 				41AA27272FF6E5C300BF6DA0 /* HomeProductCard.swift */,
 				41AA27292FF6E5E200BF6DA0 /* HomeProductsGridView.swift */,
+				3E88AE002FF9E0E600783ECA /* FeaturedProductsCarouselView.swift */,
 			);
 			name = Components;
 			path = Views;
@@ -782,6 +792,7 @@
 			children = (
 				9FB047F62FF5F4EE00F24615 /* Product.swift */,
 				9FD014BC2FF6EEF400602339 /* Brand.swift */,
+				3E88ADFE2FF9DE4C00783ECA /* BannerProduct.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -855,9 +866,10 @@
 				41AA270B2FF69FF700BF6DA0 /* Alamofire */,
 				6D9ABED22FF4117700C60D08 /* FirebaseAuth */,
 				6D9ABED42FF4117700C60D08 /* FirebaseFunctions */,
+				3EA6E02E2FFA962F004FCF0B /* Kingfisher */,
 			);
 			productName = Drape;
-			productReference = 41B03E8B2FEFCE2A00521C14 /* Drape.app */;
+			productReference = 3E88ADFB2FF9D9B300783ECA /* Drape.app */;
 			productType = "com.apple.product-type.application";
 		};
 		41B03E9C2FEFCE2F00521C14 /* DrapeTests */ = {
@@ -875,7 +887,7 @@
 			);
 			name = DrapeTests;
 			productName = DrapeTests;
-			productReference = 41B03E9D2FEFCE2F00521C14 /* DrapeTests.xctest */;
+			productReference = 3E88ADFC2FF9D9B300783ECA /* DrapeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		41B03EA62FEFCE2F00521C14 /* DrapeUITests */ = {
@@ -893,7 +905,7 @@
 			);
 			name = DrapeUITests;
 			productName = DrapeUITests;
-			productReference = 41B03EA72FEFCE2F00521C14 /* DrapeUITests.xctest */;
+			productReference = 3E88ADFD2FF9D9B300783ECA /* DrapeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -931,6 +943,7 @@
 			packageReferences = (
 				41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6D9ABED12FF4117700C60D08 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3EA6E02D2FFA962F004FCF0B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 41B03E822FEFCE2A00521C14;
 			projectDirPath = "";
@@ -1002,6 +1015,7 @@
 				3EFC6DFE2FEFE482002FBB9B /* SplashScreen.swift in Sources */,
 				41B9B8E92FF02858002CF176 /* HomeScreen.swift in Sources */,
 				9FB047FD2FF5FC2300F24615 /* GetAllProductsUseCase.swift in Sources */,
+				3E88ADFF2FF9DE4C00783ECA /* BannerProduct.swift in Sources */,
 				41B9B8F32FF39890002CF176 /* HeaderHomeScreenView.swift in Sources */,
 				9FB047F32FF5F47400F24615 /* HomeRepositoryImpl.swift in Sources */,
 				9FB048002FF5FE7E00F24615 /* HomeViewModel.swift in Sources */,
@@ -1056,6 +1070,7 @@
 				41B9B8EE2FF39604002CF176 /* CustomSearchField.swift in Sources */,
 				3EFC6E052FEFEF1B002FBB9B /* OnBoardingScreen.swift in Sources */,
 				41B9B8EC2FF395DA002CF176 /* CategoryChipListView.swift in Sources */,
+				3E88AE012FF9E0E600783ECA /* FeaturedProductsCarouselView.swift in Sources */,
 				3E2212A12FF5581000770211 /* SignInError.swift in Sources */,
 				6D9C9A982FF431D200C8AA09 /* SignUpError.swift in Sources */,
 				6D9C9A9B2FF431FC00C8AA09 /* KeychainStorage.swift in Sources */,
@@ -1391,6 +1406,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3EA6E02D2FFA962F004FCF0B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.10.0;
+			};
+		};
 		41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1410,6 +1433,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3EA6E02E2FFA962F004FCF0B /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EA6E02D2FFA962F004FCF0B /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		41AA270B2FF69FF700BF6DA0 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */;
