@@ -10,14 +10,15 @@ import SwiftUI
 struct AddressView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel = AddressViewModel()
-
+    @State private var addressPendingDeletion: AddressItem?
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text("Saved Address")
                     .font(.system(size: 18, weight: .semibold))
                     .padding(.top, 8)
-
+                
                 if viewModel.addresses.isEmpty {
                     emptyAddressRow
                 } else {
@@ -30,10 +31,10 @@ struct AddressView: View {
                                     viewModel.selectAddress(address)
                                 }
                             )
-
+                            
                             // Delete button
                             Button {
-                                viewModel.deleteAddress(id: address.id)
+                                addressPendingDeletion = address
                             } label: {
                                 Image(systemName: "trash.fill")
                                     .foregroundStyle(.red)
@@ -43,7 +44,7 @@ struct AddressView: View {
                         }
                     }
                 }
-
+                
                 Button {
                     router.showAddAddress()
                 } label: {
@@ -61,9 +62,9 @@ struct AddressView: View {
                     }
                 }
                 .padding(.top, 8)
-
+                
                 Spacer(minLength: 24)
-
+                
                 CustomButton(
                     type: .primary,
                     text: "Apply",
@@ -94,6 +95,23 @@ struct AddressView: View {
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             viewModel.reload()
+        }.alert(
+            "Delete Address",
+            isPresented: Binding(
+                get: { addressPendingDeletion != nil },
+                set: { if !$0 { addressPendingDeletion = nil } }
+            ),
+            presenting: addressPendingDeletion
+        ) { address in
+            Button("Delete", role: .destructive) {
+                viewModel.deleteAddress(id: address.id)
+                addressPendingDeletion = nil
+            }
+            Button("Cancel", role: .cancel) {
+                addressPendingDeletion = nil
+            }
+        } message: { address in
+            Text("Are you sure you want to delete this address?")
         }
     }
 }

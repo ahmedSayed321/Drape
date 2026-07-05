@@ -101,7 +101,7 @@ final class CheckoutViewModel {
             return 0
         }
     }
-    
+    //TODO: Wait for other to see how the order will be like
     func placeOrder() async {
         guard state.isPlaceOrderEnabled else {
             state.errorMessage = "Please complete required checkout data."

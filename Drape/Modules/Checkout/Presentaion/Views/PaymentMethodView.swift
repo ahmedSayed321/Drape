@@ -10,6 +10,7 @@ import SwiftUI
 struct PaymentMethodView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel = PaymentMethodViewModel.shared
+    @State private var cardPendingDeletion: CardItem?
 
     var body: some View {
         ScrollView {
@@ -45,7 +46,7 @@ struct PaymentMethodView: View {
 
                             // Delete button
                             Button {
-                                viewModel.deleteCard(id: card.id)
+                                cardPendingDeletion = card
                             } label: {
                                 Image(systemName: "trash.fill")
                                     .foregroundStyle(.red)
@@ -104,8 +105,26 @@ struct PaymentMethodView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
-    }
-}
+        .alert(
+             "Delete Card",
+             isPresented: Binding(
+                 get: { cardPendingDeletion != nil },
+                 set: { if !$0 { cardPendingDeletion = nil } }
+             ),
+             presenting: cardPendingDeletion
+         ) { card in
+             Button("Delete", role: .destructive) {
+                 viewModel.deleteCard(id: card.id)
+                 cardPendingDeletion = nil
+             }
+             Button("Cancel", role: .cancel) {
+                 cardPendingDeletion = nil
+             }
+         } message: { card in
+             Text("Are you sure you want to delete \(card.brand) ending in \(card.maskedNumber.suffix(4))?")
+         }
+     }
+ }
 
 import SwiftUI
 
