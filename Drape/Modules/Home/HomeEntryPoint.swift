@@ -7,7 +7,7 @@
 
 
 
-import SwiftUICore
+import SwiftUI
 
 struct HomeEntryPoint: View {
     @Environment(\.modelContext) private var context

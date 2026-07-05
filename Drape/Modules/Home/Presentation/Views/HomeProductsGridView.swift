@@ -31,7 +31,9 @@ struct HomeProductsGridView: View {
                     uiState: product.toUIState(),
                     isFavorited: isFavorited(product),        // NEW
                     onFavTap: { onFavoriteTap(product) },      // NEW
-                    onCardTap: {}
+                    onCardTap: {
+                        selectedProductId = product.id
+                    }
                 )
                 .onAppear {
                     onProductAppear(product)

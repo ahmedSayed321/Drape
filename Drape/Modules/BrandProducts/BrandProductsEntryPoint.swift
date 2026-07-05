@@ -5,7 +5,7 @@
 //  Created by Youssef Abd El-Fatah on 04/07/2026.
 //
 
-import SwiftUICore
+import SwiftUI
 
 struct BrandProductsEntryPoint: View {
     @Environment(\.modelContext) private var context
