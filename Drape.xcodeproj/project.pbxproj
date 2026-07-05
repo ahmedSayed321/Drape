@@ -97,6 +97,8 @@
 		9F3FB9D02FF9DC890000DD67 /* SavedProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9CF2FF9DC890000DD67 /* SavedProductsViewModel.swift */; };
 		9F3FB9D22FF9E1A60000DD67 /* FavoriteModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9D12FF9E1A60000DD67 /* FavoriteModuleFactory.swift */; };
 		9F3FB9D42FF9E1BA0000DD67 /* FavoriteEntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9D32FF9E1BA0000DD67 /* FavoriteEntryPoint.swift */; };
+		9F3FB9D62FF9F5B10000DD67 /* HomeModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9D52FF9F5B10000DD67 /* HomeModuleFactory.swift */; };
+		9F3FB9D82FF9F6350000DD67 /* HomeEntryPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9D72FF9F6350000DD67 /* HomeEntryPoint.swift */; };
 		9F4DDE6A2FF06F4700B9D2F0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */; };
 		9F952CD52FF8EC040007C3F3 /* GetHomeScreenDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */; };
 		9F952CD72FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */; };
@@ -224,6 +226,8 @@
 		9F3FB9CF2FF9DC890000DD67 /* SavedProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsViewModel.swift; sourceTree = "<group>"; };
 		9F3FB9D12FF9E1A60000DD67 /* FavoriteModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModuleFactory.swift; sourceTree = "<group>"; };
 		9F3FB9D32FF9E1BA0000DD67 /* FavoriteEntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEntryPoint.swift; sourceTree = "<group>"; };
+		9F3FB9D52FF9F5B10000DD67 /* HomeModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModuleFactory.swift; sourceTree = "<group>"; };
+		9F3FB9D72FF9F6350000DD67 /* HomeEntryPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEntryPoint.swift; sourceTree = "<group>"; };
 		9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHomeScreenDataUseCase.swift; sourceTree = "<group>"; };
 		9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreProductsUseCaseProtocol.swift; sourceTree = "<group>"; };
@@ -454,6 +458,8 @@
 		41B9B8E62FF02826002CF176 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9F3FB9D72FF9F6350000DD67 /* HomeEntryPoint.swift */,
+				9F3FB9D52FF9F5B10000DD67 /* HomeModuleFactory.swift */,
 				9FB0C00C2FF59CC4005DE79C /* Data */,
 				9FB047F42FF5F4CE00F24615 /* Domain */,
 				9FB0C00B2FF59C8F005DE79C /* Presentation */,
@@ -1119,7 +1125,6 @@
 				3EFC6DFE2FEFE482002FBB9B /* SplashScreen.swift in Sources */,
 				41B9B8E92FF02858002CF176 /* HomeScreen.swift in Sources */,
 				9F3FB9CA2FF9D9600000DD67 /* SavedProductModel.swift in Sources */,
-				9FB047FD2FF5FC2300F24615 /* GetAllProductsUseCase.swift in Sources */,
 				41B9B8F32FF39890002CF176 /* HeaderHomeScreenView.swift in Sources */,
 				9FB047F32FF5F47400F24615 /* HomeRepositoryImpl.swift in Sources */,
 				9FB048002FF5FE7E00F24615 /* HomeViewModel.swift in Sources */,
@@ -1146,6 +1151,7 @@
 				41BC1F7C2FF4FFFE00985A5F /* RecentSearchListView.swift in Sources */,
 				41BC1FA62FF52E3700985A5F /* FetchAllProductsUseCase.swift in Sources */,
 				9FAC15DA2FF87EC1000EBE26 /* ProductCardUIState.swift in Sources */,
+				9F3FB9D82FF9F6350000DD67 /* HomeEntryPoint.swift in Sources */,
 				41B0DB382FF5B3FC0083D212 /* RecentSearchesRepositoryProtocol.swift in Sources */,
 				41BC1F932FF52BDC00985A5F /* ShopifyConfig.swift in Sources */,
 				41AA272A2FF6E5E200BF6DA0 /* HomeProductsGridView.swift in Sources */,
@@ -1160,6 +1166,7 @@
 				41BC1F9A2FF52C7100985A5F /* SearchRemoteDataSource.swift in Sources */,
 				41B0DB3A2FF5B40F0083D212 /* RecentSearchesLocalDataSource.swift in Sources */,
 				9F3FB9D22FF9E1A60000DD67 /* FavoriteModuleFactory.swift in Sources */,
+				9F3FB9D62FF9F5B10000DD67 /* HomeModuleFactory.swift in Sources */,
 				41BC1F782FF4FE7700985A5F /* RecentSearchItemView.swift in Sources */,
 				6D9C9A902FF4313A00C8AA09 /* CustomerRepositoryProtocol.swift in Sources */,
 				3E22129F2FF557D100770211 /* SignInUseCase.swift in Sources */,

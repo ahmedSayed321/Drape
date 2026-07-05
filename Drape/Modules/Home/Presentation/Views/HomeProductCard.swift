@@ -11,7 +11,7 @@ struct HomeProductCard: View {
     
     let uiState: ProductCardUIState
     
-    @State private var isFavorited: Bool = false
+    let isFavorited: Bool
     var onFavTap: () -> Void
     var onCardTap: () -> Void
     
@@ -69,7 +69,6 @@ struct HomeProductCard: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        isFavorited.toggle()
                         onFavTap()
                         print("fav button clicked")
                     }) {

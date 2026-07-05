@@ -20,7 +20,7 @@ struct FavoriteProductsGridView: View {
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(viewModel.products) { product in
                 HomeProductCard(
-                    uiState: product.toUIState(),
+                    uiState: product.toUIState(), isFavorited: true,
                     onFavTap: {
                         viewModel.remove(product)
                     },

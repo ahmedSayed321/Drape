@@ -18,6 +18,7 @@ class HomeViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
     @Published var isLoadingMore: Bool = false
+    @Published var savedProductIDs: Set<Int> = []
     
     @Published var sortOption: SortOption = .relevance
     @Published var priceRange: ClosedRange<Double> = 0...200
@@ -69,13 +70,19 @@ class HomeViewModel: ObservableObject {
     
     private let getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol
     private let loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol
+    private let toggleSaveProductUseCase: ToggleSaveProductUseCase   // NEW
+    private let savedProductsRepository: SavedProductsRepository            // NEW
     
     init(
         getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol = GetHomeScreenDataUseCase(),
-        loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol = LoadMoreProductsUseCase()
+        loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol = LoadMoreProductsUseCase(),
+        toggleSaveProductUseCase: ToggleSaveProductUseCase,   // NEW, no default — needs a ModelContext
+        savedProductsRepository: SavedProductsRepository             // NEW
     ) {
         self.getHomeScreenDataUseCase = getHomeScreenDataUseCase
         self.loadMoreProductsUseCase = loadMoreProductsUseCase
+        self.toggleSaveProductUseCase = toggleSaveProductUseCase
+        self.savedProductsRepository = savedProductsRepository
     }
     
     func loadHomeData() async {
@@ -94,11 +101,34 @@ class HomeViewModel: ObservableObject {
             self.canLoadMore = homeData.products.count == pageSize
             priceRange = 0...maxProductPrice
             
+            refreshSavedState()   // NEW
 
             isLoading = false
         } catch {
             errorMessage = "Failed to load data \(error.localizedDescription)"
             isLoading = false
+        }
+    }
+    
+    // NEW
+    func refreshSavedState() {
+        guard let ids = try? savedProductsRepository.getAll().map(\.id) else { return }
+        savedProductIDs = Set(ids)
+    }
+    
+    // NEW
+    func isFavorited(_ product: Product) -> Bool {
+        savedProductIDs.contains(product.id)
+    }
+    
+    // NEW
+    func toggleFavorite(_ product: Product) {
+        do {
+            print("Entered toggle")
+            try toggleSaveProductUseCase.execute(product: product.toSavedProduct())
+            refreshSavedState()
+        } catch {
+            errorMessage = "Failed to update favorites: \(error.localizedDescription)"
         }
     }
     

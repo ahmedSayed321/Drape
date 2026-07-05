@@ -29,8 +29,8 @@ struct CategoryChipListView: View {
 }
 
 #Preview {
-    let viewModel = HomeViewModel()
-    viewModel.categories = ["All", "Men", "Women", "Kids", "Accessories"]
-    return CategoryChipListView(viewModel: viewModel)
-        .padding()
+//    let viewModel = HomeViewModel()
+//    viewModel.categories = ["All", "Men", "Women", "Kids", "Accessories"]
+//    return CategoryChipListView(viewModel: viewModel)
+//        .padding()
 }

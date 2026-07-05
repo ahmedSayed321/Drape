@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @StateObject private var viewModel: HomeViewModel = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
     @State private var showFilters = false
     @State private var filterDetent: PresentationDetent = .fraction(0.5)
     
@@ -73,7 +73,9 @@ struct HomeScreen: View {
                                     products: viewModel.filteredProducts,
                                     onProductAppear: { product in
                                         viewModel.loadMoreProductsIfNeeded(currentItem: product)
-                                    }
+                                    },
+                                    isFavorited: { viewModel.isFavorited($0) },
+                                    onFavoriteTap: { viewModel.toggleFavorite($0) }
                                 )
                                 .padding(.horizontal, 16.0)
                                 if viewModel.isLoadingMore {
@@ -117,5 +119,5 @@ struct HomeScreen: View {
 
 
 #Preview {
-    HomeScreen()
+    HomeEntryPoint()
 }
