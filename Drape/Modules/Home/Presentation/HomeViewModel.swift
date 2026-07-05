@@ -70,14 +70,14 @@ class HomeViewModel: ObservableObject {
     
     private let getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol
     private let loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol
-    private let toggleSaveProductUseCase: ToggleSaveProductUseCase   // NEW
-    private let savedProductsRepository: SavedProductsRepository            // NEW
+    private let toggleSaveProductUseCase: ToggleSaveProductUseCase
+    private let savedProductsRepository: SavedProductsRepository
     
     init(
         getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol = GetHomeScreenDataUseCase(),
         loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol = LoadMoreProductsUseCase(),
-        toggleSaveProductUseCase: ToggleSaveProductUseCase,   // NEW, no default — needs a ModelContext
-        savedProductsRepository: SavedProductsRepository             // NEW
+        toggleSaveProductUseCase: ToggleSaveProductUseCase,
+        savedProductsRepository: SavedProductsRepository
     ) {
         self.getHomeScreenDataUseCase = getHomeScreenDataUseCase
         self.loadMoreProductsUseCase = loadMoreProductsUseCase
@@ -100,8 +100,9 @@ class HomeViewModel: ObservableObject {
 
             self.canLoadMore = homeData.products.count == pageSize
             priceRange = 0...maxProductPrice
+//            priceRange = 0...3_000
             
-            refreshSavedState()   // NEW
+            refreshSavedState()
 
             isLoading = false
         } catch {
@@ -110,18 +111,16 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    // NEW
+    
     func refreshSavedState() {
         guard let ids = try? savedProductsRepository.getAll().map(\.id) else { return }
         savedProductIDs = Set(ids)
     }
     
-    // NEW
     func isFavorited(_ product: Product) -> Bool {
         savedProductIDs.contains(product.id)
     }
     
-    // NEW
     func toggleFavorite(_ product: Product) {
         do {
             print("Entered toggle")
@@ -149,6 +148,9 @@ class HomeViewModel: ObservableObject {
         selectedCategory != "All"
             || priceRange != (0...maxProductPrice)
             || !selectedSizes.isEmpty
+//        selectedCategory != "All"
+//            || priceRange != (0...3_000)
+//            || !selectedSizes.isEmpty
     }
         
     /// Call this when the user scrolls near the bottom.
@@ -168,6 +170,9 @@ class HomeViewModel: ObservableObject {
         defer { isLoadingMore = false }
         
         let requestLimit = products.count + pageSize
+        print("Products count: \(products.count)")
+        print("pageSize: \(pageSize)")
+        print("requestLimit: \(requestLimit)")
         
         do {
             let refetched = try await loadMoreProductsUseCase.execute(limit: requestLimit)

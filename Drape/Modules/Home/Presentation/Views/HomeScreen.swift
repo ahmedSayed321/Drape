@@ -82,16 +82,6 @@ struct HomeScreen: View {
                                     ProgressView()
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, 16)
-                                } else if viewModel.selectedCategory != "All" {
-                                    HStack(spacing: 6) {
-                                        Image(systemName: "line.3.horizontal.decrease.circle")
-                                            .foregroundStyle(.secondary)
-                                        Text("Clear filters to load more products")
-                                            .font(.footnote)
-                                            .foregroundStyle(.secondary)
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 16)
                                 }
                             } header: {
                                 CategoryChipListView(
@@ -112,7 +102,10 @@ struct HomeScreen: View {
                }
             .task {
                 await viewModel.loadHomeData()
-        }
+            }
+            .navigationDestination(for: Brand.self) { brand in   // NEW
+                BrandProductsEntryPoint(brand: brand.name)
+            }
         }
     }
 }

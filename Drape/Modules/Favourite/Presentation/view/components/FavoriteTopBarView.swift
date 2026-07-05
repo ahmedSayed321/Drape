@@ -11,11 +11,11 @@ struct FavoriteTopBarView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Button(action: {}) {
-                    Image(systemName: "arrow.left")
-                        .font(.title2)
-                        .foregroundColor(.black)
-                }
+//                Button(action: {}) {
+//                    Image(systemName: "arrow.left")
+//                        .font(.title2)
+//                        .foregroundColor(.black)
+//                }
                 
                 Spacer()
                 
@@ -26,11 +26,11 @@ struct FavoriteTopBarView: View {
                 
                 Spacer()
                 
-                Button(action: {}) {
-                    Image(systemName: "bell")
-                        .font(.title2)
-                        .foregroundColor(.black)
-                }
+//                Button(action: {}) {
+//                    Image(systemName: "bell")
+//                        .font(.title2)
+//                        .foregroundColor(.black)
+//                }
             }
             .padding(.horizontal)
             .padding(.top, 10)
