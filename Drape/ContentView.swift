@@ -26,7 +26,7 @@ struct ContentView: View {
                 }.tag(1)
             
             // Third Tab
-            CartView()
+            CartView(viewModel: .live(draftOrderId: "1213139878074"))
                 .tabItem {
                     Label("Cart", systemImage: "cart.fill")
                 }.tag(2)
