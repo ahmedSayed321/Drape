@@ -14,9 +14,13 @@ struct FavouriteView: View {
     var body: some View {
         VStack {
             FavoriteTopBarView()
-            ScrollView(.vertical, showsIndicators: false) {
-                FavoriteProductsGridView(viewModel: viewModel)
-                    .padding(.top, 10)
+            if viewModel.products.isEmpty {
+                EmptyStateView()
+            } else {
+                ScrollView(.vertical, showsIndicators: false) {
+                    FavoriteProductsGridView(viewModel: viewModel)
+                        .padding(.top, 10)
+                }
             }
         }
         .padding(.horizontal, 16)
@@ -28,11 +32,5 @@ struct FavouriteView: View {
 }
 
 #Preview {
-//    FavouriteView(
-//        viewModel: SavedProductsViewModel(
-//            repository: SavedProductsRepositoryImpl(
-//                context:
-//            )
-//        )
-//    )
+    FavoriteEntryPoint()
 }

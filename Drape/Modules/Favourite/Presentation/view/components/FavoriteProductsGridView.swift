@@ -24,7 +24,10 @@ struct FavoriteProductsGridView: View {
                     onFavTap: {
                         viewModel.remove(product)
                     },
-                    onCardTap: {})
+                    onCardTap: {
+                        
+                    }
+                )
             }
         }
         
@@ -32,5 +35,5 @@ struct FavoriteProductsGridView: View {
 }
 
 #Preview {
-//    FavoriteProductsGridView()
+    FavoriteEntryPoint()
 }
