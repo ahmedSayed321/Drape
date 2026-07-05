@@ -8,27 +8,37 @@
 import SwiftUI
 
 struct HomeProductsGridView: View {
-    
+
     let products: [Product]
-     
+
+    @State private var selectedProductId: Int?
+
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
-    
+
     var body: some View {
-        
+
         LazyVGrid(columns: columns, spacing: 20) {
+
             ForEach(products) { product in
-                HomeProductCard(product: product, onFavTap: {}, onCardTap: {})
+
+                HomeProductCard(
+                    product: product,
+
+                    onFavTap: {
+                        print("Favorite tapped")
+                    },
+
+                    onCardTap: {
+                        selectedProductId = product.id
+                    }
+                )
             }
         }
-        
+        .navigationDestination(item: $selectedProductId) { productId in
+            ProductDetailsScreen(productId: productId)
+        }
     }
-}
-
-#Preview {
-    HomeProductsGridView(
-        products: []
-    )
 }
