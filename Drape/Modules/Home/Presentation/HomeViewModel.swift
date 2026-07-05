@@ -22,6 +22,12 @@ class HomeViewModel: ObservableObject {
     @Published var priceRange: ClosedRange<Double> = 0...200
     @Published var selectedSizes: Set<String> = []
     
+    // MARK: - Featured Carousel
+    // Static mock banners shown in the auto-scrolling home carousel.
+    // Not derived from `products` since `Product` has no real "post link" yet.
+    // Initialized directly from the static mock data — no network fetch needed.
+    @Published var featuredProducts: [BannerProduct] = BannerProduct.mockBanners
+    
     var maxProductPrice: Double {
             max(products.map(\.priceValue).max() ?? 200, 1)
     }
@@ -88,6 +94,10 @@ class HomeViewModel: ObservableObject {
             self.categories = ["All"] + categories
 
             priceRange = 0...maxProductPrice
+            
+            // Note: featuredProducts is no longer built here — it's static
+            // mock data set at declaration time above. Remove this comment
+            // once real banner data is wired up from the backend.
 
             isLoading = false
         } catch {

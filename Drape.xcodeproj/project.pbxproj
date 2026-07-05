@@ -15,6 +15,9 @@
 		3E41F39A2FF70D7300703397 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F3992FF70D7300703397 /* CartView.swift */; };
 		3E41F39C2FF70D8600703397 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39B2FF70D8600703397 /* AccountView.swift */; };
 		3E41F39E2FF70D9E00703397 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39D2FF70D9E00703397 /* FavouriteView.swift */; };
+		3E88ADFF2FF9DE4C00783ECA /* BannerProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88ADFE2FF9DE4C00783ECA /* BannerProduct.swift */; };
+		3E88AE012FF9E0E600783ECA /* FeaturedProductsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88AE002FF9E0E600783ECA /* FeaturedProductsCarouselView.swift */; };
+		3EA6E02F2FFA962F004FCF0B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3EA6E02E2FFA962F004FCF0B /* Kingfisher */; };
 		3E73C16C2FF9A4D20011CC9D /* ProductDetailsRepoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73C15B2FF9A4D20011CC9D /* ProductDetailsRepoImpl.swift */; };
 		3E73C16D2FF9A4D20011CC9D /* ProductDetailsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73C1602FF9A4D20011CC9D /* ProductDetailsRepo.swift */; };
 		3E73C16E2FF9A4D20011CC9D /* ProductDetailsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73C15E2FF9A4D20011CC9D /* ProductDetailsEntity.swift */; };
@@ -139,6 +142,8 @@
 		3E41F3992FF70D7300703397 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		3E41F39B2FF70D8600703397 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		3E41F39D2FF70D9E00703397 /* FavouriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteView.swift; sourceTree = "<group>"; };
+		3E88ADFE2FF9DE4C00783ECA /* BannerProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerProduct.swift; sourceTree = "<group>"; };
+		3E88AE002FF9E0E600783ECA /* FeaturedProductsCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedProductsCarouselView.swift; sourceTree = "<group>"; };
 		3E73C1532FF9A1F80011CC9D /* Drape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E73C1542FF9A1F80011CC9D /* DrapeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E73C1552FF9A1F80011CC9D /* DrapeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrapeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EA6E02F2FFA962F004FCF0B /* Kingfisher in Frameworks */,
 				41AA270C2FF69FF700BF6DA0 /* Alamofire in Frameworks */,
 				6D9ABED32FF4117700C60D08 /* FirebaseAuth in Frameworks */,
 				6D9ABED52FF4117700C60D08 /* FirebaseFunctions in Frameworks */,
@@ -580,6 +586,7 @@
 				41AA27112FF6A55E00BF6DA0 /* FilterSheetView.swift */,
 				41AA27272FF6E5C300BF6DA0 /* HomeProductCard.swift */,
 				41AA27292FF6E5E200BF6DA0 /* HomeProductsGridView.swift */,
+				3E88AE002FF9E0E600783ECA /* FeaturedProductsCarouselView.swift */,
 			);
 			name = Components;
 			path = Views;
@@ -911,6 +918,7 @@
 			children = (
 				9FB047F62FF5F4EE00F24615 /* Product.swift */,
 				9FD014BC2FF6EEF400602339 /* Brand.swift */,
+				3E88ADFE2FF9DE4C00783ECA /* BannerProduct.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -984,6 +992,7 @@
 				41AA270B2FF69FF700BF6DA0 /* Alamofire */,
 				6D9ABED22FF4117700C60D08 /* FirebaseAuth */,
 				6D9ABED42FF4117700C60D08 /* FirebaseFunctions */,
+				3EA6E02E2FFA962F004FCF0B /* Kingfisher */,
 			);
 			productName = Drape;
 			productReference = 3E73C1532FF9A1F80011CC9D /* Drape.app */;
@@ -1060,6 +1069,7 @@
 			packageReferences = (
 				41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6D9ABED12FF4117700C60D08 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3EA6E02D2FFA962F004FCF0B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 41B03E822FEFCE2A00521C14;
 			projectDirPath = "";
@@ -1131,6 +1141,7 @@
 				3EFC6DFE2FEFE482002FBB9B /* SplashScreen.swift in Sources */,
 				41B9B8E92FF02858002CF176 /* HomeScreen.swift in Sources */,
 				9FB047FD2FF5FC2300F24615 /* GetAllProductsUseCase.swift in Sources */,
+				3E88ADFF2FF9DE4C00783ECA /* BannerProduct.swift in Sources */,
 				41B9B8F32FF39890002CF176 /* HeaderHomeScreenView.swift in Sources */,
 				9FB047F32FF5F47400F24615 /* HomeRepositoryImpl.swift in Sources */,
 				9FB048002FF5FE7E00F24615 /* HomeViewModel.swift in Sources */,
@@ -1195,6 +1206,7 @@
 				41B9B8EE2FF39604002CF176 /* CustomSearchField.swift in Sources */,
 				3EFC6E052FEFEF1B002FBB9B /* OnBoardingScreen.swift in Sources */,
 				41B9B8EC2FF395DA002CF176 /* CategoryChipListView.swift in Sources */,
+				3E88AE012FF9E0E600783ECA /* FeaturedProductsCarouselView.swift in Sources */,
 				3E2212A12FF5581000770211 /* SignInError.swift in Sources */,
 				6D9C9A982FF431D200C8AA09 /* SignUpError.swift in Sources */,
 				6D9C9A9B2FF431FC00C8AA09 /* KeychainStorage.swift in Sources */,
@@ -1530,6 +1542,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3EA6E02D2FFA962F004FCF0B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.10.0;
+			};
+		};
 		41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1549,6 +1569,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3EA6E02E2FFA962F004FCF0B /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3EA6E02D2FFA962F004FCF0B /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		41AA270B2FF69FF700BF6DA0 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 41B03EBA2FEFD2C300521C14 /* XCRemoteSwiftPackageReference "Alamofire" */;
