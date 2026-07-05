@@ -7,9 +7,18 @@
 
 import SwiftUI
 import FirebaseCore
+import SwiftData
 
 @main
 struct DrapeApp: App {
+    
+    let container: ModelContainer = {
+        let schema = Schema([
+            SavedProductModel.self
+            // future: OtherFeatureModel.self, etc.
+        ])
+        return try! ModelContainer(for: schema)
+    }()
 
     @State private var router = AppRouter()
 
@@ -43,5 +52,6 @@ struct DrapeApp: App {
             }
 
         }
+        .modelContainer(container)
     }
 }

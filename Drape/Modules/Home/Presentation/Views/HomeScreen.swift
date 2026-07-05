@@ -1,4 +1,3 @@
-//
 //  HomeScreen.swift
 //  Drape
 //
@@ -9,46 +8,21 @@ import SwiftUI
 
 struct HomeScreen: View {
     
-    @StateObject private var viewModel: HomeViewModel = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
     @State private var showFilters = false
     @State private var filterDetent: PresentationDetent = .fraction(0.5)
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                // MARK: - Fixed Top Header Elements
-                VStack {
-                    HeaderHomeScreenView(onBellTap: {})
-                        .padding(.horizontal, 16.0)
-                        .padding(.top, 12.0)
-                        .padding(.bottom, 16.0)
-
-                    HStack(spacing: 8) {
-                        NavigationLink {
-                            SearchView()
-                        } label: {
-                            CustomSearchField(text: .constant(""))
-                        }
-
-                        SliderFilterView(onTap: {
-                            showFilters.toggle()
-                        })
-                    }
-                    .padding(.horizontal, 16.0)
-                    .padding(.bottom, 16.0)
-                }
-                
-                // MARK: - Dynamic State Layer (Pulled Out of ScrollView)
+            Group {
                 if viewModel.isLoading {
-                    // Now max height expands perfectly to fill the remaining screen space
                     VStack {
                         Spacer()
-                        ProgressView("Loading")
+                        ProgressView()
                         Spacer()
                     }
-                        
+
                 } else if let errorMessage = viewModel.errorMessage {
-                    // Pulling this out means Spacers can now push against the entire screen dimensions
                     VStack {
                         Spacer()
                         ContentUnavailableView(
@@ -58,48 +32,88 @@ struct HomeScreen: View {
                         )
                         Spacer()
                     }
-                    
+
                 } else {
-                    // MARK: - Content Layer (Only shown when data is ready)
+                    // MARK: - Everything now scrolls together in one ScrollView:
+                    // header, search bar, carousel, brands, and product grid.
                     ScrollView {
-                        LazyVStack(pinnedViews: [.sectionHeaders]) { 
+                        LazyVStack() {
+
+                            // MARK: - Top Header Elements (moved inside ScrollView)
+                            HeaderHomeScreenView(onBellTap: {})
+                                .padding(.horizontal, 16.0)
+                                .padding(.top, 12.0)
+                                .padding(.bottom, 16.0)
+
+                            HStack(spacing: 8) {
+                                NavigationLink {
+                                    SearchView()
+                                } label: {
+                                    CustomSearchField(text: .constant(""))
+                                }
+
+                                SliderFilterView(onTap: {
+                                    showFilters.toggle()
+                                })
+                            }
+                            .padding(.horizontal, 16.0)
+                            .padding(.bottom, 16.0)
+
+                            // MARK: - Featured Products Carousel
+                            if !viewModel.featuredProducts.isEmpty {
+                                FeaturedProductsCarouselView(products: viewModel.featuredProducts)
+                                    .padding(.bottom, 20.0)
+                            }
+
                             Section {
                                 BrandSectionView(brands: viewModel.brands)
-                                    .padding(.horizontal, 16.0)
                                     .padding(.bottom, 16.0)
                             }
-                            
+
                             Section {
                                 HomeProductsGridView(
-                                    products: viewModel.filteredProducts
+                                    products: viewModel.filteredProducts,
+                                    onProductAppear: { product in
+                                        viewModel.loadMoreProductsIfNeeded(currentItem: product)
+                                    },
+                                    isFavorited: { viewModel.isFavorited($0) },
+                                    onFavoriteTap: { viewModel.toggleFavorite($0) }
                                 )
+                                .padding(.horizontal, 16.0)
+                                if viewModel.isLoadingMore {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 16)
+                                }
                             } header: {
                                 CategoryChipListView(
                                     viewModel: viewModel
                                 )
-                                    .padding(.leading, 16.0)
-                                    .padding(.bottom, 24.0)
-                                    .background(.white)
+                                .padding(.leading, 16.0)
+                                .padding(.bottom, 24.0)
+                                .background(.white)
                             }
                         }
-                        .padding(.horizontal, 16.0)
                     }
-                    .scrollIndicators(.hidden) 
+                    .scrollIndicators(.hidden)
                 }
             }
             .sheet(isPresented: $showFilters) {
-                   FilterSheetView(viewModel: viewModel, selectedDetent: $filterDetent)
-                       .presentationDetents([.fraction(0.5), .fraction(0.85)], selection: $filterDetent)
-                       .presentationDragIndicator(.visible)
-               }
+                FilterSheetView(viewModel: viewModel, selectedDetent: $filterDetent)
+                    .presentationDetents([.fraction(0.5), .fraction(0.85)], selection: $filterDetent)
+                    .presentationDragIndicator(.visible)
+            }
             .task {
                 await viewModel.loadHomeData()
-        }
+            }
+            .navigationDestination(for: Brand.self) { brand in   // NEW
+                BrandProductsEntryPoint(brand: brand.name)
+            }
         }
     }
 }
 
 
 #Preview {
-    HomeScreen()
+    HomeEntryPoint()
 }

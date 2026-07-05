@@ -9,14 +9,17 @@ import Foundation
 
 struct ProductsEndpoint: APIEndpoint {
     let limit: Int?
+    let vendor: String?
 
     var baseURL: String { ShopifyConfig.baseURL }
     var path: String { "/products.json" }
     var method: HTTPMethod { .get }
     var headers: [String: String] { ShopifyConfig.defaultHeaders }
     var queryParameters: [String: String]? {
-        guard let limit else { return nil }
-        return ["limit": "\(limit)"]
+        var params: [String: String] = [:]
+        if let limit { params["limit"] = "\(limit)" }
+        if let vendor { params["vendor"] = vendor }
+        return params.isEmpty ? nil : params
     }
 }
 
