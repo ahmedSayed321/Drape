@@ -4,7 +4,6 @@
 //
 //  Created by Youssef Abd El-Fatah on 04/07/2026.
 //
-
 import Combine
 
 
@@ -13,16 +12,21 @@ final class SavedProductsViewModel: ObservableObject {
     @Published private(set) var products: [SavedProduct] = []
     @Published private(set) var errorMessage: String?
 
-    private let repository: SavedProductsRepository
+    private let getSavedProductsUseCase: GetSavedProductsUseCaseProtocol
+    private let removeSavedProductUseCase: RemoveSavedProductUseCaseProtocol
 
-    init(repository: SavedProductsRepository) {
-        self.repository = repository
+    init(
+        getSavedProductsUseCase: GetSavedProductsUseCaseProtocol,
+        removeSavedProductUseCase: RemoveSavedProductUseCaseProtocol
+    ) {
+        self.getSavedProductsUseCase = getSavedProductsUseCase
+        self.removeSavedProductUseCase = removeSavedProductUseCase
         loadProducts()
     }
 
     func loadProducts() {
         do {
-            products = try repository.getAll()
+            products = try getSavedProductsUseCase.execute()
         } catch {
             errorMessage = "Failed to load saved products"
         }
@@ -30,7 +34,7 @@ final class SavedProductsViewModel: ObservableObject {
 
     func remove(_ product: SavedProduct) {
         do {
-            try repository.remove(product.id)
+            try removeSavedProductUseCase.execute(productID: product.id)
             loadProducts()
         } catch {
             errorMessage = "Failed to remove product"

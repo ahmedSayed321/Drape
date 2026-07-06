@@ -107,6 +107,8 @@
 		9F3FB9F52FFA185F0000DD67 /* BrandProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9F42FFA185F0000DD67 /* BrandProductsView.swift */; };
 		9F3FB9F72FFA194A0000DD67 /* EmptyProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9F62FFA194A0000DD67 /* EmptyProducts.swift */; };
 		9F4DDE6A2FF06F4700B9D2F0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */; };
+		9F529C602FFB31C300CF63DE /* GetSavedProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F529C5F2FFB31BA00CF63DE /* GetSavedProductsUseCase.swift */; };
+		9F529C622FFB37F900CF63DE /* RemoveSavedProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F529C612FFB37F900CF63DE /* RemoveSavedProductUseCase.swift */; };
 		9F952CD52FF8EC040007C3F3 /* GetHomeScreenDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */; };
 		9F952CD72FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */; };
 		9FAC15D72FF87C73000EBE26 /* FavoriteTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC15D62FF87C73000EBE26 /* FavoriteTopBarView.swift */; };
@@ -243,6 +245,8 @@
 		9F3FB9F42FFA185F0000DD67 /* BrandProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandProductsView.swift; sourceTree = "<group>"; };
 		9F3FB9F62FFA194A0000DD67 /* EmptyProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProducts.swift; sourceTree = "<group>"; };
 		9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		9F529C5F2FFB31BA00CF63DE /* GetSavedProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSavedProductsUseCase.swift; sourceTree = "<group>"; };
+		9F529C612FFB37F900CF63DE /* RemoveSavedProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveSavedProductUseCase.swift; sourceTree = "<group>"; };
 		9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHomeScreenDataUseCase.swift; sourceTree = "<group>"; };
 		9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreProductsUseCaseProtocol.swift; sourceTree = "<group>"; };
 		9FAC15D62FF87C73000EBE26 /* FavoriteTopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTopBarView.swift; sourceTree = "<group>"; };
@@ -838,6 +842,8 @@
 		9F3FB9C32FF9D8130000DD67 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9F529C612FFB37F900CF63DE /* RemoveSavedProductUseCase.swift */,
+				9F529C5F2FFB31BA00CF63DE /* GetSavedProductsUseCase.swift */,
 				9F3FB9CD2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift */,
 			);
 			path = UseCases;
@@ -1192,6 +1198,7 @@
 				41B0DB312FF5B2510083D212 /* VariantDTO.swift in Sources */,
 				9F3FB9E82FFA0C380000DD67 /* BrandProductsViewModel.swift in Sources */,
 				41BC1F752FF4FA7A00985A5F /* SearchView.swift in Sources */,
+				9F529C602FFB31C300CF63DE /* GetSavedProductsUseCase.swift in Sources */,
 				3E41F39C2FF70D8600703397 /* AccountView.swift in Sources */,
 				41BC1F842FF50F9900985A5F /* SearchListView.swift in Sources */,
 				9F952CD52FF8EC040007C3F3 /* GetHomeScreenDataUseCase.swift in Sources */,
@@ -1272,6 +1279,7 @@
 				3EFC6E052FEFEF1B002FBB9B /* OnBoardingScreen.swift in Sources */,
 				41B9B8EC2FF395DA002CF176 /* CategoryChipListView.swift in Sources */,
 				9F3FB9C82FF9D8C60000DD67 /* SavedProductsRepository.swift in Sources */,
+				9F529C622FFB37F900CF63DE /* RemoveSavedProductUseCase.swift in Sources */,
 				3E2212A12FF5581000770211 /* SignInError.swift in Sources */,
 				9F3FB9CE2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift in Sources */,
 				6D9C9A982FF431D200C8AA09 /* SignUpError.swift in Sources */,
