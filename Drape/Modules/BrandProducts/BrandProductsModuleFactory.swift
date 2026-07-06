@@ -10,13 +10,13 @@ import SwiftData
 
 enum BrandProductsModuleFactory {
     @MainActor
-    static func makeView(brand: Brand, modelContext: ModelContext) -> BrandProductsView {
+    static func makeView(brand: String, modelContext: ModelContext) -> BrandProductsView {
         let savedProductsRepository = SavedProductsRepositoryImpl(context: modelContext)
         let toggleUseCase = ToggleSaveProductUseCase(repository: savedProductsRepository)
         let getSavedUseCase = GetSavedProductsUseCase(repository: savedProductsRepository)   // NEW
 
         let viewModel = BrandProductsViewModel(
-            brandName: brand.name,
+            brandName: brand,
             toggleSaveProductUseCase: toggleUseCase,
             getSavedProductsUseCase: getSavedUseCase
         )
