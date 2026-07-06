@@ -33,7 +33,7 @@ final class CartViewModel: ObservableObject {
         updateQuantityUseCase: UpdateCartItemQuantityUseCaseProtocol,
         removeLineItemUseCase: RemoveCartLineItemUseCaseProtocol,
         clearCartUseCase: ClearCartUseCaseProtocol,
-        draftOrderId: String? = nil
+        draftOrderId: String? = "1218793308346"
     ) {
         self.getDraftOrderUseCase = getDraftOrderUseCase
         self.createDraftOrderUseCase = createDraftOrderUseCase

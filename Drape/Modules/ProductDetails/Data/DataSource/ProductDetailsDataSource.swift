@@ -9,10 +9,16 @@ import Foundation
 
 protocol ProductDetailsDataSourceProtocol{
     func fetchProductDetails(productId : Int) async throws -> ProductDetail
+    
+    func addToCart(
+           variantId: String,
+           customerId: String,
+           quantity: Int
+       ) async throws -> DraftOrderResponseDTO
 }
 
 class ProductDetailsDataSource : ProductDetailsDataSourceProtocol{
-    
+   
     private let networkService: NetworkServiceProtocol
 
     init(networkService: NetworkServiceProtocol = NetworkService.shared) {
@@ -29,9 +35,44 @@ class ProductDetailsDataSource : ProductDetailsDataSourceProtocol{
             throw ProductError.productNotFound
         }
         
-        print("Data source desc \(response)")
         return response
     }
+    
+    func addToCart(
+        variantId: String,
+        customerId: String,
+        quantity: Int
+    ) async throws -> DraftOrderResponseDTO {
+      
+
+        let request = DraftOrderRequest(
+            draftOrder: DraftOrder(
+                lineItems: [
+                    LineItem(
+                        variantId: variantId,
+                        quantity: quantity
+                    )
+                ],
+                customer: Customer(id: customerId)
+            )
+        )
+
+        let response: DraftOrderResponseDTO
+
+        do {
+            response = try await networkService.request(
+                AddToChartEndPoint.create(request)
+            )
+        } catch {
+            throw error
+        }
+
+        return response
+    }
+   
+    
+    
+    
     
     
 }

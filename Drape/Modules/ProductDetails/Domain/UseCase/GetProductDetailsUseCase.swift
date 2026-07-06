@@ -23,4 +23,18 @@ class GetProductDetailsUseCase {
         
         return product
     }
+    
+    
+    func invokeAddToChart(
+        variantId: String,
+        customerId: String,
+        quantity: Int
+    ) async throws -> DraftOrderResponseDTO {
+
+        return try await remoteRepo.addToCart(
+            variantId: variantId,
+            customerId: customerId,
+            quantity: quantity
+        )
+    }
 }
