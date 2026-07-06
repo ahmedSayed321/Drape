@@ -9,46 +9,34 @@ import SwiftData
 import Foundation
 
 
+// Data/Repositories/SavedProductsRepositoryImpl.swift
 final class SavedProductsRepositoryImpl: SavedProductsRepository {
-    private let context: ModelContext
+    private let localDataSource: SavedProductsLocalDataSource
 
-    init(context: ModelContext) {
-        self.context = context
+    init(localDataSource: SavedProductsLocalDataSource) {
+        self.localDataSource = localDataSource
     }
 
     func getAll() throws -> [SavedProduct] {
-        let descriptor = FetchDescriptor<SavedProductModel>(
-            sortBy: [SortDescriptor(\.title)]
-        )
-        return try context.fetch(descriptor).map { $0.toDomain() }
+        try localDataSource.getAll().map { $0.toDomain() }
     }
 
     func save(_ product: SavedProduct) throws {
-        let entity = SavedProductModel(
+        let model = SavedProductModel(
             id: product.id,
             title: product.title,
             imageURLString: product.imageURL,
             price: product.price
         )
-        context.insert(entity)
-        try context.save()
+        try localDataSource.save(model)
     }
 
     func remove(_ productID: Int) throws {
-        let descriptor = FetchDescriptor<SavedProductModel>(
-            predicate: #Predicate { $0.id == productID }
-        )
-        if let entity = try context.fetch(descriptor).first {
-            context.delete(entity)
-            try context.save()
-        }
+        try localDataSource.remove(productID)
     }
 
     func isSaved(_ productID: Int) throws -> Bool {
-        let descriptor = FetchDescriptor<SavedProductModel>(
-            predicate: #Predicate { $0.id == productID }
-        )
-        return try context.fetch(descriptor).first != nil
+        try localDataSource.isSaved(productID)
     }
 }
 

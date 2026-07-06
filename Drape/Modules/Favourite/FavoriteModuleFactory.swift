@@ -10,7 +10,8 @@ import SwiftData
 enum FavoriteModuleFactory {
     @MainActor
     static func makeSavedProductsView(context: ModelContext) -> FavouriteView {
-        let repository = SavedProductsRepositoryImpl(context: context)
+        let localDataSource = SavedProductsLocalDataSourceImpl(context: context)
+        let repository = SavedProductsRepositoryImpl(localDataSource: localDataSource)
 
         let viewModel = SavedProductsViewModel(
             getSavedProductsUseCase: GetSavedProductsUseCase(repository: repository),

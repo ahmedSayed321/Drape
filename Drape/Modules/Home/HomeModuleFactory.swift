@@ -11,9 +11,11 @@ import SwiftData
 enum HomeModuleFactory {
     @MainActor
     static func makeHomeView(modelContext: ModelContext) -> HomeScreen {
-        let savedProductsRepository = SavedProductsRepositoryImpl(context: modelContext)
+        let localDataSource = SavedProductsLocalDataSourceImpl(context: modelContext)   // NEW
+        let savedProductsRepository = SavedProductsRepositoryImpl(localDataSource: localDataSource)   // CHANGED
+
         let toggleUseCase = ToggleSaveProductUseCase(repository: savedProductsRepository)
-        let getSavedUseCase = GetSavedProductsUseCase(repository: savedProductsRepository)   // NEW
+        let getSavedUseCase = GetSavedProductsUseCase(repository: savedProductsRepository)
 
         let viewModel = HomeViewModel(
             toggleSaveProductUseCase: toggleUseCase,
