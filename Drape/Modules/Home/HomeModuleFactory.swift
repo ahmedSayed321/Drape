@@ -13,10 +13,11 @@ enum HomeModuleFactory {
     static func makeHomeView(modelContext: ModelContext) -> HomeScreen {
         let savedProductsRepository = SavedProductsRepositoryImpl(context: modelContext)
         let toggleUseCase = ToggleSaveProductUseCase(repository: savedProductsRepository)
+        let getSavedUseCase = GetSavedProductsUseCase(repository: savedProductsRepository)   // NEW
 
         let viewModel = HomeViewModel(
             toggleSaveProductUseCase: toggleUseCase,
-            savedProductsRepository: savedProductsRepository
+            getSavedProductsUseCase: getSavedUseCase
         )
         return HomeScreen(viewModel: viewModel)
     }

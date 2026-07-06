@@ -4,9 +4,11 @@
 //
 //  Created by Youssef Abd El-Fatah on 04/07/2026.
 //
+protocol ToggleSaveProductUseCaseProtocol {
+    func execute(product: SavedProduct) throws
+}
 
-
-struct ToggleSaveProductUseCase {
+struct ToggleSaveProductUseCase: ToggleSaveProductUseCaseProtocol {
     let repository: SavedProductsRepository
     
     init(repository: SavedProductsRepository) {

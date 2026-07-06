@@ -70,19 +70,19 @@ class HomeViewModel: ObservableObject {
     
     private let getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol
     private let loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol
-    private let toggleSaveProductUseCase: ToggleSaveProductUseCase
-    private let savedProductsRepository: SavedProductsRepository
+    private let toggleSaveProductUseCase: ToggleSaveProductUseCaseProtocol
+    private let getSavedProductsUseCase: GetSavedProductsUseCaseProtocol
     
     init(
         getHomeScreenDataUseCase: GetHomeScreenDataUseCaseProtocol = GetHomeScreenDataUseCase(),
         loadMoreProductsUseCase: LoadMoreProductsUseCaseProtocol = LoadMoreProductsUseCase(),
-        toggleSaveProductUseCase: ToggleSaveProductUseCase,
-        savedProductsRepository: SavedProductsRepository
+        toggleSaveProductUseCase: ToggleSaveProductUseCaseProtocol,
+        getSavedProductsUseCase: GetSavedProductsUseCaseProtocol
     ) {
         self.getHomeScreenDataUseCase = getHomeScreenDataUseCase
         self.loadMoreProductsUseCase = loadMoreProductsUseCase
         self.toggleSaveProductUseCase = toggleSaveProductUseCase
-        self.savedProductsRepository = savedProductsRepository
+        self.getSavedProductsUseCase = getSavedProductsUseCase
     }
     
     func loadHomeData() async {
@@ -113,7 +113,7 @@ class HomeViewModel: ObservableObject {
     
     
     func refreshSavedState() {
-        guard let ids = try? savedProductsRepository.getAll().map(\.id) else { return }
+        guard let ids = try? getSavedProductsUseCase.execute().map(\.id) else { return }
         savedProductIDs = Set(ids)
     }
     
@@ -170,9 +170,6 @@ class HomeViewModel: ObservableObject {
         defer { isLoadingMore = false }
         
         let requestLimit = products.count + pageSize
-        print("Products count: \(products.count)")
-        print("pageSize: \(pageSize)")
-        print("requestLimit: \(requestLimit)")
         
         do {
             let refetched = try await loadMoreProductsUseCase.execute(limit: requestLimit)

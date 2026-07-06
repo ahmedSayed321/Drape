@@ -15,26 +15,26 @@ final class BrandProductsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isLoadingMore = false
     @Published var errorMessage: String?
-    @Published var savedProductIDs: Set<Int> = []   // NEW
+    @Published var savedProductIDs: Set<Int> = []
 
     let brandName: String
 
     private let pageSize = 20
     private var canLoadMore = true
     private let getProductsByVendorUseCase: GetProductsByVendorUseCaseProtocol
-    private let toggleSaveProductUseCase: ToggleSaveProductUseCase  // NEW
-    private let savedProductsRepository: SavedProductsRepository            // NEW
+    private let toggleSaveProductUseCase: ToggleSaveProductUseCaseProtocol
+    private let getSavedProductsUseCase: GetSavedProductsUseCaseProtocol
 
     init(
         brandName: String,
         getProductsByVendorUseCase: GetProductsByVendorUseCaseProtocol = GetProductsByVendorUseCase(),
-        toggleSaveProductUseCase: ToggleSaveProductUseCase,   // NEW, no default (needs ModelContext)
-        savedProductsRepository: SavedProductsRepository             // NEW
+        toggleSaveProductUseCase: ToggleSaveProductUseCaseProtocol,
+        getSavedProductsUseCase: GetSavedProductsUseCaseProtocol
     ) {
         self.brandName = brandName
         self.getProductsByVendorUseCase = getProductsByVendorUseCase
         self.toggleSaveProductUseCase = toggleSaveProductUseCase
-        self.savedProductsRepository = savedProductsRepository
+        self.getSavedProductsUseCase = getSavedProductsUseCase
     }
 
     func loadProducts() async {
@@ -44,7 +44,7 @@ final class BrandProductsViewModel: ObservableObject {
             let fetched = try await getProductsByVendorUseCase.execute(vendor: brandName, limit: pageSize)
             products = fetched
             canLoadMore = fetched.count == pageSize
-            refreshSavedState()   // NEW
+            refreshSavedState()
         } catch {
             errorMessage = "Failed to load \(brandName) products: \(error.localizedDescription)"
         }
@@ -75,24 +75,21 @@ final class BrandProductsViewModel: ObservableObject {
             if refetched.count < requestLimit {
                 canLoadMore = false
             }
-            refreshSavedState()   // NEW — new page may include already-favorited items
+            refreshSavedState()
         } catch {
             errorMessage = "Failed to load more: \(error.localizedDescription)"
         }
     }
 
-    // NEW
     func refreshSavedState() {
-        guard let ids = try? savedProductsRepository.getAll().map(\.id) else { return }
+        guard let ids = try? getSavedProductsUseCase.execute().map(\.id) else { return }
         savedProductIDs = Set(ids)
     }
 
-    // NEW
     func isFavorited(_ product: Product) -> Bool {
         savedProductIDs.contains(product.id)
     }
 
-    // NEW
     func toggleFavorite(_ product: Product) {
         do {
             try toggleSaveProductUseCase.execute(product: product.toSavedProduct())

@@ -70,7 +70,6 @@ struct HomeProductCard: View {
                     Spacer()
                     Button(action: {
                         onFavTap()
-                        print("fav button clicked")
                     }) {
                         Image(systemName: isFavorited ? "heart.fill" : "heart")
                             .font(.system(size: 18, weight: .semibold))
@@ -88,7 +87,6 @@ struct HomeProductCard: View {
         .contentShape(Rectangle())
         .onTapGesture {
             onCardTap()
-            print("product card button clicked")
         }
     }
 }
