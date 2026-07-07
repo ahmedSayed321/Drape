@@ -12,11 +12,11 @@ protocol APIEndpoint {
     var path: String { get }
     var method: HTTPMethod { get }
     var queryParameters: [String: String]? { get }
-    var body: Data? { get }
+    var body: Encodable? { get }
 }
 
 extension APIEndpoint {
-    var body: Data? { nil }
+    var body: Encodable? { nil }
     var fullURL: URL? {
         var components = URLComponents(string: baseURL + path)
         if let queryParameters {

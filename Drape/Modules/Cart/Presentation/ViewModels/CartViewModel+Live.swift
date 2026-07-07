@@ -17,8 +17,7 @@ extension CartViewModel {
             createDraftOrderUseCase: CreateDraftOrderUseCase(repository: repository),
             updateQuantityUseCase: UpdateCartItemQuantityUseCase(repository: repository),
             removeLineItemUseCase: RemoveCartLineItemUseCase(repository: repository),
-            clearCartUseCase: ClearCartUseCase(repository: repository),
-            draftOrderId: draftOrderId
-        )
+            clearCartUseCase: ClearCartUseCase(repository: repository)
+	        )
     }
 }

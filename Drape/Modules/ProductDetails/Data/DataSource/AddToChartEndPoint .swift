@@ -21,11 +21,11 @@ enum AddToChartEndPoint : APIEndpoint{
     var method: HTTPMethod { .post }
     var headers: [String: String] { ShopifyConfig.defaultHeaders }
     
-    var body: Data? {
-           switch self {
-           case .create(let request):
-               return try? JSONEncoder().encode(request)
-           }
-       }
+    var body: Encodable? {
+        switch self {
+        case .create(let request):
+            return request   
+        }
+    }
     
 }

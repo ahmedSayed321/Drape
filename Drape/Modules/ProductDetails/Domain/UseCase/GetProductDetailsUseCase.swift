@@ -29,7 +29,7 @@ class GetProductDetailsUseCase {
         variantId: String,
         customerId: String,
         quantity: Int
-    ) async throws -> DraftOrderResponseDTO {
+    ) async throws -> Cart {
 
         return try await remoteRepo.addToCart(
             variantId: variantId,

@@ -36,11 +36,9 @@ final class NetworkService: NetworkServiceProtocol {
         request.allHTTPHeaderFields = headers
         
         if let body = endpoint.body {
-            if let data = body as? Data {
-                request.httpBody = data
-            } else {
-                request.httpBody = try JSONEncoder().encode(AnyEncodable(body))
-            }
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(AnyEncodable(body))
         }
 
         do {
@@ -51,6 +49,7 @@ final class NetworkService: NetworkServiceProtocol {
             }
 
             guard (200...299).contains(httpResponse.statusCode) else {
+                let bodyString = String(data: data, encoding: .utf8) ?? "<no body>"
                 throw NetworkError.serverError(statusCode: httpResponse.statusCode)
             }
 

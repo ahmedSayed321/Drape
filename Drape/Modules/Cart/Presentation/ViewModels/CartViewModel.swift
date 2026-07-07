@@ -17,12 +17,14 @@ enum CartViewState {
 @MainActor
 final class CartViewModel: ObservableObject {
     @Published private(set) var state: CartViewState = .loading
+    @Published var syncErrorMessage: String?
 
     private let getDraftOrderUseCase: GetDraftOrderUseCaseProtocol
     private let createDraftOrderUseCase: CreateDraftOrderUseCaseProtocol
     private let updateQuantityUseCase: UpdateCartItemQuantityUseCaseProtocol
     private let removeLineItemUseCase: RemoveCartLineItemUseCaseProtocol
     private let clearCartUseCase: ClearCartUseCaseProtocol
+    private let keychain: KeychainTokenStorage
 
     private var draftOrderId: String?
     private var debounceTasks: [String: Task<Void, Never>] = [:]
@@ -33,14 +35,15 @@ final class CartViewModel: ObservableObject {
         updateQuantityUseCase: UpdateCartItemQuantityUseCaseProtocol,
         removeLineItemUseCase: RemoveCartLineItemUseCaseProtocol,
         clearCartUseCase: ClearCartUseCaseProtocol,
-        draftOrderId: String? = "1218793308346"
+        keychain: KeychainTokenStorage = KeychainTokenStorage()
     ) {
         self.getDraftOrderUseCase = getDraftOrderUseCase
         self.createDraftOrderUseCase = createDraftOrderUseCase
         self.updateQuantityUseCase = updateQuantityUseCase
         self.removeLineItemUseCase = removeLineItemUseCase
         self.clearCartUseCase = clearCartUseCase
-        self.draftOrderId = draftOrderId
+        self.keychain = keychain
+        self.draftOrderId = keychain.getCartDraftOrderID()
     }
 
     func loadCart() async {
@@ -61,8 +64,9 @@ final class CartViewModel: ObservableObject {
     func createCart(with items: [CartLineItem]) async {
         state = .loading
         do {
-            let newCart = try await createDraftOrderUseCase.execute(items: items)
+            let newCart = try await createDraftOrderUseCase.execute(items: items,customerId:keychain.getShopifyCustomerID() ?? "")
             draftOrderId = newCart.draftOrderId
+            keychain.saveCartDraftOrderID(newCart.draftOrderId) 
             let uiState = CartUIState(from: newCart)
             state = newCart.lineItems.isEmpty ? .empty : .success(uiState)
         } catch {
@@ -89,28 +93,38 @@ final class CartViewModel: ObservableObject {
 
             let updatedUIState = uiState.updating(lineItems: updatedLineItems)
             state = .success(updatedUIState)
-            debounceSync(itemId: item.id, newQuantity: newQuantity)
+            debounceSync(itemId: item.id, newQuantity: newQuantity, previousQuantity: currentQuantity)
         }
     }
 
-    private func debounceSync(itemId: String, newQuantity: Int) {
+    private func debounceSync(itemId: String, newQuantity: Int, previousQuantity: Int) {
         debounceTasks[itemId]?.cancel()
         debounceTasks[itemId] = Task {
             try? await Task.sleep(for: .milliseconds(500))
             guard !Task.isCancelled else { return }
-            await syncQuantity(itemId: itemId, quantity: newQuantity)
+            await syncQuantity(itemId: itemId, quantity: newQuantity, previousQuantity: previousQuantity)
         }
     }
 
-    private func syncQuantity(itemId: String, quantity: Int) async {
+
+    private func syncQuantity(itemId: String, quantity: Int, previousQuantity: Int) async {
         guard let draftOrderId else { return }
         do {
             let cart = try await updateQuantityUseCase.execute(draftOrderId: draftOrderId, variantId: itemId, quantity: quantity)
             let uiState = CartUIState(from: cart)
             state = cart.lineItems.isEmpty ? .empty : .success(uiState)
         } catch {
-            state = .failure("Couldn't update quantity. Please try again.")
-            await loadCart()
+            rollbackQuantity(itemId: itemId, to: previousQuantity)
+            syncErrorMessage = "Couldn't update quantity. Please try again."
+        }
+    }
+
+    private func rollbackQuantity(itemId: String, to previousQuantity: Int) {
+        guard case .success(let uiState) = state else { return }
+        var items = uiState.lineItems
+        if let index = items.firstIndex(where: { $0.id == itemId }) {
+            items[index] = items[index].updating(quantity: previousQuantity)
+            state = .success(uiState.updating(lineItems: items))
         }
     }
 
@@ -141,6 +155,7 @@ final class CartViewModel: ObservableObject {
         do {
             try await clearCartUseCase.execute(draftOrderId: draftOrderId)
             self.draftOrderId = nil
+            keychain.clearCartDraftOrderID()
             state = .empty
         } catch {
             state = .failure("Couldn't clear your cart.")

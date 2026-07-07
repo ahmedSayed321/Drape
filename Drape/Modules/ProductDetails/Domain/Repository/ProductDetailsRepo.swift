@@ -14,7 +14,7 @@ protocol ProductDetailsRepoProtocol{
            variantId: String,
            customerId: String,
            quantity: Int
-       ) async throws -> DraftOrderResponseDTO
+       ) async throws -> Cart   
     
     
     
