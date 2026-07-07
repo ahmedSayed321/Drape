@@ -15,6 +15,12 @@ class ProductDetailsViewModel {
 
     var state: ProductDetailsState = .idle
 
+    
+    var isAddingToCart: Bool = false
+    var showAddToCartSuccessAlert: Bool = false
+    var addToCartErrorMessage: String? = nil
+
+    
     init(useCase: GetProductDetailsUseCase = GetProductDetailsUseCase()) {
         self.useCase = useCase
     }
@@ -25,9 +31,30 @@ class ProductDetailsViewModel {
         do {
             let product = try await useCase.execute(productId: productId)
             state = .success(product)
-            print("here is the desc :\(product.description)")
         } catch {
             state = .failure(error.localizedDescription)
         }
     }
+    
+    
+    func addToCart(
+            variantId: String,
+            customerId: String,
+            quantity: Int
+        ) async {
+
+            isAddingToCart = true
+            defer { isAddingToCart = false }
+
+            do {
+                _ = try await useCase.invokeAddToChart(
+                    variantId: variantId,
+                    customerId: customerId,
+                    quantity: quantity
+                )
+                showAddToCartSuccessAlert = true
+            } catch {
+                addToCartErrorMessage = error.localizedDescription
+            }
+        }
 }

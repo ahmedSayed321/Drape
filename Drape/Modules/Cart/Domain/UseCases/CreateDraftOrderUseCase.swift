@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CreateDraftOrderUseCaseProtocol {
-    func execute(items: [CartLineItem]) async throws -> Cart
+    func execute(items: [CartLineItem], customerId: String) async throws -> Cart
 }
 
 struct CreateDraftOrderUseCase: CreateDraftOrderUseCaseProtocol {
@@ -18,7 +18,7 @@ struct CreateDraftOrderUseCase: CreateDraftOrderUseCaseProtocol {
         self.repository = repository
     }
 
-    func execute(items: [CartLineItem]) async throws -> Cart {
-        try await repository.createDraftOrder(items: items)
+    func execute(items: [CartLineItem], customerId: String) async throws -> Cart {
+        try await repository.createDraftOrder(items: items, customerId: customerId)
     }
 }
