@@ -86,6 +86,6 @@ struct OrdersScreen: View {
     }
 }
 
-#Preview {
-    OrdersModuleFactory.makeOrdersView(customerRepository: ShopifyCustomerRepository())
-}
+//#Preview {
+//    OrdersModuleFactory.makeOrdersView(customerRepository: ShopifyCustomerRepository())
+//}

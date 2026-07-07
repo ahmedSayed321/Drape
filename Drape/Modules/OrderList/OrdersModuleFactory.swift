@@ -8,16 +8,17 @@
 
 enum OrdersModuleFactory {
     @MainActor
-    static func makeOrdersView(customerRepository: CustomerRepositoryProtocol) -> OrdersScreen {
+    static func makeOrdersView(customerEmail: String) -> OrdersScreen {
         let remoteDataSource = OrdersRemoteDataSourceImpl()
         let ordersRepository = OrdersRepositoryImpl(remoteDataSource: remoteDataSource)
+        let customerRepository = ShopifyCustomerRepository()
 
         let orderListUseCase = OrderListUseCase(
             ordersRepository: ordersRepository,
             customerRepository: customerRepository
         )
 
-        let viewModel = OrdersViewModel(
+        let viewModel = OrdersViewModel(email: customerEmail,
             orderListUseCase: orderListUseCase
         )
         return OrdersScreen(viewModel: viewModel)
