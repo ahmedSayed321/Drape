@@ -28,7 +28,7 @@ final class AddAddressViewModel {
         state.selectedCoordinate = coordinate
     }
 
-    func addAddress() async {
+    func addAddress() {
         let trimmedNickname = state.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedAddress = state.fullAddress.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -42,9 +42,14 @@ final class AddAddressViewModel {
         }
 
         state.isSaving = true
-        try? await Task.sleep(nanoseconds: 700_000_000)
-        state.isSaving = false
+        state.errorMessage = nil
+
+        let newItem = makeAddressItem()
+        CheckoutStorage.shared.addAddress(newItem)
+
+        state.savedRemoteId = nil
         state.isSuccessVisible = true
+        state.isSaving = false
     }
 
     func dismissSuccess() {
@@ -58,7 +63,8 @@ final class AddAddressViewModel {
             details: state.fullAddress,
             isDefault: false,
             latitude: state.selectedCoordinate?.latitude,
-            longitude: state.selectedCoordinate?.longitude
+            longitude: state.selectedCoordinate?.longitude,
+            remoteId: nil
         )
     }
 }

@@ -73,6 +73,8 @@ struct AddAddressUiState {
     var selectedCoordinate: CLLocationCoordinate2D?
     var isSaving: Bool = false
     var isSuccessVisible: Bool = false
+    var errorMessage: String?        
+    var savedRemoteId: Int?          
 
     var isAddEnabled: Bool {
         !nickname.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&

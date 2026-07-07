@@ -174,9 +174,7 @@ private extension AddAddressView {
                     type: .primary,
                     text: viewModel.state.isSaving ? "Adding..." : "Add",
                     action: {
-                        Task {
-                            await viewModel.addAddress()
-                        }
+                        viewModel.addAddress()
                     },
                     status: viewModel.state.isAddEnabled ? .enable : .disable
                 )
@@ -218,15 +216,8 @@ private extension AddAddressView {
                     type: .primary,
                     text: "Thanks",
                     action: {
-                        let newAddress = viewModel.makeAddressItem()
-                        
-                        var addresses = CheckoutStorage.shared.loadAddresses()
-                        addresses.append(newAddress)
-                        CheckoutStorage.shared.saveAddresses(addresses)
-                        
                         viewModel.dismissSuccess()
                         isSheetPresented = false
-                        
                         router.showAddress()
                     },
                     status: .enable
