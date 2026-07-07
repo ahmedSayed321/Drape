@@ -15,6 +15,7 @@ public struct ProductDetailsScreen: View {
     @State private var selectedSize: String? = "M"
     @State private var isFavourite: Bool = false
     
+    private var keyChain = KeychainTokenStorage()
     public init(productId: Int) {
         self.productId = productId
     }
@@ -69,9 +70,32 @@ public struct ProductDetailsScreen: View {
                 Spacer()
 
                 bottomBarSection(
-                    price: product.price,
-                    onAddToCart: {}
-                )
+                       price: product.price,
+                       isAddingToCart: viewModel.isAddingToCart,
+                       onAddToCart: {
+                           Task {
+                               guard let customerId = keyChain.getShopifyCustomerID() else {
+                                   return
+                               }
+                               let varID = String(product.variantId)
+                              
+                               await viewModel.addToCart(
+                                   variantId: varID,
+                                   customerId: customerId,
+                                   quantity: 1
+                               )
+                           }
+                       }
+                   )
+                   .padding(.horizontal, 20)
+                   .alert(
+                       "Added to Cart",
+                       isPresented: $viewModel.showAddToCartSuccessAlert
+                   ) {
+                       Button("OK", role: .cancel) {}
+                   } message: {
+                       Text("\(product.title) was added successfully to your cart.")
+                   }
                 .padding(.horizontal, 20)
             }
         }
@@ -234,6 +258,7 @@ extension ProductDetailsScreen {
 extension ProductDetailsScreen {
     func bottomBarSection(
         price: Double? = nil,
+        isAddingToCart: Bool = false,
         onAddToCart: (() -> Void)? = nil
     ) -> some View {
         HStack {
@@ -255,9 +280,9 @@ extension ProductDetailsScreen {
 
             CustomButton(
                 type: .primary,
-                text: "Add to Cart",
+                text: isAddingToCart ? "Adding..." : "Add to Cart",
                 action: { onAddToCart?() },
-                status: .enable,
+                status: isAddingToCart ? .disable : .enable,
                 leading: Image(systemName: "cart.fill")
             )
         }

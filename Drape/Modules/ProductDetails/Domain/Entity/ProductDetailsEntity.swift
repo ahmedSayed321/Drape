@@ -14,7 +14,7 @@ struct ProductDetailsEntity {
     let productType: String
     
     let sizes: [String]
-    
+    let variantId: Int
     let mainImage: String?
     let imageURLs: [String]
     let price: Double

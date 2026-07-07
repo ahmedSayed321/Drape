@@ -151,6 +151,7 @@ extension ProductDetail {
             ?? []
 
         let price = Double(variants?.first?.price ?? "") ?? 0
+        let variantId = variants?.first?.id ?? 0
 
         return ProductDetailsEntity(
             title: title ?? "",
@@ -158,6 +159,7 @@ extension ProductDetail {
             vendor: vendor ?? "",
             productType: productType ?? "",
             sizes: sizes,
+            variantId: variantId,
             mainImage: image?.src,
             imageURLs: imageURLs,
             price: price
