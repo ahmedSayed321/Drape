@@ -10,8 +10,8 @@ import Foundation
 @MainActor
 final class OrdersViewModel: ObservableObject {
 
-    @Published var ongoingOrders: [Order] = []
-    @Published var completedOrders: [Order] = []
+    @Published var ongoingOrders: [OrderUIState] = []
+    @Published var completedOrders: [OrderUIState] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
 
@@ -37,8 +37,12 @@ final class OrdersViewModel: ObservableObject {
             var orders = try await orderListUseCase.getOrders(email: email, status: .any)
             await enrichWithImages(&orders)
 
-            ongoingOrders = orders.filter { $0.fulfillmentStatus != .fulfilled }
-            completedOrders = orders.filter { $0.fulfillmentStatus == .fulfilled }
+            ongoingOrders = orders
+                .filter { $0.fulfillmentStatus != .fulfilled }
+                .map { $0.toUIState() }
+            completedOrders = orders
+                .filter { $0.fulfillmentStatus == .fulfilled }
+                .map { $0.toUIState() }
 
         } catch {
             errorMessage = "Failed to load orders: \(error.localizedDescription)"

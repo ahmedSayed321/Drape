@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OrderCard: View {
-    let order: Order
-    var onLeaveReviewTap: (OrderLineItem) -> Void = { _ in }
+    let order: OrderUIState
+    var onLeaveReviewTap: (OrderLineItemUIState) -> Void = { _ in }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -21,7 +21,7 @@ struct OrderCard: View {
                 ForEach(order.lineItems) { item in
                     OrderLineItemRow(
                         item: item,
-                        showReviewButton: order.fulfillmentStatus == .fulfilled,
+                        showReviewButton: order.showReviewButton,
                         onLeaveReviewTap: { onLeaveReviewTap(item) }
                     )
                 }
@@ -46,28 +46,34 @@ struct OrderCard: View {
     }
 
     private var statusBadge: some View {
-        Text(statusText)
+        Text(order.statusText)
             .font(.system(size: 11, weight: .semibold))
-            .foregroundColor(statusColor)
+            .foregroundColor(order.statusColor)
             .padding(.horizontal, 10)
             .padding(.vertical, 4)
-            .background(statusColor.opacity(0.15))
+            .background(order.statusColor.opacity(0.15))
             .clipShape(Capsule())
     }
+}
 
-    private var statusText: String {
-        switch order.fulfillmentStatus {
-        case .unfulfilled: return "Pending"
-        case .partial: return "In Transit"
-        case .fulfilled: return "Delivered"
-        }
-    }
-
-    private var statusColor: Color {
-        switch order.fulfillmentStatus {
-        case .unfulfilled: return .orange
-        case .partial: return .blue
-        case .fulfilled: return .green
-        }
-    }
+#Preview {
+    OrderCard(
+        order: OrderUIState(
+            id: 1,
+            name: "#1015",
+            statusText: "Delivered",
+            statusColor: .green,
+            showReviewButton: true,
+            lineItems: [
+                OrderLineItemUIState(
+                    id: 1,
+                    title: "Regular Fit Slogan",
+                    sizeText: "Size: M",
+                    priceText: "$129.95",
+                    imageURL: nil
+                )
+            ]
+        )
+    )
+    .padding()
 }

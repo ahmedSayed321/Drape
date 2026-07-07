@@ -19,6 +19,20 @@ struct OrderDTO: Decodable {
     let lineItems: [OrderLineItemDTO]?
 }
 
+extension OrderDTO {
+    func toDomain() -> Order {
+        Order(
+            id: id ?? 0,
+            name: name ?? "Unknown Order",
+            financialStatus: financialStatus ?? "pending",
+            fulfillmentStatus: FulfillmentStatus(rawValue: fulfillmentStatus),
+            totalPrice: totalPrice ?? "0.00",
+            currency: currency ?? "USD",
+            lineItems: (lineItems ?? []).map { $0.toDomain() }
+        )
+    }
+}
+
 struct OrderLineItemDTO: Decodable {
     let id: Int?
     let productId: Int?
@@ -27,4 +41,19 @@ struct OrderLineItemDTO: Decodable {
     let price: String?
     let quantity: Int?
     let vendor: String?
+}
+
+extension OrderLineItemDTO {
+    func toDomain() -> OrderLineItem {
+        OrderLineItem(
+            id: id ?? 0,
+            productId: productId ?? 0,
+            title: title ?? "Unknown Product",
+            variantTitle: variantTitle,
+            price: price ?? "0.00",
+            quantity: quantity ?? 1,
+            vendor: vendor ?? "Unknown",
+            imageURL: nil
+        )
+    }
 }

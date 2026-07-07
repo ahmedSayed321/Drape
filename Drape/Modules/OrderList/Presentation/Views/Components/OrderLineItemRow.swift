@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct OrderLineItemRow: View {
-    let item: OrderLineItem
+    let item: OrderLineItemUIState
     var showReviewButton: Bool = false
     var onLeaveReviewTap: () -> Void = {}
 
@@ -23,13 +23,13 @@ struct OrderLineItemRow: View {
                     .foregroundColor(.black)
                     .lineLimit(1)
 
-                if let variantTitle = item.variantTitle {
-                    Text("Size: \(variantTitle)")
+                if let sizeText = item.sizeText {
+                    Text(sizeText)
                         .font(.system(size: 12))
                         .foregroundColor(.gray)
                 }
 
-                Text("$\(item.price)")
+                Text(item.priceText)
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.black)
             }

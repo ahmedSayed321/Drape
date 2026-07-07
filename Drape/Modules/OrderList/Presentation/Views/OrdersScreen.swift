@@ -59,7 +59,7 @@ struct OrdersScreen: View {
         }
     }
 
-    private var currentOrders: [Order] {
+    private var currentOrders: [OrderUIState] {
         selectedTab == .ongoing ? viewModel.ongoingOrders : viewModel.completedOrders
     }
 
