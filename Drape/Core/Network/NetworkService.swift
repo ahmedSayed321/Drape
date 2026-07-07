@@ -49,7 +49,6 @@ final class NetworkService: NetworkServiceProtocol {
             }
 
             guard (200...299).contains(httpResponse.statusCode) else {
-                let bodyString = String(data: data, encoding: .utf8) ?? "<no body>"
                 throw NetworkError.serverError(statusCode: httpResponse.statusCode)
             }
 

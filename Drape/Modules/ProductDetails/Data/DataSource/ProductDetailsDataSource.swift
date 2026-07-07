@@ -25,10 +25,7 @@ class ProductDetailsDataSource : ProductDetailsDataSourceProtocol{
         self.networkService = networkService
     }
     
-    
-    
     func fetchProductDetails(productId: Int) async throws -> ProductDetail {
-        
         let response : ProductDetailsResponse = try await networkService.request(ProductsDetailsEndpoint(productId: productId))
         
         guard let response = response.product else{
@@ -43,8 +40,7 @@ class ProductDetailsDataSource : ProductDetailsDataSourceProtocol{
         customerId: String,
         quantity: Int
     ) async throws -> DraftOrderResponseDTO {
-      
-
+        
         let request = DraftOrderRequest(
             draftOrder: DraftOrder(
                 lineItems: [
@@ -69,12 +65,6 @@ class ProductDetailsDataSource : ProductDetailsDataSourceProtocol{
 
         return response
     }
-   
-    
-    
-    
-    
-    
 }
 
 enum ProductError: Error {
