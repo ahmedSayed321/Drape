@@ -124,8 +124,6 @@ class HomeViewModel: ObservableObject {
     }
     
     func refreshHomeData() async {
-        errorMessage = nil
-
         do {
             let homeData = try await getHomeScreenDataUseCase.execute()
 
@@ -138,7 +136,7 @@ class HomeViewModel: ObservableObject {
 
             refreshSavedState()
         } catch {
-            errorMessage = "Failed to load data \(error.localizedDescription)"
+            print("Failed to refresh home data: \(error.localizedDescription)")
         }
     }
     
