@@ -14,6 +14,8 @@
 		3E2212A12FF5581000770211 /* SignInError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2212A02FF5581000770211 /* SignInError.swift */; };
 		3E2212A32FF5593800770211 /* ShopifyCustomerSearchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2212A22FF5593800770211 /* ShopifyCustomerSearchDto.swift */; };
 		3E2212A52FF559B200770211 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2212A42FF559B200770211 /* SignInViewModel.swift */; };
+		3E3DC1222FFE7574006EE065 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 41B0EF302FFD08A600853464 /* FirebaseFunctions */; };
+		3E3DC1262FFE9B24006EE065 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3E3DC1252FFE9B24006EE065 /* FirebaseAuth */; };
 		3E41F39A2FF70D7300703397 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F3992FF70D7300703397 /* CartView.swift */; };
 		3E41F39C2FF70D8600703397 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39B2FF70D8600703397 /* AccountView.swift */; };
 		3E41F39E2FF70D9E00703397 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39D2FF70D9E00703397 /* FavouriteView.swift */; };
@@ -453,9 +455,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C9F0822FFE8EED00B15F39 /* FirebaseFunctions in Frameworks */,
-				41C9F0802FFE8EED00B15F39 /* FirebaseCore in Frameworks */,
-				41C9F07E2FFE8EED00B15F39 /* FirebaseAuth in Frameworks */,
+				3E3DC1222FFE7574006EE065 /* FirebaseFunctions in Frameworks */,
+				3E3DC1262FFE9B24006EE065 /* FirebaseAuth in Frameworks */,
 				3EA6E02F2FFA962F004FCF0B /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1797,9 +1798,8 @@
 			);
 			name = Drape;
 			packageProductDependencies = (
-				41C9F07D2FFE8EED00B15F39 /* FirebaseAuth */,
-				41C9F07F2FFE8EED00B15F39 /* FirebaseCore */,
-				41C9F0812FFE8EED00B15F39 /* FirebaseFunctions */,
+				41B0EF302FFD08A600853464 /* FirebaseFunctions */,
+				3E3DC1252FFE9B24006EE065 /* FirebaseAuth */,
 			);
 			productName = Drape;
 			productReference = 3E73C1532FF9A1F80011CC9D /* Drape.app */;
@@ -1874,8 +1874,8 @@
 			);
 			mainGroup = 41B03E822FEFCE2A00521C14;
 			packageReferences = (
-				41C9F07C2FFE8EED00B15F39 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				41B0EF2D2FFD082E00853464 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				3E3DC1242FFE9B24006EE065 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 41B03E822FEFCE2A00521C14;
 			projectDirPath = "";
@@ -2450,6 +2450,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3E3DC1242FFE9B24006EE065 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.14.0;
+			};
+		};
 		41B0EF2D2FFD082E00853464 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -2458,31 +2466,22 @@
 				minimumVersion = 8.10.0;
 			};
 		};
-		41C9F07C2FFE8EED00B15F39 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.11.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		41C9F07D2FFE8EED00B15F39 /* FirebaseAuth */ = {
+		3E3DC1252FFE9B24006EE065 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41C9F07C2FFE8EED00B15F39 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3E3DC1242FFE9B24006EE065 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		41C9F07F2FFE8EED00B15F39 /* FirebaseCore */ = {
+		3EA6E02E2FFA962F004FCF0B /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41C9F07C2FFE8EED00B15F39 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCore;
+			productName = Kingfisher;
 		};
 		41C9F0812FFE8EED00B15F39 /* FirebaseFunctions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41C9F07C2FFE8EED00B15F39 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = Kingfisher;
+			package = 41B0EF2D2FFD082E00853464 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = FirebaseFunctions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

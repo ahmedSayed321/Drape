@@ -9,7 +9,11 @@ import SwiftUI
 
 struct BrandProductsView: View {
     @StateObject var viewModel: BrandProductsViewModel
+    @State private var showGuestAlert = false
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppRouter.self) private var router
+    
+    private let keychain = KeychainTokenStorage()
 
     var body: some View {
         VStack {
@@ -38,7 +42,13 @@ struct BrandProductsView: View {
                         products: viewModel.products,
                         onProductAppear: { viewModel.loadMoreIfNeeded(currentItem: $0) },
                         isFavorited: { viewModel.isFavorited($0) },
-                        onFavoriteTap: { viewModel.toggleFavorite($0) }
+                        onFavoriteTap: { product in
+                            guard !isGuest else {
+                                showGuestAlert = true
+                                return
+                            }
+                            viewModel.toggleFavorite(product)
+                        }
                     )
                     .padding(.top, 10)
 
@@ -57,5 +67,20 @@ struct BrandProductsView: View {
         .onAppear {
             viewModel.refreshSavedState()
         }
+        .alert("Login Required", isPresented: $showGuestAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Go to Login") {
+                router.showSignIn()
+            }
+        } message: {
+            Text("You need to login first to use favorites.")
+        }
+    }
+    
+    private var isGuest: Bool {
+        guard let customerId = keychain.getShopifyCustomerID() else {
+            return true
+        }
+        return customerId.isEmpty
     }
 }

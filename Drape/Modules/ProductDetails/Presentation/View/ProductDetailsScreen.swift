@@ -18,6 +18,9 @@ public struct ProductDetailsScreen: View {
     
     private var sizes = ["M","S","L"]
     @State private var selectedSize: String? = "M"
+    @State private var isFavourite: Bool = false
+    @State private var showGuestAlert = false
+    @Environment(AppRouter.self) private var router
     
     private var keyChain = KeychainTokenStorage()
     
@@ -48,7 +51,14 @@ public struct ProductDetailsScreen: View {
                             isFavorite: Binding(
                                 get: { viewModel.isFavorite },
                                 set: { _ in viewModel.toggleFavorite(product: product) }
-                            )
+                            ),
+                            onFavoriteTap: {
+                                guard !isGuest else {
+                                    showGuestAlert = true
+                                    return
+                                }
+                                isFavourite.toggle()
+                            }
                         )
 
                         titleAndRatingSection(
@@ -76,6 +86,7 @@ public struct ProductDetailsScreen: View {
                 bottomBarSection(
                        price: product.price,
                        isAddingToCart: viewModel.isAddingToCart,
+                       isGuest: isGuest,
                        onAddToCart: {
                            Task {
                                guard let customerId = keyChain.getShopifyCustomerID() else {
@@ -100,6 +111,14 @@ public struct ProductDetailsScreen: View {
                    } message: {
                        Text("\(product.title) was added successfully to your cart.")
                    }
+                   .alert("Login Required", isPresented: $showGuestAlert) {
+                       Button("Cancel", role: .cancel) {}
+                       Button("Go to Login") {
+                           router.showSignIn()
+                       }
+                   } message: {
+                       Text("You need to login first to use favorites.")
+                   }
                 .padding(.horizontal, 20)
             }
         }
@@ -110,6 +129,13 @@ public struct ProductDetailsScreen: View {
             await viewModel.fetchProductDetails(productId: productId)
             
         }
+    }
+    
+    private var isGuest: Bool {
+        guard let customerId = keyChain.getShopifyCustomerID() else {
+            return true
+        }
+        return customerId.isEmpty
     }
      
 }
@@ -263,6 +289,7 @@ extension ProductDetailsScreen {
     func bottomBarSection(
         price: Double? = nil,
         isAddingToCart: Bool = false,
+        isGuest: Bool = false,
         onAddToCart: (() -> Void)? = nil
     ) -> some View {
         HStack {
@@ -286,7 +313,7 @@ extension ProductDetailsScreen {
                 type: .primary,
                 text: isAddingToCart ? "Adding..." : "Add to Cart",
                 action: { onAddToCart?() },
-                status: isAddingToCart ? .disable : .enable,
+                status: (isAddingToCart || isGuest) ? .disable : .enable,
                 leading: Image(systemName: "cart.fill")
             )
         }
@@ -297,7 +324,8 @@ extension ProductDetailsScreen {
 
 func productImageGallery(
     imageURLs: [String]?,
-    isFavorite: Binding<Bool>
+    isFavorite: Binding<Bool>,
+    onFavoriteTap: @escaping () -> Void
 ) -> some View {
 
     ZStack(alignment: .topTrailing) {
@@ -354,7 +382,7 @@ func productImageGallery(
         }
 
         Button {
-            isFavorite.wrappedValue.toggle()
+            onFavoriteTap()
         } label: {
             Image(systemName: isFavorite.wrappedValue ? "heart.fill" : "heart")
                 .font(.system(size: 16, weight: .semibold))
