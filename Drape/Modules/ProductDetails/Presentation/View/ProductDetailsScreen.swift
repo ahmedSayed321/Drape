@@ -8,16 +8,21 @@
 import SwiftUI
 
 public struct ProductDetailsScreen: View {
-    @State private var viewModel = ProductDetailsViewModel()
+    @State var viewModel: ProductDetailsViewModel
     public var productId: Int
+    
+    public init(viewModel: ProductDetailsViewModel, productId: Int) {   // ADD: public
+        self._viewModel = State(initialValue: viewModel)
+        self.productId = productId
+    }
     
     private var sizes = ["M","S","L"]
     @State private var selectedSize: String? = "M"
     @State private var isFavourite: Bool = false
+    @State private var showGuestAlert = false
+    @Environment(AppRouter.self) private var router
     
-    public init(productId: Int) {
-        self.productId = productId
-    }
+    private var keyChain = KeychainTokenStorage()
     
     public var body: some View {
         VStack {
@@ -43,7 +48,17 @@ public struct ProductDetailsScreen: View {
                     VStack(alignment: .leading) {
                         productImageGallery(
                             imageURLs: product.imageURLs, // see part 2
-                            isFavorite: $isFavourite
+                            isFavorite: Binding(
+                                get: { viewModel.isFavorite },
+                                set: { _ in viewModel.toggleFavorite(product: product) }
+                            ),
+                            onFavoriteTap: {
+                                guard !isGuest else {
+                                    showGuestAlert = true
+                                    return
+                                }
+                                isFavourite.toggle()
+                            }
                         )
 
                         titleAndRatingSection(
@@ -69,9 +84,41 @@ public struct ProductDetailsScreen: View {
                 Spacer()
 
                 bottomBarSection(
-                    price: product.price,
-                    onAddToCart: {}
-                )
+                       price: product.price,
+                       isAddingToCart: viewModel.isAddingToCart,
+                       isGuest: isGuest,
+                       onAddToCart: {
+                           Task {
+                               guard let customerId = keyChain.getShopifyCustomerID() else {
+                                   return
+                               }
+                               let varID = String(product.variantId)
+                              
+                               await viewModel.addToCart(
+                                   variantId: varID,
+                                   customerId: customerId,
+                                   quantity: 1
+                               )
+                           }
+                       }
+                   )
+                   .padding(.horizontal, 20)
+                   .alert(
+                       "Added to Cart",
+                       isPresented: $viewModel.showAddToCartSuccessAlert
+                   ) {
+                       Button("OK", role: .cancel) {}
+                   } message: {
+                       Text("\(product.title) was added successfully to your cart.")
+                   }
+                   .alert("Login Required", isPresented: $showGuestAlert) {
+                       Button("Cancel", role: .cancel) {}
+                       Button("Go to Login") {
+                           router.showSignIn()
+                       }
+                   } message: {
+                       Text("You need to login first to use favorites.")
+                   }
                 .padding(.horizontal, 20)
             }
         }
@@ -82,6 +129,13 @@ public struct ProductDetailsScreen: View {
             await viewModel.fetchProductDetails(productId: productId)
             
         }
+    }
+    
+    private var isGuest: Bool {
+        guard let customerId = keyChain.getShopifyCustomerID() else {
+            return true
+        }
+        return customerId.isEmpty
     }
      
 }
@@ -234,6 +288,8 @@ extension ProductDetailsScreen {
 extension ProductDetailsScreen {
     func bottomBarSection(
         price: Double? = nil,
+        isAddingToCart: Bool = false,
+        isGuest: Bool = false,
         onAddToCart: (() -> Void)? = nil
     ) -> some View {
         HStack {
@@ -255,9 +311,9 @@ extension ProductDetailsScreen {
 
             CustomButton(
                 type: .primary,
-                text: "Add to Cart",
+                text: isAddingToCart ? "Adding..." : "Add to Cart",
                 action: { onAddToCart?() },
-                status: .enable,
+                status: (isAddingToCart || isGuest) ? .disable : .enable,
                 leading: Image(systemName: "cart.fill")
             )
         }
@@ -268,7 +324,8 @@ extension ProductDetailsScreen {
 
 func productImageGallery(
     imageURLs: [String]?,
-    isFavorite: Binding<Bool>
+    isFavorite: Binding<Bool>,
+    onFavoriteTap: @escaping () -> Void
 ) -> some View {
 
     ZStack(alignment: .topTrailing) {
@@ -325,7 +382,7 @@ func productImageGallery(
         }
 
         Button {
-            isFavorite.wrappedValue.toggle()
+            onFavoriteTap()
         } label: {
             Image(systemName: isFavorite.wrappedValue ? "heart.fill" : "heart")
                 .font(.system(size: 16, weight: .semibold))
@@ -339,6 +396,10 @@ func productImageGallery(
     }
     .padding(.bottom, 12)
 }
+//#Preview {
+//    ProductDetailsScreen(productId: 8419989422266)
+//}
 #Preview {
-    ProductDetailsScreen(productId: 8419989422266)
+    @Environment(\.modelContext) var context
+    ProductDetailsModuleFactory.makeProductDetailsView(productId: 8419989422266, modelContext: context)
 }

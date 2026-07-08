@@ -10,7 +10,11 @@ struct HomeScreen: View {
     
     @StateObject var viewModel: HomeViewModel
     @State private var showFilters = false
+    @State private var showGuestAlert = false
     @State private var filterDetent: PresentationDetent = .fraction(0.5)
+    @Environment(AppRouter.self) private var router
+    
+    private let keychain = KeychainTokenStorage()
     
     var body: some View {
         NavigationStack {
@@ -77,7 +81,13 @@ struct HomeScreen: View {
                                         viewModel.loadMoreProductsIfNeeded(currentItem: product)
                                     },
                                     isFavorited: { viewModel.isFavorited($0) },
-                                    onFavoriteTap: { viewModel.toggleFavorite($0) }
+                                    onFavoriteTap: { product in
+                                        guard !isGuest else {
+                                            showGuestAlert = true
+                                            return
+                                        }
+                                        viewModel.toggleFavorite(product)
+                                    }
                                 )
                                 .padding(.horizontal, 16.0)
                                 if viewModel.isLoadingMore {
@@ -89,7 +99,6 @@ struct HomeScreen: View {
                                 CategoryChipListView(
                                     viewModel: viewModel
                                 )
-                                .padding(.leading, 16.0)
                                 .padding(.bottom, 24.0)
                                 .background(.white)
                             }
@@ -104,16 +113,35 @@ struct HomeScreen: View {
                     .presentationDragIndicator(.visible)
             }
             .task {
-                await viewModel.loadHomeData()
+                await viewModel.loadHomeDataOnce()
+            }
+            .onAppear {
+                viewModel.refreshSavedState()
             }
             .navigationDestination(for: Brand.self) { brand in   // NEW
                 BrandProductsEntryPoint(brand: brand.name)
             }
+            .alert("Login Required", isPresented: $showGuestAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Go to Login") {
+                    router.showSignIn()
+                }
+            } message: {
+                Text("You need to login first to use favorites.")
+            }
         }
+    }
+    
+    private var isGuest: Bool {
+        guard let customerId = keychain.getShopifyCustomerID() else {
+            return true
+        }
+        return customerId.isEmpty
     }
 }
 
 
 #Preview {
     HomeEntryPoint()
+        .environment(AppRouter())
 }
