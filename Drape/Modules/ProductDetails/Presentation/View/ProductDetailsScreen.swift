@@ -11,14 +11,13 @@ public struct ProductDetailsScreen: View {
     @State var viewModel: ProductDetailsViewModel
     public var productId: Int
     
-    public init(viewModel: ProductDetailsViewModel, productId: Int) {   // ADD: public
+    public init(viewModel: ProductDetailsViewModel, productId: Int) {
         self._viewModel = State(initialValue: viewModel)
         self.productId = productId
     }
     
     private var sizes = ["M","S","L"]
     @State private var selectedSize: String? = "M"
-    @State private var isFavourite: Bool = false
     @State private var showGuestAlert = false
     @Environment(AppRouter.self) private var router
     
@@ -50,15 +49,14 @@ public struct ProductDetailsScreen: View {
                             imageURLs: product.imageURLs, // see part 2
                             isFavorite: Binding(
                                 get: { viewModel.isFavorite },
-                                set: { _ in viewModel.toggleFavorite(product: product) }
-                            ),
-                            onFavoriteTap: {
-                                guard !isGuest else {
-                                    showGuestAlert = true
-                                    return
+                                set: { _ in
+                                    guard !isGuest else {
+                                        showGuestAlert = true
+                                        return
+                                    }
+                                    viewModel.toggleFavorite(product: product)
                                 }
-                                isFavourite.toggle()
-                            }
+                            )
                         )
 
                         titleAndRatingSection(
@@ -324,8 +322,7 @@ extension ProductDetailsScreen {
 
 func productImageGallery(
     imageURLs: [String]?,
-    isFavorite: Binding<Bool>,
-    onFavoriteTap: @escaping () -> Void
+    isFavorite: Binding<Bool>
 ) -> some View {
 
     ZStack(alignment: .topTrailing) {
@@ -382,7 +379,7 @@ func productImageGallery(
         }
 
         Button {
-            onFavoriteTap()
+            isFavorite.wrappedValue.toggle()
         } label: {
             Image(systemName: isFavorite.wrappedValue ? "heart.fill" : "heart")
                 .font(.system(size: 16, weight: .semibold))

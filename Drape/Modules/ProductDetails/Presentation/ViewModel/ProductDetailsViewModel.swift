@@ -40,22 +40,21 @@ public class ProductDetailsViewModel {
         state = .loading
 
         do {
-            let product = try await useCase.execute(productId: productId)
-            state = .success(product)
-            await checkIfFavorited(productId: productId)
+            async let product = try await useCase.execute(productId: productId)
+            async let savedProducts = try getSavedProductsUseCase.execute()
+            
+            let (productDetails, savedProductsResult) = try await (product, savedProducts)
+            
+            // Check if product is favorited
+            isFavorite = savedProductsResult.contains { $0.id == productId }
+            
+            state = .success(productDetails)
+            
         } catch {
             state = .failure(error.localizedDescription)
         }
     }
     
-    private func checkIfFavorited(productId: Int) async {
-        do {
-            let savedProducts = try getSavedProductsUseCase.execute()
-            isFavorite = savedProducts.contains { $0.id == productId }
-        } catch {
-            isFavorite = false
-        }
-    }
     
     func toggleFavorite(product: ProductDetailsEntity) {
         guard let productId = currentProductId else { return }
