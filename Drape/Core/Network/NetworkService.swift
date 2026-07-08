@@ -36,10 +36,9 @@ final class NetworkService: NetworkServiceProtocol {
         request.allHTTPHeaderFields = headers
         
         if let body = endpoint.body {
-            let encoded = try JSONEncoder().encode(body)
-            request.httpBody = encoded
-
-            print(String(data: encoded, encoding: .utf8)!)
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            request.httpBody = try encoder.encode(AnyEncodable(body))
         }
 
         do {
@@ -64,12 +63,7 @@ final class NetworkService: NetworkServiceProtocol {
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 return try decoder.decode(T.self, from: data)
             } catch {
-                if let json = String(data: data, encoding: .utf8) {
-                    print("RAW JSON:", String(data: data, encoding: .utf8) ?? "nil")
-                    print("DECODING TYPE:", T.self)
-                    print("❌ Decoding failed for response:")
-                    print(json)
-                }
+                print("NetworkError.decodingFailed : \(NetworkError.decodingFailed)")
                 throw NetworkError.decodingFailed
             }
 

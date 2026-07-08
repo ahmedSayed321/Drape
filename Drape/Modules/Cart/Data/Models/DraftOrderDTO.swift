@@ -59,21 +59,22 @@ extension DraftOrderLineItemDTO {
 // Request DTOs (encoding, for POST/PUT)
 
 struct CreateDraftOrderRequestDTO: Encodable {
-    let draftOrder: DraftOrderRequestBody?
-
+    let draftOrder: DraftOrderRequestBody
 }
 
 struct DraftOrderRequestBody: Encodable {
     let lineItems: [LineItemRequestDTO]
-    let shippingLine: ShippingLineDTO?
+    let customer: CustomerDTO?
 
+}
+
+struct CustomerDTO : Codable {
+    let id: String
 }
 
 struct LineItemRequestDTO: Encodable {
     let variantId: Int?
     let quantity: Int?
-    let properties: [LineItemPropertyDTO]?
-
 }
 
 struct LineItemPropertyDTO: Encodable {

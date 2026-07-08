@@ -34,13 +34,10 @@ extension Cart {
             lineItems: lineItems.map { item in
                 LineItemRequestDTO(
                     variantId: Int(item.id) ?? 0,
-                    quantity: item.quantity,
-                    properties: item.imageURL.map {
-                        [LineItemPropertyDTO(name: "_image_url", value: $0.absoluteString)]
-                    }
+                    quantity: item.quantity
                 )
             },
-            shippingLine: nil
+            customer: nil
         )
     }
 }
@@ -49,10 +46,7 @@ extension CartLineItem {
     func toRequestDTO() -> LineItemRequestDTO {
         LineItemRequestDTO(
             variantId: Int(id) ?? 0,
-            quantity: quantity,
-            properties: imageURL.map {
-                [LineItemPropertyDTO(name: "_image_url", value: $0.absoluteString)]
-            }
+            quantity: quantity
         )
     }
 }

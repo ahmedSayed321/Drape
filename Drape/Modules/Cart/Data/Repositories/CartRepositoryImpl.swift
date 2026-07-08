@@ -14,15 +14,21 @@ final class CartRepositoryImpl: CartRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    func createDraftOrder(items: [CartLineItem]) async throws -> Cart {
+    func createDraftOrder(items: [CartLineItem] , customerId: String) async throws -> Cart {
         let requestBody = CreateDraftOrderRequestDTO(
             draftOrder: DraftOrderRequestBody(
                 lineItems: items.map { $0.toRequestDTO() },
-                shippingLine: nil
+                customer: CustomerDTO(id: customerId)
             )
         )
-        let response = try await remoteDataSource.createDraftOrder(requestBody)
-        return CartMapper.toDomain(response.draftOrder)
+
+        do {
+            let response = try await remoteDataSource.createDraftOrder(requestBody)
+            let cart = CartMapper.toDomain(response.draftOrder)
+            return cart
+        } catch {
+            throw error
+        }
     }
 
     func getDraftOrder(id: String) async throws -> Cart {
@@ -41,13 +47,24 @@ final class CartRepositoryImpl: CartRepository {
         let requestBody = CreateDraftOrderRequestDTO(
             draftOrder: DraftOrderRequestBody(
                 lineItems: updatedItems.map { $0.toRequestDTO() },
-                shippingLine: nil
+                customer: nil
             )
         )
         let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
         return CartMapper.toDomain(response.draftOrder)
     }
 
+    func replaceLineItems(draftOrderId: String, items: [CartLineItem]) async throws -> Cart {
+        let requestBody = CreateDraftOrderRequestDTO(
+            draftOrder: DraftOrderRequestBody(
+                lineItems: items.map { $0.toRequestDTO() },
+                customer: nil   
+            )
+        )
+        let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
+        return CartMapper.toDomain(response.draftOrder)
+    }
+    
     func removeLineItem(draftOrderId: String, variantId: String) async throws -> Cart {
         let current = try await getDraftOrder(id: draftOrderId)
         let remainingItems = current.lineItems.filter { $0.id != variantId }
@@ -55,7 +72,7 @@ final class CartRepositoryImpl: CartRepository {
         let requestBody = CreateDraftOrderRequestDTO(
             draftOrder: DraftOrderRequestBody(
                 lineItems: remainingItems.map { $0.toRequestDTO() },
-                shippingLine: nil
+                customer: nil
             )
         )
         let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
