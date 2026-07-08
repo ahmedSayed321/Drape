@@ -123,7 +123,7 @@ final class CheckoutViewModel {
         do {
             let financialStatus = "pending" // for now
 
-            _ = try await checkoutRepository.createOrder(
+            let order = try await checkoutRepository.createOrder(
                 lineItems: cartItems,
                 customerId: customerId,
                 address: address,
@@ -135,6 +135,7 @@ final class CheckoutViewModel {
                 financialStatus: financialStatus,
                 sendReceipt: true
             )
+            print("✅ Order placed: \(order)")
 
             state.isOrderSuccessVisible = true
         } catch {
