@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FavoriteProductsGridView: View {
     let viewModel: SavedProductsViewModel
+    
+    @State private var selectedProductId: Int?
      
     private let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -20,15 +22,19 @@ struct FavoriteProductsGridView: View {
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(viewModel.products) { product in
                 HomeProductCard(
-                    uiState: product.toUIState(), isFavorited: true,
+                    uiState: product.toUIState(),
+                    isFavorited: true,
                     onFavTap: {
                         viewModel.remove(product)
                     },
                     onCardTap: {
-                        
+                        selectedProductId = product.id
                     }
                 )
             }
+        }
+        .navigationDestination(item: $selectedProductId) { productId in
+            ProductDetailsEntryPoint(productID: productId)
         }
         
     }
