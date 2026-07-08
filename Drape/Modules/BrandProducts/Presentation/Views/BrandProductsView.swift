@@ -54,5 +54,8 @@ struct BrandProductsView: View {
         .task {
             await viewModel.loadProductsOnce()
         }
+        .onAppear {
+            viewModel.refreshSavedState()
+        }
     }
 }

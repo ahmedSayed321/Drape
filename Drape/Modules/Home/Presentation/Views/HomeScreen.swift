@@ -105,6 +105,9 @@ struct HomeScreen: View {
             .task {
                 await viewModel.loadHomeDataOnce()
             }
+            .onAppear {
+                viewModel.refreshSavedState()
+            }
             .navigationDestination(for: Brand.self) { brand in   // NEW
                 BrandProductsEntryPoint(brand: brand.name)
             }
