@@ -104,7 +104,7 @@ struct HomeScreen: View {
                     .presentationDragIndicator(.visible)
             }
             .task {
-                await viewModel.loadHomeData()
+                await viewModel.loadHomeDataOnce()
             }
             .navigationDestination(for: Brand.self) { brand in   // NEW
                 BrandProductsEntryPoint(brand: brand.name)
