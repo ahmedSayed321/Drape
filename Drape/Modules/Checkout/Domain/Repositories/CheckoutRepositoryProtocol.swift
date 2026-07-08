@@ -9,7 +9,18 @@ import Foundation
 
 protocol CheckoutRepositoryProtocol {
     
-    func createOrder(lineItems: [CartItem], customerId: Int, financialStatus: String, sendReceipt: Bool) async throws -> Order
+    func createOrder(
+          lineItems: [CartItem],
+          customerId: Int,
+          address: AddressItem,
+          customerFirstName: String,
+          customerLastName: String,
+          customerPhone: String?,
+          promo: ValidatedPromoCode?,
+          discountAmount: Double,
+          financialStatus: String,
+          sendReceipt: Bool
+      ) async throws -> Order
 
 }
 

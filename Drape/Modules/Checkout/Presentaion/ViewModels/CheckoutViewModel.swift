@@ -112,7 +112,7 @@ final class CheckoutViewModel {
             return
         }
 
-        guard state.selectedAddress != nil else {
+        guard let address = state.selectedAddress else {
             state.errorMessage = "Please select a delivery address."
             return
         }
@@ -121,11 +121,17 @@ final class CheckoutViewModel {
         state.errorMessage = nil
 
         do {
-            let financialStatus = state.selectedPaymentOption == .cash ? "pending" : "pending" // for now
+            let financialStatus = "pending" // for now
 
             _ = try await checkoutRepository.createOrder(
                 lineItems: cartItems,
                 customerId: customerId,
+                address: address,
+                customerFirstName: customerFirstName,
+                customerLastName: customerLastName,
+                customerPhone: customerPhone,
+                promo: state.appliedPromo,
+                discountAmount: state.discountAmount,
                 financialStatus: financialStatus,
                 sendReceipt: true
             )
@@ -137,7 +143,6 @@ final class CheckoutViewModel {
 
         state.isPlacingOrder = false
     }
-    
     
     func dismissSuccess() {
         state.isOrderSuccessVisible = false
