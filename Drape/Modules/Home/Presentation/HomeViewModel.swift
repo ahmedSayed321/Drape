@@ -123,6 +123,25 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    func refreshHomeData() async {
+        errorMessage = nil
+
+        do {
+            let homeData = try await getHomeScreenDataUseCase.execute()
+
+            self.products = homeData.products
+            self.brands = homeData.brands
+            self.categories = ["All"] + homeData.categories
+
+            self.canLoadMore = homeData.products.count == pageSize
+            priceRange = 0...maxProductPrice
+
+            refreshSavedState()
+        } catch {
+            errorMessage = "Failed to load data \(error.localizedDescription)"
+        }
+    }
+    
     
     func refreshSavedState() {
         guard let ids = try? getSavedProductsUseCase.execute().map(\.id) else { return }
