@@ -49,6 +49,12 @@ final class NetworkService: NetworkServiceProtocol {
             }
 
             guard (200...299).contains(httpResponse.statusCode) else {
+
+                if let json = String(data: data, encoding: .utf8) {
+                    print("Status:", httpResponse.statusCode)
+                    print("Response:", json)
+                }
+
                 throw NetworkError.serverError(statusCode: httpResponse.statusCode)
             }
 

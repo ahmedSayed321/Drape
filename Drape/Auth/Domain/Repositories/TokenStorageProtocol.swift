@@ -13,5 +13,9 @@ protocol TokenStorageProtocol {
     func saveFirebaseUID(_ uid: String)
     func getFirebaseUID() -> String?
     func clearAll()
+    
+    func saveShopifyCustomerID(_ id: String)
+    func getShopifyCustomerID() -> String?
+    func clearShopifyCustomerID()
 }
 

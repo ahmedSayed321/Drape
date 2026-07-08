@@ -10,6 +10,7 @@ import SwiftUI
 struct CartView: View {
     @StateObject var viewModel: CartViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppRouter.self) private var router
     var onBellTap: () -> Void = {}
     
 
@@ -54,7 +55,19 @@ struct CartView: View {
                     type: .primary,
                     text: "Go To Checkout",
                     action: {
-                        // handle checkout tap
+                        let checkoutItems = cartUI.lineItems.map { item in
+                            CartItem(
+                                id: UUID(),
+                                variantId: Int(item.id) ?? 0,
+                                title: item.title,
+                                price: NSDecimalNumber(decimal: item.priceDecimal).doubleValue,
+                                quantity: item.quantity,
+                                imageURL: item.imageURL
+                            )
+                        }
+                        router.cartItems = checkoutItems
+                        router.draftOrderId = viewModel.currentDraftOrderId ?? ""
+                        router.showCheckout()
                     },
                     trailing: Image(systemName: "arrow.right")
                 )

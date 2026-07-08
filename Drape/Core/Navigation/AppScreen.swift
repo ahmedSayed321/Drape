@@ -13,5 +13,11 @@ enum AppScreen {
     case signUp
     case home
     case onBoarding
+    case checkout
+    case address
+    case addAddress
+    case payment
+    case addCard
+    case cart
 
 }

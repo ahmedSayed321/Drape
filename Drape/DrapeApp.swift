@@ -21,7 +21,8 @@ struct DrapeApp: App {
     }()
 
     @State private var router = AppRouter()
-
+    var draftOrderId: String = ""
+    
     init() {
         FirebaseApp.configure()
     }
@@ -48,6 +49,24 @@ struct DrapeApp: App {
                     .environment(router)
             case .home:
                 ContentView()
+                    .environment(router)
+            case .checkout:
+                CheckoutView(cartItems: router.cartItems, draftOrderId: router.draftOrderId)
+                    .environment(router)
+            case .address:
+                AddressView()
+                    .environment(router)
+            case .addAddress:
+                AddAddressView()
+                    .environment(router)
+            case .payment:
+                PaymentMethodView()
+                    .environment(router)
+            case .addCard:
+                AddCardView()
+                    .environment(router)
+            case .cart:
+                CartView(viewModel: .live(draftOrderId: router.draftOrderId.isEmpty ? nil : router.draftOrderId))
                     .environment(router)
             }
 
