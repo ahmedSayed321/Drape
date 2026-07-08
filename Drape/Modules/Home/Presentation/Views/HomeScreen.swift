@@ -89,7 +89,6 @@ struct HomeScreen: View {
                                 CategoryChipListView(
                                     viewModel: viewModel
                                 )
-                                .padding(.leading, 16.0)
                                 .padding(.bottom, 24.0)
                                 .background(.white)
                             }
@@ -104,7 +103,10 @@ struct HomeScreen: View {
                     .presentationDragIndicator(.visible)
             }
             .task {
-                await viewModel.loadHomeData()
+                await viewModel.loadHomeDataOnce()
+            }
+            .onAppear {
+                viewModel.refreshSavedState()
             }
             .navigationDestination(for: Brand.self) { brand in   // NEW
                 BrandProductsEntryPoint(brand: brand.name)

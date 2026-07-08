@@ -24,6 +24,8 @@ class HomeViewModel: ObservableObject {
     @Published var priceRange: ClosedRange<Double> = 0...200
     @Published var selectedSizes: Set<String> = []
     
+    private var hasLoadedData = false
+    
     // MARK: - Featured Carousel
     // Static mock banners shown in the auto-scrolling home carousel.
     // Not derived from `products` since `Product` has no real "post link" yet.
@@ -91,7 +93,9 @@ class HomeViewModel: ObservableObject {
         self.getSavedProductsUseCase = getSavedProductsUseCase
     }
     
-    func loadHomeData() async {
+    func loadHomeDataOnce() async {
+        guard !hasLoadedData else { return }
+        
         isLoading = true
         errorMessage = nil
 
@@ -110,6 +114,8 @@ class HomeViewModel: ObservableObject {
             
             refreshSavedState()
 
+            hasLoadedData = true
+            
             isLoading = false
         } catch {
             errorMessage = "Failed to load data \(error.localizedDescription)"

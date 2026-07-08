@@ -8,17 +8,18 @@
 import SwiftUI
 
 public struct ProductDetailsScreen: View {
-    @State private var viewModel = ProductDetailsViewModel()
+    @State var viewModel: ProductDetailsViewModel
     public var productId: Int
+    
+    public init(viewModel: ProductDetailsViewModel, productId: Int) {   // ADD: public
+        self._viewModel = State(initialValue: viewModel)
+        self.productId = productId
+    }
     
     private var sizes = ["M","S","L"]
     @State private var selectedSize: String? = "M"
-    @State private var isFavourite: Bool = false
     
     private var keyChain = KeychainTokenStorage()
-    public init(productId: Int) {
-        self.productId = productId
-    }
     
     public var body: some View {
         VStack {
@@ -44,7 +45,10 @@ public struct ProductDetailsScreen: View {
                     VStack(alignment: .leading) {
                         productImageGallery(
                             imageURLs: product.imageURLs, // see part 2
-                            isFavorite: $isFavourite
+                            isFavorite: Binding(
+                                get: { viewModel.isFavorite },
+                                set: { _ in viewModel.toggleFavorite(product: product) }
+                            )
                         )
 
                         titleAndRatingSection(
@@ -364,6 +368,10 @@ func productImageGallery(
     }
     .padding(.bottom, 12)
 }
+//#Preview {
+//    ProductDetailsScreen(productId: 8419989422266)
+//}
 #Preview {
-    ProductDetailsScreen(productId: 8419989422266)
+    @Environment(\.modelContext) var context
+    ProductDetailsModuleFactory.makeProductDetailsView(productId: 8419989422266, modelContext: context)
 }
