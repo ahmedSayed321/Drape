@@ -5,6 +5,7 @@
 //  Created by Moaz on 06/07/2026.
 //
 import Foundation
+import FirebaseAuth
 
 @MainActor
 final class AccountViewModel: ObservableObject {
@@ -31,4 +32,6 @@ final class AccountViewModel: ObservableObject {
             return false
         }
     }
+    
+    func getEmailForUser() -> String {Auth.auth().currentUser?.email ?? ""}
 }

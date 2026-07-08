@@ -7,7 +7,7 @@
 import Foundation
 
 enum AccountDestination: Hashable {
-//    case myOrders
+    case myOrders
     case myDetails
 //    case addressBook
 //    case paymentMethods

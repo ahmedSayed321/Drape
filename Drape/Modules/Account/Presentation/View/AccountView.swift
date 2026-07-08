@@ -20,7 +20,7 @@ struct AccountView: View {
                         VStack(spacing: 0) {
                             sectionGroup {
                                 AccountItemView(icon: "shippingbox", title: "My Orders") {
-//                                    path.append(AccountDestination.myOrders)
+                                    path.append(AccountDestination.myOrders)
                                 }
                             }
                             sectionDivider()
@@ -85,7 +85,7 @@ struct AccountView: View {
                     }
                 }
                 .navigationDestination(for: AccountDestination.self) { destination in
-                    destinationView(for: destination)
+                    destinationView(for: destination,email : viewModel.getEmailForUser())
                 }
 
                 if showLogoutAlert {
@@ -123,7 +123,7 @@ struct AccountView: View {
     // Destination routing
 
     @ViewBuilder
-    private func destinationView(for destination: AccountDestination) -> some View {
+    private func destinationView(for destination: AccountDestination, email : String) -> some View {
         switch destination {
         case .myDetails:
             MyDetailsView()
@@ -131,6 +131,8 @@ struct AccountView: View {
             FaqsView()
         case .helpCenter:
             HelpCenterView()
+        case .myOrders:
+            OrdersModuleFactory.makeOrdersView(customerEmail:email)
         }
     }
 
