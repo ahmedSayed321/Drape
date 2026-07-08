@@ -78,6 +78,7 @@ struct AddCardView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 24)
             }
+            .clipped()
 
             if viewModel.state.isSuccessVisible {
                 successOverlay

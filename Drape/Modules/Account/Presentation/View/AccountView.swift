@@ -92,6 +92,7 @@ struct AccountView: View {
                             }
                         }
                     }
+                    .clipped()
                 }
                 .background(Color.white)
                 .navigationBarTitleDisplayMode(.inline)

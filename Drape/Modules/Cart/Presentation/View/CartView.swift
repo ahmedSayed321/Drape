@@ -42,6 +42,7 @@ struct CartView: View {
                     }
                     .padding(.top, 12)
                 }
+                .clipped()
 
                 OrderSummaryView(
                     subtotal: cartUI.subtotal,

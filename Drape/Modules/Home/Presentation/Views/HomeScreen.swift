@@ -105,6 +105,7 @@ struct HomeScreen: View {
                         }
                     }
                     .scrollIndicators(.hidden)
+                    .clipped()
                 }
             }
             .sheet(isPresented: $showFilters) {

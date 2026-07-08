@@ -22,6 +22,7 @@ struct RecentSearchListView: View {
                 }
             }
         }
+        .clipped()
     }
 }
 

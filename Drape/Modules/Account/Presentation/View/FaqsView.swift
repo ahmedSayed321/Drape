@@ -51,6 +51,7 @@ struct FaqsView: View {
                         .padding(.top, 4)
                     }
                 }
+                .clipped()
             }
         }
         .navigationBarTitleDisplayMode(.inline)

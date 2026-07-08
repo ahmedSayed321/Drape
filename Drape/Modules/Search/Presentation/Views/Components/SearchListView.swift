@@ -30,6 +30,7 @@ struct SearchListView: View {
             }
         }
         .scrollIndicators(.hidden)
+        .clipped()
     }
 }
 

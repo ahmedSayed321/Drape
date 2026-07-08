@@ -22,6 +22,7 @@ struct FavouriteView: View {
                         FavoriteProductsGridView(viewModel: viewModel)
                             .padding(.top, 10)
                     }
+                    .clipped()
                 }
             }
             .padding(.horizontal, 16)
