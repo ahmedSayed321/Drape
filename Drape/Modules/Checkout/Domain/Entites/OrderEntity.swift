@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Order {
+struct OrderEntity {
     let id: Int
     let name: String
     let total: String

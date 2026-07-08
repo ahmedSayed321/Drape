@@ -20,7 +20,7 @@ protocol CheckoutRepositoryProtocol {
           discountAmount: Double,
           financialStatus: String,
           sendReceipt: Bool
-      ) async throws -> Order
+      ) async throws -> OrderEntity
 
 }
 
