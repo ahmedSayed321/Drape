@@ -17,21 +17,27 @@ final class CheckoutStorage {
     private let cardsFilename = "checkout_cards.json"
 
     private init() {}
-
+    // Returns a URL inside a user‑specific directory (based on Firebase UID). Returns nil for guests.
     private func fileURL(for name: String) -> URL? {
+        guard let uid = KeychainTokenStorage().getFirebaseUID() else {
+            // Guest users never reach checkout, so no storage needed
+            return nil
+        }
         do {
             let fm = FileManager.default
             let appSupport = try fm.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let dir = appSupport.appendingPathComponent("Drape", isDirectory: true)
-            if !fm.fileExists(atPath: dir.path) {
-                try fm.createDirectory(at: dir, withIntermediateDirectories: true)
+            let baseDir = appSupport.appendingPathComponent("Drape", isDirectory: true)
+            let userDir = baseDir.appendingPathComponent("user_\(uid)", isDirectory: true)
+            if !fm.fileExists(atPath: userDir.path) {
+                try fm.createDirectory(at: userDir, withIntermediateDirectories: true)
             }
-            return dir.appendingPathComponent(name)
+            return userDir.appendingPathComponent(name)
         } catch {
             logger.error("failed to get file url: \(error.localizedDescription)")
             return nil
         }
     }
+
 
     // MARK: - Addresses
     func loadAddresses() -> [AddressItem] {

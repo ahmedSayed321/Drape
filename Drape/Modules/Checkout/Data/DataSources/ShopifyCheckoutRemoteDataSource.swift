@@ -15,14 +15,6 @@ final class ShopifyCheckoutRemoteDataSource {
         self.networkService = networkService
     }
 
-    func createDraftOrder(_ body: ShopifyDraftOrderRequestDTO) async throws -> ShopifyDraftOrderResponseDTO {
-        try await networkService.request(ShopifyCheckoutEndpoint.createDraftOrder(body: body))
-    }
-
-    func updateDraftOrder(id: Int, body: ShopifyDraftOrderRequestDTO) async throws -> ShopifyDraftOrderResponseDTO {
-        try await networkService.request(ShopifyCheckoutEndpoint.updateDraftOrder(id: id, body: body))
-    }
-
     func getDraftOrder(id: Int) async throws -> ShopifyDraftOrderResponseDTO {
         try await networkService.request(ShopifyCheckoutEndpoint.getDraftOrder(id: id))
     }
@@ -37,5 +29,9 @@ final class ShopifyCheckoutRemoteDataSource {
 
     func getCustomerOrders(customerId: Int) async throws -> ShopifyCustomerOrdersResponseDTO {
         try await networkService.request(ShopifyCheckoutEndpoint.getCustomerOrders(customerId: customerId))
+    }
+    
+    func createOrder(_ body: ShopifyOrderRequestDTO) async throws -> ShopifyOrderResponseDTO {
+        try await networkService.request(ShopifyCheckoutEndpoint.createOrder(body: body))
     }
 }

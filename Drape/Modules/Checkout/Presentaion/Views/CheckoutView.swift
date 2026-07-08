@@ -10,9 +10,13 @@ import SwiftUI
 struct CheckoutView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel: CheckoutViewModel
+    @State private var isConfirmationVisible = false
 
     init(cartItems: [CartItem], draftOrderId: String) {
-        _viewModel = State(initialValue: CheckoutViewModel(cartItems: cartItems, draftOrderId: draftOrderId))
+        let tokenStorage = KeychainTokenStorage()
+        let customerId = tokenStorage.getShopifyCustomerID().flatMap { Int($0) } ?? 0
+        _viewModel = State(initialValue: CheckoutViewModel(cartItems: cartItems, draftOrderId: draftOrderId, customerId: customerId )
+        )
     }
     
     var body: some View {
@@ -41,7 +45,7 @@ struct CheckoutView: View {
                         type: .primary,
                         text: viewModel.state.isPlacingOrder ? "Placing..." : "Place Order",
                         action: {
-                            Task { await viewModel.placeOrder() }
+                            isConfirmationVisible = true
                         },
                         status: viewModel.state.isPlaceOrderEnabled ? .enable : .disable
                     )
@@ -59,7 +63,14 @@ struct CheckoutView: View {
                 }
             }
             
-            //TODO: Show order Success pop up
+            if isConfirmationVisible {
+                confirmationOverlay
+            }
+            
+            
+            if viewModel.state.isOrderSuccessVisible {
+                successOverlay
+            }
         }
     }
 }
@@ -218,6 +229,138 @@ private extension CheckoutView {
                     .font(.footnote)
                     .foregroundStyle(.red)
             }
+        }
+    }
+}
+private extension CheckoutView {
+    
+    var successOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.35)
+                .ignoresSafeArea()
+
+            VStack(spacing: 18) {
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 70))
+                    .foregroundStyle(.green)
+
+                Text("Order Placed!")
+                    .font(.title.bold())
+
+                Text("Your order has been placed successfully.")
+                    .foregroundStyle(.secondary)
+
+                CustomButton(
+                    type: .primary,
+                    text: "Thanks",
+                    action: {
+                        viewModel.dismissSuccess()
+                        router.showHome()
+                    },
+                    status: .enable
+                )
+            }
+            .padding(28)
+            .frame(width: 320)
+            .background(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+            .shadow(radius: 20)
+        }
+        .zIndex(100)
+    }
+    
+    var confirmationOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.35)
+                .ignoresSafeArea()
+
+            VStack(spacing: 18) {
+                Text("Confirm Your Order")
+                    .font(.title2.bold())
+
+                VStack(alignment: .leading, spacing: 8) {
+                    confirmationRow(
+                        label: "Deliver to",
+                        value: viewModel.state.selectedAddress?.title ?? "No address selected"
+                    )
+
+                    if let address = viewModel.state.selectedAddress {
+                        Text(address.details)
+                            .font(.footnote)
+                            .foregroundStyle(.gray)
+                            .padding(.leading, 2)
+                    }
+
+                    Divider()
+
+                    confirmationRow(
+                        label: "Payment",
+                        value: paymentSummaryText
+                    )
+
+                    Divider()
+
+                    confirmationRow(
+                        label: "Total",
+                        value: "$ \(Int(viewModel.state.total))",
+                        isBold: true
+                    )
+                }
+                .padding(.vertical, 4)
+
+                HStack(spacing: 12) {
+                    CustomButton(
+                        type: .custom(textColor: .white, buttonColor: .red),
+                        text: "Cancel",
+                        action: {
+                            isConfirmationVisible = false
+                        },
+                        status: .enable
+                    )
+
+                    CustomButton(
+                        type: .primary,
+                        text: "Confirm",
+                        action: {
+                            isConfirmationVisible = false
+                            Task { await viewModel.placeOrder() }
+                        },
+                        status: .enable
+                    )
+                }
+            }
+            .padding(28)
+            .frame(width: 320)
+            .background(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+            .shadow(radius: 20)
+        }
+        .zIndex(99)
+    }
+
+    func confirmationRow(label: String, value: String, isBold: Bool = false) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(.gray)
+
+            Text(value)
+                .font(isBold ? .headline : .subheadline)
+                .fontWeight(isBold ? .bold : .medium)
+        }
+    }
+
+    var paymentSummaryText: String {
+        switch viewModel.state.selectedPaymentOption {
+        case .card:
+            if let card = viewModel.state.selectedCard {
+                return "\(card.brand) \(card.maskedNumber)"
+            }
+            return "No card added"
+        case .cash:
+            return "Cash on Delivery"
+        case .applePay:
+            return "Apple Pay"
         }
     }
 }

@@ -25,24 +25,22 @@ struct AddressItem: Identifiable, Equatable, Hashable, Codable {
 }
 
 extension AddressItem {
-    func toShippingAddress(
-        firstName: String,
-        lastName: String,
-        phone: String?,
-        country: String = "Egypt"
-    ) -> ShopifyDraftOrderRequestDTO.ShippingAddress {
-        .init(
-            first_name: firstName,
-            last_name: lastName,
-            address1: details,
-            address2: nil,
-            city: title,        // e.g. "Home", "Work" — not ideal but harmless placeholder
-            province: nil,
-            country: country,
-            zip: "",
-            phone: phone
-        )
-    }
+
+    func toOrderShippingAddress(
+           firstName: String,
+           lastName: String,
+           phone: String?,
+           country: String = "Egypt"
+       ) -> ShopifyOrderRequestDTO.ShippingAddress {
+           .init(
+               first_name: firstName,
+               last_name: lastName,
+               address1: details,
+               city: title,
+               country: country,
+               phone: phone
+           )
+       }
     
     func toCustomerAddress(
         phone: String?,

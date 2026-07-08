@@ -16,83 +16,47 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
         self.remoteDataSource = remoteDataSource
     }
 
-    func updateDraftOrder(
-        draftOrderId: Int,
-        lineItems: [CartItem],
-        address: AddressItem,
-        customerFirstName: String,
-        customerLastName: String,
-        customerPhone: String?,
-        promo: ValidatedPromoCode?,
-        discountAmount: Double
-    ) async throws -> DraftOrder {
+    func createOrder(
+          lineItems: [CartItem],
+          customerId: Int,
+          address: AddressItem,
+          customerFirstName: String,
+          customerLastName: String,
+          customerPhone: String?,
+          promo: ValidatedPromoCode?,
+          discountAmount: Double,
+          financialStatus: String = "pending",
+          sendReceipt: Bool = true
+      ) async throws -> Order {
 
-        let requestBody = buildRequestBody(
-            lineItems: lineItems,
-            address: address,
-            customerFirstName: customerFirstName,
-            customerLastName: customerLastName,
-            customerPhone: customerPhone,
-            promo: promo,
-            discountAmount: discountAmount
-        )
+          let shippingAddress = address.toOrderShippingAddress(
+              firstName: customerFirstName,
+              lastName: customerLastName,
+              phone: customerPhone
+          )
 
-        let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
-        return map(response.draftOrder)
-    }
+          let discountCodes: [ShopifyOrderRequestDTO.DiscountCode]? = promo.map {
+              [.init(code: $0.code, amount: String(discountAmount))]
+          }
 
-    func completeOrder(draftOrderId: Int, paymentPending: Bool) async throws -> DraftOrder {
-        let response = try await remoteDataSource.completeDraftOrder(id: draftOrderId, paymentPending: paymentPending)
-        return map(response.draftOrder)
-    }
+          let requestBody = ShopifyOrderRequestDTO(
+              order: .init(
+                  line_items: lineItems.map { .init(variant_id: $0.variantId, quantity: $0.quantity) },
+                  customer: .init(id: customerId),
+                  shipping_address: shippingAddress,
+                  discount_codes: discountCodes,
+                  financial_status: financialStatus,
+                  send_receipt: sendReceipt
+              )
+          )
 
-    func fetchDraftOrder(id: Int) async throws -> DraftOrder {
-        let response = try await remoteDataSource.getDraftOrder(id: id)
-        return map(response.draftOrder)
-    }
-
-    private func buildRequestBody(
-        lineItems: [CartItem],
-        address: AddressItem,
-        customerFirstName: String,
-        customerLastName: String,
-        customerPhone: String?,
-        promo: ValidatedPromoCode?,
-        discountAmount: Double
-    ) -> ShopifyDraftOrderRequestDTO {
-        let shippingAddress = address.toShippingAddress(
-            firstName: customerFirstName,
-            lastName: customerLastName,
-            phone: customerPhone
-        )
-
-        return ShopifyDraftOrderRequestDTO(
-            draft_order: .init(
-                line_items: lineItems.map { .init(variant_id: $0.variantId, quantity: $0.quantity) },
-                shipping_address: shippingAddress,
-                applied_discount: promo.map {
-                    .init(
-                        description: "Promo code \($0.code)",
-                        value: String($0.value),
-                        value_type: $0.valueType,
-                        title: $0.code,
-                        amount: String(discountAmount)
-                    )
-                },
-                email: nil,
-                note: address.locationNote
-            )
-        )
-    }
-
-    private func map(_ dto: ShopifyDraftOrderDTO) -> DraftOrder {
-        DraftOrder(
-            id: dto.id,
-            name: dto.name,
-            subtotal: dto.subtotalPrice,
-            discountAmount: dto.appliedDiscount?.amount,
-            total: dto.totalPrice,
-            orderId: dto.orderId
-        )
-    }
+          let response = try await remoteDataSource.createOrder(requestBody)
+          return Order(
+              id: response.order.id,
+              name: response.order.name,
+              total: response.order.totalPrice,
+              financialStatus: response.order.financialStatus,
+              fulfillmentStatus: response.order.fulfillmentStatus
+          )
+      }
 }
