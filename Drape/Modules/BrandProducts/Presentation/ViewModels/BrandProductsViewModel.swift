@@ -16,6 +16,8 @@ final class BrandProductsViewModel: ObservableObject {
     @Published var isLoadingMore = false
     @Published var errorMessage: String?
     @Published var savedProductIDs: Set<Int> = []
+    
+    private var hasLoadedData = false
 
     let brandName: String
 
@@ -37,7 +39,9 @@ final class BrandProductsViewModel: ObservableObject {
         self.getSavedProductsUseCase = getSavedProductsUseCase
     }
 
-    func loadProducts() async {
+    func loadProductsOnce() async {
+        guard !hasLoadedData else { return }
+        
         isLoading = true
         errorMessage = nil
         do {
@@ -45,6 +49,8 @@ final class BrandProductsViewModel: ObservableObject {
             products = fetched
             canLoadMore = fetched.count == pageSize
             refreshSavedState()
+            
+            hasLoadedData = true
         } catch {
             errorMessage = "Failed to load \(brandName) products: \(error.localizedDescription)"
         }
