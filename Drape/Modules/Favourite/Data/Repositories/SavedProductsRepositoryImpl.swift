@@ -35,6 +35,10 @@ final class SavedProductsRepositoryImpl: SavedProductsRepository {
         try localDataSource.remove(productID)
     }
 
+    func removeAll() throws {
+        try localDataSource.removeAll()
+    }
+
     func isSaved(_ productID: Int) throws -> Bool {
         try localDataSource.isSaved(productID)
     }
