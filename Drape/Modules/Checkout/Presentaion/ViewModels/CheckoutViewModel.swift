@@ -24,8 +24,11 @@ final class CheckoutViewModel {
     private let customerLastName: String
     private let customerPhone: String?
     
+    private let customerId: Int
+    
     init(cartItems: [CartItem] = [],
          draftOrderId: String,
+         customerId: Int,
          customerFirstName: String = "Guest",
          customerLastName: String = "Customer",
          customerPhone: String? = nil,
@@ -34,6 +37,7 @@ final class CheckoutViewModel {
     ) {
         self.cartItems = cartItems
         self.draftOrderId = draftOrderId
+        self.customerId = customerId
         self.customerFirstName = customerFirstName
         self.customerLastName = customerLastName
         self.customerPhone = customerPhone
@@ -101,20 +105,15 @@ final class CheckoutViewModel {
             return 0
         }
     }
-    //TODO: Wait for other to see how the order will be like
+    
     func placeOrder() async {
         guard state.isPlaceOrderEnabled else {
             state.errorMessage = "Please complete required checkout data."
             return
         }
 
-        guard let address = state.selectedAddress else {
+        guard state.selectedAddress != nil else {
             state.errorMessage = "Please select a delivery address."
-            return
-        }
-
-        guard let draftOrderIdInt = Int(draftOrderId) else {
-            state.errorMessage = "Something went wrong with your cart. Please try again."
             return
         }
 
@@ -122,22 +121,13 @@ final class CheckoutViewModel {
         state.errorMessage = nil
 
         do {
-            let draftOrder = try await checkoutRepository.updateDraftOrder(
-                draftOrderId: draftOrderIdInt,
+            let financialStatus = state.selectedPaymentOption == .cash ? "pending" : "pending" // for now
+
+            _ = try await checkoutRepository.createOrder(
                 lineItems: cartItems,
-                address: address,
-                customerFirstName: customerFirstName,
-                customerLastName: customerLastName,
-                customerPhone: customerPhone,
-                promo: state.appliedPromo,
-                discountAmount: state.discountAmount
-            )
-
-            let paymentPending = state.selectedPaymentOption == .cash
-
-            _ = try await checkoutRepository.completeOrder(
-                draftOrderId: draftOrder.id,
-                paymentPending: paymentPending
+                customerId: customerId,
+                financialStatus: financialStatus,
+                sendReceipt: true
             )
 
             state.isOrderSuccessVisible = true
