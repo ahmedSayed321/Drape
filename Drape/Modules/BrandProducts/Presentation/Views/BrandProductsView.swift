@@ -62,7 +62,10 @@ struct BrandProductsView: View {
         .background(Color.white.ignoresSafeArea())
         .navigationBarHidden(true)
         .task {
-            await viewModel.loadProducts()
+            await viewModel.loadProductsOnce()
+        }
+        .onAppear {
+            viewModel.refreshSavedState()
         }
         .alert("Login Required", isPresented: $showGuestAlert) {
             Button("Cancel", role: .cancel) {}
