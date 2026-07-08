@@ -9,7 +9,7 @@ import Foundation
 import Observation
 
 @Observable
-class ProductDetailsViewModel {
+public class ProductDetailsViewModel {
 
     private let useCase: GetProductDetailsUseCase
     private let toggleSaveProductUseCase: ToggleSaveProductUseCaseProtocol
@@ -42,7 +42,7 @@ class ProductDetailsViewModel {
         do {
             let product = try await useCase.execute(productId: productId)
             state = .success(product)
-            await checkIfFavorited(pfocutId: productId)
+            await checkIfFavorited(productId: productId)
         } catch {
             state = .failure(error.localizedDescription)
         }

@@ -8,17 +8,18 @@
 import SwiftUI
 
 public struct ProductDetailsScreen: View {
-    @State private var viewModel: ProductDetailsViewModel
+    @State var viewModel: ProductDetailsViewModel
     public var productId: Int
+    
+    public init(viewModel: ProductDetailsViewModel, productId: Int) {   // ADD: public
+        self._viewModel = State(initialValue: viewModel)
+        self.productId = productId
+    }
     
     private var sizes = ["M","S","L"]
     @State private var selectedSize: String? = "M"
     
     private var keyChain = KeychainTokenStorage()
-    public init(productId: Int, viewModel: ProductDetailsViewModel) {
-        self.productId = productId
-        self._viewModel = State(initialValue: viewModel)
-    }
     
     public var body: some View {
         VStack {
@@ -371,5 +372,6 @@ func productImageGallery(
 //    ProductDetailsScreen(productId: 8419989422266)
 //}
 #Preview {
-    ProductDetailsModuleFactory.makeProductDetailsView(productId: 8419989422266)
+    @Environment(\.modelContext) var context
+    ProductDetailsModuleFactory.makeProductDetailsView(productId: 8419989422266, modelContext: context)
 }

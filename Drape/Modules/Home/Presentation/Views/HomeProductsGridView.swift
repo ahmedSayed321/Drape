@@ -41,7 +41,7 @@ struct HomeProductsGridView: View {
             }
         }
         .navigationDestination(item: $selectedProductId) { productId in
-            ProductDetailsModuleFactory.makeProductDetailsView(productId: productId)
+            ProductDetailsEntryPoint(productID: productId)
         }
     }
 }

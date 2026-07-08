@@ -5,18 +5,21 @@
 //  Created by Youssef Abd El-Fatah on 07/07/2026.
 //
 
+import SwiftUI
+import SwiftData
 
 enum ProductDetailsModuleFactory {
-    @Environment(\.modelContext) private var context
     @MainActor
-    static func makeProductDetailsView(productId: Int) -> ProductDetailsScreen {
-        let localDataSource = SavedProductsLocalDataSourceImpl(context: context)
+    static func makeProductDetailsView(productId: Int, modelContext: ModelContext) -> ProductDetailsScreen {
+        let localDataSource = SavedProductsLocalDataSourceImpl(context: modelContext)
         let savedProductsRepository = SavedProductsRepositoryImpl(localDataSource: localDataSource)
+        let savedProductsUseCase = GetSavedProductsUseCase(repository: savedProductsRepository)
         let toggleSaveUseCase = ToggleSaveProductUseCase(repository: savedProductsRepository)
 
         let viewModel = ProductDetailsViewModel(
-            toggleSaveProductUseCase: toggleSaveUseCase
+            toggleSaveProductUseCase: toggleSaveUseCase,
+            getSavedProductsUseCase: savedProductsUseCase
         )
-        return ProductDetailsScreen(productId: productId, viewModel: viewModel)
+        return ProductDetailsScreen(viewModel: viewModel, productId: productId)
     }
 }
