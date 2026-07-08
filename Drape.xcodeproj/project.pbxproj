@@ -144,7 +144,7 @@
 		6D9C9AA22FF4329100C8AA09 /* ShopifyCustomerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9C9AA12FF4329100C8AA09 /* ShopifyCustomerRepository.swift */; };
 		6D9C9AA42FF4406E00C8AA09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */; };
 		6DC0D4912FFDB26200D15192 /* ShopifyOrderRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0D4902FFDB26200D15192 /* ShopifyOrderRequestDTO.swift */; };
-		6DC0D4932FFDB36D00D15192 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0D4922FFDB36D00D15192 /* Order.swift */; };
+		6DC0D4932FFDB36D00D15192 /* OrderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0D4922FFDB36D00D15192 /* OrderEntity.swift */; };
 		9F4DDE6A2FF06F4700B9D2F0 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */; };
 		9FB047F02FF5F0A000F24615 /* HomeRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB047EF2FF5F0A000F24615 /* HomeRemoteDataSource.swift */; };
 		9FB047F32FF5F47400F24615 /* HomeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB047F22FF5F47400F24615 /* HomeRepositoryImpl.swift */; };
@@ -317,7 +317,7 @@
 		6D9C9AA12FF4329100C8AA09 /* ShopifyCustomerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyCustomerRepository.swift; sourceTree = "<group>"; };
 		6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6DC0D4902FFDB26200D15192 /* ShopifyOrderRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyOrderRequestDTO.swift; sourceTree = "<group>"; };
-		6DC0D4922FFDB36D00D15192 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		6DC0D4922FFDB36D00D15192 /* OrderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderEntity.swift; sourceTree = "<group>"; };
 		9F4DDE692FF06F4100B9D2F0 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9FB047EF2FF5F0A000F24615 /* HomeRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRemoteDataSource.swift; sourceTree = "<group>"; };
 		9FB047F22FF5F47400F24615 /* HomeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -1001,7 +1001,7 @@
 			children = (
 				6D1E88532FF957BD005D6386 /* ValidatedPromoCode.swift */,
 				6D1E885C2FF95868005D6386 /* DraftOrder.swift */,
-				6DC0D4922FFDB36D00D15192 /* Order.swift */,
+				6DC0D4922FFDB36D00D15192 /* OrderEntity.swift */,
 			);
 			path = Entites;
 			sourceTree = "<group>";
@@ -1354,7 +1354,7 @@
 				9FB047FA2FF5FB4E00F24615 /* HomeRepositoryProtocol.swift in Sources */,
 				6D1E88272FF88042005D6386 /* AddressView.swift in Sources */,
 				41BC1FA32FF52E1300985A5F /* SearchRepositoryProtocol .swift in Sources */,
-				6DC0D4932FFDB36D00D15192 /* Order.swift in Sources */,
+				6DC0D4932FFDB36D00D15192 /* OrderEntity.swift in Sources */,
 				41BC1F9C2FF52D0000985A5F /* SearchEndpoint.swift in Sources */,
 				6D1E88612FF95D8C005D6386 /* AddressItem.swift in Sources */,
 				41BC1F902FF52B9B00985A5F /* NetworkService.swift in Sources */,
