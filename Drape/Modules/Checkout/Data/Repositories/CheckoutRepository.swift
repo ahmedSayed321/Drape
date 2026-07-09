@@ -27,7 +27,7 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
           discountAmount: Double,
           financialStatus: String = "pending",
           sendReceipt: Bool = true
-      ) async throws -> Order {
+    ) async throws -> OrderEntity {
 
           let shippingAddress = address.toOrderShippingAddress(
               firstName: customerFirstName,
@@ -51,7 +51,7 @@ final class CheckoutRepository: CheckoutRepositoryProtocol {
           )
 
           let response = try await remoteDataSource.createOrder(requestBody)
-          return Order(
+          return OrderEntity(
               id: response.order.id,
               name: response.order.name,
               total: response.order.totalPrice,
