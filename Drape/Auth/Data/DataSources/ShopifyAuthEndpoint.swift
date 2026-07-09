@@ -10,6 +10,8 @@ import Foundation
 enum ShopifyAuthEndpoint: APIEndpoint {
     case searchCustomer(email: String)
     case createCustomer(body: ShopifyCreateCustomerRequestDTO)
+    case fetchMetafields(customerId: String)
+    case updateMetafield(customerId: String, body: UpdateMetafieldRequestDTO)
 
     var baseURL: String { ShopifyConfig.baseURL }
 
@@ -17,13 +19,14 @@ enum ShopifyAuthEndpoint: APIEndpoint {
         switch self {
         case .searchCustomer:   return "/customers/search.json"
         case .createCustomer:   return "/customers.json"
+        case .fetchMetafields(let id), .updateMetafield(let id, _): return "/customers/\(id)/metafields.json"
         }
     }
 
     var method: HTTPMethod {
         switch self {
-        case .searchCustomer:   return .get
-        case .createCustomer:   return .post
+        case .searchCustomer, .fetchMetafields:   return .get
+        case .createCustomer, .updateMetafield:   return .post
         }
     }
 
@@ -41,6 +44,7 @@ enum ShopifyAuthEndpoint: APIEndpoint {
     var body: Encodable? {
         switch self {
         case .createCustomer(let body): return body
+        case .updateMetafield(_, let body): return body
         default: return nil
         }
     }

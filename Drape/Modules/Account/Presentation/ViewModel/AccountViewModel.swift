@@ -13,9 +13,14 @@ final class AccountViewModel: ObservableObject {
     @Published var logoutError: String?
 
     private let logoutUseCase: LogoutUseCase
+    var clearFavoritesUseCase: ClearAllSavedProductsUseCaseProtocol?
 
-    init(logoutUseCase: LogoutUseCase = LogoutUseCase(repository: FirebaseAuthRepository())) {
+    init(
+        logoutUseCase: LogoutUseCase = LogoutUseCase(repository: FirebaseAuthRepository()),
+        clearFavoritesUseCase: ClearAllSavedProductsUseCaseProtocol? = nil
+    ) {
         self.logoutUseCase = logoutUseCase
+        self.clearFavoritesUseCase = clearFavoritesUseCase
     }
     
     
@@ -26,6 +31,7 @@ final class AccountViewModel: ObservableObject {
 
         do {
             try logoutUseCase.execute()
+            try? clearFavoritesUseCase?.execute()
             return true
         } catch {
             logoutError = "Something went wrong while logging out. Please try again."

@@ -78,6 +78,7 @@ public struct ProductDetailsScreen: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                 }
+                .clipped()
 
                 Spacer()
 

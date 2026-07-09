@@ -58,6 +58,7 @@ struct MyDetailsView: View {
             .padding(.horizontal, 16)
             .padding(.top, 20)
         }
+        .clipped()
         .safeAreaInset(edge: .bottom) {
             CustomButton(
                 type: .primary,

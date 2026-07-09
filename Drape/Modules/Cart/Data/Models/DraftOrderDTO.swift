@@ -28,6 +28,7 @@ struct DraftOrderDTO: Decodable {
 
 struct DraftOrderLineItemDTO: Decodable {
     let id: Int?
+    let productId: Int?
     let variantId: Int?
     let title: String?
     let variantTitle: String?
@@ -35,7 +36,6 @@ struct DraftOrderLineItemDTO: Decodable {
     let price: String?
     let sku: String?
     let properties: [LineItemPropertyResponseDTO]?
-
 }
 
 struct LineItemPropertyResponseDTO: Decodable {

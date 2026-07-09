@@ -123,6 +123,23 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    func refreshHomeData() async {
+        do {
+            let homeData = try await getHomeScreenDataUseCase.execute()
+
+            self.products = homeData.products
+            self.brands = homeData.brands
+            self.categories = ["All"] + homeData.categories
+
+            self.canLoadMore = homeData.products.count == pageSize
+            priceRange = 0...maxProductPrice
+
+            refreshSavedState()
+        } catch {
+            print("Failed to refresh home data: \(error.localizedDescription)")
+        }
+    }
+    
     
     func refreshSavedState() {
         guard let ids = try? getSavedProductsUseCase.execute().map(\.id) else { return }
@@ -196,6 +213,10 @@ class HomeViewModel: ObservableObject {
             let newProducts = Array(refetched.suffix(from: products.count))
             products.append(contentsOf: newProducts)
             
+            // Expand the price range to include any new items that might have a higher price.
+            // (We only paginate when filtering is not active, so we can safely reset it here)
+            priceRange = 0...maxProductPrice
+
             // Shopify returned fewer than requested -> no more pages left
             if refetched.count < requestLimit {
                 canLoadMore = false

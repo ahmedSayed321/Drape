@@ -8,7 +8,10 @@
 import Foundation
 
 extension KeychainTokenStorage {
-    private var cartDraftOrderKey: String { "cart_draft_order_id" }
+    private var cartDraftOrderKey: String {
+        let customerId = getShopifyCustomerID() ?? "guest"
+        return "cart_draft_order_id_\(customerId)"
+    }
 
     func getCartDraftOrderID() -> String? {
         keychain.read(forKey: cartDraftOrderKey)
