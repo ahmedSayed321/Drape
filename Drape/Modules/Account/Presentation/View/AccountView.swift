@@ -38,7 +38,7 @@ struct AccountView: View {
                                 rowDivider()
                                 AccountItemView(icon: "house", title: "Address Book") {
                                     runGuestProtectedAction {
-//                                        path.append(AccountDestination.addressBook)
+                                        path.append(AccountDestination.addressBook)
                                     }
                                 }
                                 rowDivider()
@@ -160,6 +160,8 @@ struct AccountView: View {
             HelpCenterView()
         case .myOrders:
             OrdersModuleFactory.makeOrdersView(customerEmail:email)
+        case .addressBook:
+            AddressDetailView()
         }
     }
 
