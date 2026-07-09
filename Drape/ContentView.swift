@@ -33,7 +33,7 @@ struct ContentView: View {
             }
             .accentColor(.black)
 
-            if selectedTab == 0 {
+            if router.selectedTab == 0 {
                 ChatFAB {
                     isChatPresented = true
                 }
