@@ -28,7 +28,7 @@ struct CartUIState {
         self.subtotalDecimal = cart.subtotal
         self.taxDecimal = cart.tax
         self.shippingFeeDecimal = cart.shippingFee
-        self.totalDecimal = cart.total
+        self.totalDecimal = cart.total + cart.shippingFee
 
         self.subtotal = self.subtotalDecimal.formattedPrice
         self.tax = self.taxDecimal.formattedPrice

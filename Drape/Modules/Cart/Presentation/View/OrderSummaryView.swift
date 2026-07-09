@@ -15,7 +15,7 @@ struct OrderSummaryView: View {
     
     init(
         subtotal: String = "0",
-        shipping: String = "0",
+        shipping: String = "80",
         vat: String = "0",
         total: String = "0"
     ) {

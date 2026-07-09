@@ -95,7 +95,7 @@ final class CartRepositoryImpl: CartRepository {
 
     func clearCart(draftOrderId: String) async throws {
         try await remoteDataSource.deleteDraftOrder(id: draftOrderId)
-        NotificationCenter.default.post(name: .cartUpdated, object: Cart(draftOrderId: draftOrderId, lineItems: [], subtotal: 0, tax: 0, shippingFee: 0, total: 0, invoiceURL: nil))
+        NotificationCenter.default.post(name: .cartUpdated, object: Cart(draftOrderId: draftOrderId, lineItems: [], subtotal: 0, tax: 0,total: 0, invoiceURL: nil))
     }
 
     func checkStock(variantId: String) async throws -> Int {

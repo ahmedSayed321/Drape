@@ -16,7 +16,6 @@ enum CartMapper {
             lineItems: lineItems,
             subtotal: decimalValue(from: dto.subtotalPrice),
             tax: decimalValue(from: dto.totalTax),
-            shippingFee: decimalValue(from: dto.shippingLine?.price),
             total: decimalValue(from: dto.totalPrice),
             invoiceURL: dto.invoiceUrl.flatMap(URL.init(string:))
         )
