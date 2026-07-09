@@ -15,6 +15,7 @@
 		3E2212A32FF5593800770211 /* ShopifyCustomerSearchDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2212A22FF5593800770211 /* ShopifyCustomerSearchDto.swift */; };
 		3E2212A52FF559B200770211 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2212A42FF559B200770211 /* SignInViewModel.swift */; };
 		3E3DC1222FFE7574006EE065 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		3E3DC1262FFE9B24006EE065 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3E3DC1252FFE9B24006EE065 /* FirebaseAuth */; };
 		3E41F39A2FF70D7300703397 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F3992FF70D7300703397 /* CartView.swift */; };
 		3E41F39C2FF70D8600703397 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39B2FF70D8600703397 /* AccountView.swift */; };
 		3E41F39E2FF70D9E00703397 /* FavouriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E41F39D2FF70D9E00703397 /* FavouriteView.swift */; };
@@ -194,8 +195,11 @@
 		6D9C9AA42FF4406E00C8AA09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */; };
 		6DC0D4912FFDB26200D15192 /* ShopifyOrderRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0D4902FFDB26200D15192 /* ShopifyOrderRequestDTO.swift */; };
 		6DC0D4932FFDB36D00D15192 /* OrderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0D4922FFDB36D00D15192 /* OrderEntity.swift */; };
+		6DCAF1B02FFF14C700194B8B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6DCAF1AF2FFF14C700194B8B /* Kingfisher */; };
+		6DCAF1B22FFF1B2900194B8B /* AddressDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCAF1B12FFF1B2900194B8B /* AddressDetailView.swift */; };
 		9F12F9F12FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F12F9F02FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift */; };
 		9F12F9F32FFB5B8E00C334C7 /* SavedProductsLocalDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F12F9F22FFB5B8E00C334C7 /* SavedProductsLocalDataSourceImpl.swift */; };
+		9F2E77092FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2E77082FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift */; };
 		9F3FB9C62FF9D8A00000DD67 /* SavedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C52FF9D8A00000DD67 /* SavedProduct.swift */; };
 		9F3FB9C82FF9D8C60000DD67 /* SavedProductsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C72FF9D8C60000DD67 /* SavedProductsRepository.swift */; };
 		9F3FB9CA2FF9D9600000DD67 /* SavedProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C92FF9D9600000DD67 /* SavedProductModel.swift */; };
@@ -232,6 +236,7 @@
 		9F952CD52FF8EC040007C3F3 /* GetHomeScreenDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */; };
 		9F952CD72FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */; };
 		9F9F25362FFDD92000EAEAF1 /* ProductDetailsModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9F25352FFDD92000EAEAF1 /* ProductDetailsModuleFactory.swift */; };
+		9FA69AC62FFF4BA6008F9371 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9FA69AC52FFF4BA6008F9371 /* Kingfisher */; };
 		9FAC15D72FF87C73000EBE26 /* FavoriteTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC15D62FF87C73000EBE26 /* FavoriteTopBarView.swift */; };
 		9FAC15DA2FF87EC1000EBE26 /* ProductCardUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC15D92FF87EC1000EBE26 /* ProductCardUIState.swift */; };
 		9FAC15DF2FF885B1000EBE26 /* FavoriteProductsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC15DE2FF885B1000EBE26 /* FavoriteProductsGridView.swift */; };
@@ -456,8 +461,10 @@
 		6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6DC0D4902FFDB26200D15192 /* ShopifyOrderRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyOrderRequestDTO.swift; sourceTree = "<group>"; };
 		6DC0D4922FFDB36D00D15192 /* OrderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderEntity.swift; sourceTree = "<group>"; };
+		6DCAF1B12FFF1B2900194B8B /* AddressDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDetailView.swift; sourceTree = "<group>"; };
 		9F12F9F02FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsLocalDataSource.swift; sourceTree = "<group>"; };
 		9F12F9F22FFB5B8E00C334C7 /* SavedProductsLocalDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsLocalDataSourceImpl.swift; sourceTree = "<group>"; };
+		9F2E77082FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearAllSavedProductsUseCaseProtocol.swift; sourceTree = "<group>"; };
 		9F3FB9C52FF9D8A00000DD67 /* SavedProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProduct.swift; sourceTree = "<group>"; };
 		9F3FB9C72FF9D8C60000DD67 /* SavedProductsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsRepository.swift; sourceTree = "<group>"; };
 		9F3FB9C92FF9D9600000DD67 /* SavedProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductModel.swift; sourceTree = "<group>"; };
@@ -516,9 +523,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41BEBD642FFF8C78006529D5 /* FirebaseFunctions in Frameworks */,
+				6DCAF1B02FFF14C700194B8B /* Kingfisher in Frameworks */,
 				3E3DC1222FFE7574006EE065 /* (null) in Frameworks */,
-				41BEBD622FFF8C78006529D5 /* FirebaseAuth in Frameworks */,
+				3E3DC1262FFE9B24006EE065 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,6 +626,7 @@
 				41BFE08F2FFB1243000BB848 /* HelpCenterView.swift */,
 				419B28F12FFBBACF008B93E1 /* FaqsView.swift */,
 				419B28F52FFBBF95008B93E1 /* MyDetailsView.swift */,
+				6DCAF1B12FFF1B2900194B8B /* AddressDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1663,6 +1671,7 @@
 		9F3FB9C32FF9D8130000DD67 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9F2E77082FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift */,
 				9F529C612FFB37F900CF63DE /* RemoveSavedProductUseCase.swift */,
 				9F529C5F2FFB31BA00CF63DE /* GetSavedProductsUseCase.swift */,
 				9F3FB9CD2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift */,
@@ -2005,8 +2014,8 @@
 			);
 			name = Drape;
 			packageProductDependencies = (
-				41BEBD612FFF8C78006529D5 /* FirebaseAuth */,
-				41BEBD632FFF8C78006529D5 /* FirebaseFunctions */,
+				3E3DC1252FFE9B24006EE065 /* FirebaseAuth */,
+				6DCAF1AF2FFF14C700194B8B /* Kingfisher */,
 			);
 			productName = Drape;
 			productReference = 3E73C1532FF9A1F80011CC9D /* Drape.app */;
@@ -2081,7 +2090,8 @@
 			);
 			mainGroup = 41B03E822FEFCE2A00521C14;
 			packageReferences = (
-				41BEBD602FFF8C78006529D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3E3DC1242FFE9B24006EE065 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6DCAF1AE2FFF14C700194B8B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 41B03E822FEFCE2A00521C14;
 			projectDirPath = "";
@@ -2207,6 +2217,7 @@
 				419B28F02FFBBAA9008B93E1 /* FAQItem.swift in Sources */,
 				41B9B8F32FF39890002CF176 /* HeaderHomeScreenView.swift in Sources */,
 				9F3FB9F72FFA194A0000DD67 /* EmptyProducts.swift in Sources */,
+				9F2E77092FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift in Sources */,
 				9FB047F32FF5F47400F24615 /* HomeRepositoryImpl.swift in Sources */,
 				9FB048002FF5FE7E00F24615 /* HomeViewModel.swift in Sources */,
 				41B9B8F02FF39625002CF176 /* CategoryChipView.swift in Sources */,
@@ -2352,6 +2363,7 @@
 				419B28E92FFBBA3B008B93E1 /* FAQListView.swift in Sources */,
 				6D9C9A982FF431D200C8AA09 /* SignUpError.swift in Sources */,
 				419B29002FFBC36D008B93E1 /* UIApplication+Settings.swift in Sources */,
+				6DCAF1B22FFF1B2900194B8B /* AddressDetailView.swift in Sources */,
 				9F3FB9F52FFA185F0000DD67 /* BrandProductsView.swift in Sources */,
 				419B28EC2FFBBA73008B93E1 /* FAQViewModel.swift in Sources */,
 				41BFE0902FFB1243000BB848 /* HelpCenterView.swift in Sources */,
@@ -2696,8 +2708,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
-				kind = exactVersion;
-				version = 11.11.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.14.0;
+			};
+		};
+		6DCAF1AE2FFF14C700194B8B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.10.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2708,10 +2728,10 @@
 			package = 41BEBD602FFF8C78006529D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		41BEBD632FFF8C78006529D5 /* FirebaseFunctions */ = {
+		6DCAF1AF2FFF14C700194B8B /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 41BEBD602FFF8C78006529D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFunctions;
+			package = 6DCAF1AE2FFF14C700194B8B /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

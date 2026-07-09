@@ -105,6 +105,10 @@ struct HomeScreen: View {
                         }
                     }
                     .scrollIndicators(.hidden)
+                    .clipped()
+                    .refreshable {
+                        await viewModel.refreshHomeData()
+                    }
                 }
             }
             .sheet(isPresented: $showFilters) {

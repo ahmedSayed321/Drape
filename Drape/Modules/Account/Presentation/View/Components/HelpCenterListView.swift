@@ -66,6 +66,7 @@ struct HelpCenterListView: View {
             .padding(.horizontal, 20)
             .padding(.top, 16)
         }
+        .clipped()
     }
 }
 

@@ -39,6 +39,15 @@ final class SavedProductsLocalDataSourceImpl: SavedProductsLocalDataSource {
         }
     }
 
+    func removeAll() throws {
+        let descriptor = FetchDescriptor<SavedProductModel>()
+        let all = try context.fetch(descriptor)
+        for model in all {
+            context.delete(model)
+        }
+        try context.save()
+    }
+
     func isSaved(_ productID: Int) throws -> Bool {
         let descriptor = FetchDescriptor<SavedProductModel>(
             predicate: #Predicate { $0.id == productID }
