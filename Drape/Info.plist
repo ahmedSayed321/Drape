@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>PAYMOB_API_KEY</key>
+	<string>$(PAYMOB_API_KEY)</string>
+	<key>PAYMOB_IFRAME_ID</key>
+	<string>$(PAYMOB_IFRAME_ID)</string>
+	<key>PAYMOB_INTEGRATION_ID</key>
+	<string>$(PAYMOB_INTEGRATION_ID)</string>
 	<key>SHOPIFY_ACCESS_TOKEN</key>
 	<string>$(SHOPIFY_ACCESS_TOKEN)</string>
 </dict>

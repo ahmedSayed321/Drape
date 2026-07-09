@@ -17,12 +17,14 @@ final class CheckoutViewModel {
     // TODO: replace with real cart data once the Cart feature exists.
     private var cartItems: [CartItem]
     private let draftOrderId: String
+    private var paymentAttemptCounter = 0
 
     
     // TODO: replace with real logged-in customer info from your auth/session store.
     private let customerFirstName: String
     private let customerLastName: String
     private let customerPhone: String?
+    private let customerEmail: String
     
     private let customerId: Int
     
@@ -31,6 +33,7 @@ final class CheckoutViewModel {
          customerId: Int,
          customerFirstName: String = "Guest",
          customerLastName: String = "Customer",
+         customerEmail: String = "customer@example.com",
          customerPhone: String? = nil,
          promoRepository: PromoCodeRepositoryProtocol = PromoCodeRepository(),
          checkoutRepository: CheckoutRepositoryProtocol = CheckoutRepository()
@@ -40,6 +43,7 @@ final class CheckoutViewModel {
         self.customerId = customerId
         self.customerFirstName = customerFirstName
         self.customerLastName = customerLastName
+        self.customerEmail = customerEmail
         self.customerPhone = customerPhone
         self.promoRepository = promoRepository
         self.checkoutRepository = checkoutRepository
@@ -106,7 +110,61 @@ final class CheckoutViewModel {
         }
     }
     
-    func placeOrder() async {
+    func makePaymobPaymentRequest() -> PaymentRequest? {
+        guard state.isPlaceOrderEnabled, state.selectedAddress != nil else {
+            state.errorMessage = "Please complete required checkout data."
+            return nil
+        }
+
+        let amountCents = Int((state.total * 100).rounded())
+        guard amountCents > 0 else {
+            state.errorMessage = "Order total must be greater than zero."
+            return nil
+        }
+
+        return PaymentRequest(
+            amountCents: amountCents,
+            currency: "EGP",
+            merchantOrderId: makeUniqueMerchantOrderId(),
+            billingData: PaymentBillingData(
+                firstName: customerFirstName,
+                lastName: customerLastName,
+                email: customerEmail,
+                phoneNumber: customerPhone ?? "01000000000"
+            ),
+            items: cartItems.map {
+                PaymentItem(
+                    name: $0.title,
+                    amountCents: Int(($0.price * 100).rounded()),
+                    description: $0.title,
+                    quantity: $0.quantity
+                )
+            }
+        )
+    }
+
+    private func makeUniqueMerchantOrderId() -> String {
+        paymentAttemptCounter += 1
+
+        let baseId = draftOrderId.isEmpty ? "drape" : draftOrderId
+        let timestamp = Int(Date().timeIntervalSince1970)
+        let randomSuffix = UUID().uuidString.prefix(8)
+
+        return "\(baseId)-\(timestamp)-\(paymentAttemptCounter)-\(randomSuffix)"
+    }
+
+    func handlePaymentResult(_ result: PaymentResult) async {
+        switch result {
+        case .success:
+            await placeOrder(financialStatus: "paid")
+        case .failure(let message):
+            state.errorMessage = message
+        case .cancelled:
+            state.errorMessage = "Payment was cancelled."
+        }
+    }
+
+    func placeOrder(financialStatus: String = "pending") async {
         guard state.isPlaceOrderEnabled else {
             state.errorMessage = "Please complete required checkout data."
             return
@@ -121,8 +179,6 @@ final class CheckoutViewModel {
         state.errorMessage = nil
 
         do {
-            let financialStatus = "pending" // for now
-
             let order = try await checkoutRepository.createOrder(
                 lineItems: cartItems,
                 customerId: customerId,

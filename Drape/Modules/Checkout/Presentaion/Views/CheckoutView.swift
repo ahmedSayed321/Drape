@@ -11,6 +11,8 @@ struct CheckoutView: View {
     @Environment(AppRouter.self) private var router
     @State private var viewModel: CheckoutViewModel
     @State private var isConfirmationVisible = false
+    @State private var paymentRequest: PaymentRequest?
+    @State private var isPaymobPaymentPresented = false
 
     init(cartItems: [CartItem], draftOrderId: String) {
         let tokenStorage = KeychainTokenStorage()
@@ -70,6 +72,16 @@ struct CheckoutView: View {
             
             if viewModel.state.isOrderSuccessVisible {
                 successOverlay
+            }
+        }
+        .fullScreenCover(isPresented: $isPaymobPaymentPresented) {
+            if let paymentRequest {
+                PaymentModuleFactory.makePaymentView(paymentRequest: paymentRequest, method: .paymob) { result in
+                    isPaymobPaymentPresented = false
+                    Task {
+                        await viewModel.handlePaymentResult(result)
+                    }
+                }
             }
         }
     }
@@ -323,7 +335,17 @@ private extension CheckoutView {
                         text: "Confirm",
                         action: {
                             isConfirmationVisible = false
-                            Task { await viewModel.placeOrder() }
+                            switch viewModel.state.selectedPaymentOption {
+                            case .card:
+                                if let request = viewModel.makePaymobPaymentRequest() {
+                                    paymentRequest = request
+                                    isPaymobPaymentPresented = true
+                                }
+                            case .cash:
+                                Task { await viewModel.placeOrder() }
+                            case .applePay:
+                                viewModel.state.errorMessage = "Apple Pay is not available yet."
+                            }
                         },
                         status: .enable
                     )

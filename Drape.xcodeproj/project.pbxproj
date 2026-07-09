@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24C07F2ADD0CBE980B8208C1 /* PaymentSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6C3EEBC4C1981184B3D219 /* PaymentSession.swift */; };
+		2ED29EB3DFEA67F2A3CD4A53 /* PaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713994CE6163718957BD293 /* PaymentRequest.swift */; };
 		3E124DF92FFB36430000304E /* AddToCartDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E124DF82FFB36430000304E /* AddToCartDTO.swift */; };
 		3E124DFB2FFB37C60000304E /* AddToChartEndPoint .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E124DFA2FFB37C60000304E /* AddToChartEndPoint .swift */; };
 		3E15609B2FF02ACB00684C6A /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E15609A2FF02ACA00684C6A /* SignInView.swift */; };
@@ -33,6 +35,7 @@
 		3E88AE012FF9E0E600783ECA /* FeaturedProductsCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E88AE002FF9E0E600783ECA /* FeaturedProductsCarouselView.swift */; };
 		3EC1E4672FF5D5360047F42E /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC1E4642FF5D5360047F42E /* AppRouter.swift */; };
 		3EC1E4682FF5D5360047F42E /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC1E4652FF5D5360047F42E /* AppScreen.swift */; };
+		3EF54B162FFF289400F09A18 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3EF54B152FFF289400F09A18 /* Kingfisher */; };
 		3EFC6DFE2FEFE482002FBB9B /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC6DFD2FEFE482002FBB9B /* SplashScreen.swift */; };
 		3EFC6E012FEFEB5F002FBB9B /* drape_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC6DFF2FEFEB5E002FBB9B /* drape_icon.png */; };
 		3EFC6E022FEFEB5F002FBB9B /* onboarding.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC6E002FEFEB5E002FBB9B /* onboarding.png */; };
@@ -146,6 +149,7 @@
 		41C9F0752FFE7FDB00B15F39 /* SendChatMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C9F0742FFE7FDB00B15F39 /* SendChatMessageUseCase.swift */; };
 		41C9F0782FFE800D00B15F39 /* ChatRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C9F0772FFE800D00B15F39 /* ChatRepositoryProtocol.swift */; };
 		41C9F07B2FFE802700B15F39 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C9F07A2FFE802700B15F39 /* ChatMessage.swift */; };
+		47D23E959A34E2B4A7FCF00C /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B270C756CF4440F914CF68 /* PaymentRepository.swift */; };
 		6D06211B2FF01C0300C9B2D2 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D06211A2FF01C0300C9B2D2 /* SignupView.swift */; };
 		6D1E881C2FF860F1005D6386 /* UIStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E881B2FF860F1005D6386 /* UIStates.swift */; };
 		6D1E881F2FF86139005D6386 /* CheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E881E2FF86139005D6386 /* CheckoutViewModel.swift */; };
@@ -195,6 +199,13 @@
 		6D9C9AA42FF4406E00C8AA09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */; };
 		6DC0D4912FFDB26200D15192 /* ShopifyOrderRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0D4902FFDB26200D15192 /* ShopifyOrderRequestDTO.swift */; };
 		6DC0D4932FFDB36D00D15192 /* OrderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0D4922FFDB36D00D15192 /* OrderEntity.swift */; };
+		75200F3B5680864C68B389AA /* PaymentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4A1CBC459EA865689B0AC1 /* PaymentResult.swift */; };
+		76AC2402F9DDBACC0E83FF05 /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B805B9C707A14992CFE0D3A /* PaymentMethod.swift */; };
+		78B3C1DA77676BF098AAAE58 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776A385C439C02E17E77A06B /* PaymentViewModel.swift */; };
+		7A5457B4CD1CFC125915CA70 /* StartPaymentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A89202657B382EC38B3C942 /* StartPaymentUseCase.swift */; };
+		8C9965644344D984F9C4E474 /* PaymentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CF2D54F143268F361051D6 /* PaymentWebView.swift */; };
+		8DB3FDC25D5E6453E6A6458B /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4153FB7A395ACEF831EEC8 /* PaymentView.swift */; };
+		9E84BF258668A7FD244BC09D /* PaymobRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A4FAE4E5DB3D02AF9F89F /* PaymobRemoteDataSource.swift */; };
 		6DCAF1B02FFF14C700194B8B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6DCAF1AF2FFF14C700194B8B /* Kingfisher */; };
 		6DCAF1B22FFF1B2900194B8B /* AddressDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCAF1B12FFF1B2900194B8B /* AddressDetailView.swift */; };
 		9F12F9F12FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F12F9F02FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift */; };
@@ -252,6 +263,11 @@
 		9FD014B92FF6EB8F00602339 /* VendorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD014B82FF6EB8F00602339 /* VendorDTO.swift */; };
 		9FD014BB2FF6ED2C00602339 /* ImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD014BA2FF6ED2C00602339 /* ImageDTO.swift */; };
 		9FD014BD2FF6EEF400602339 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD014BC2FF6EEF400602339 /* Brand.swift */; };
+		BC4E3CA25A4DA153FF566317 /* PaymobDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897A93B01960E6CDBA95D8B9 /* PaymobDTOs.swift */; };
+		BD5C267008049462AEDA2536 /* PaymobEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B37F302D063C293508BF7A /* PaymobEndpoint.swift */; };
+		C0BBB2B00E25047A2A9F7B18 /* PaymentModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB273809A3F8F293A026891 /* PaymentModuleFactory.swift */; };
+		DE3F1BA5FA879579BA157F7B /* PaymobConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62332CE898D2C3A8FCC9642 /* PaymobConfig.swift */; };
+		EDAA647E19C2FB070AF9BD23 /* PaymentRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FA05CC502B6EB7F6845AF9 /* PaymentRepositoryProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +288,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A4A1CBC459EA865689B0AC1 /* PaymentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentResult.swift; path = Drape/Modules/Payment/Domain/Entities/PaymentResult.swift; sourceTree = SOURCE_ROOT; };
+		24CF2D54F143268F361051D6 /* PaymentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentWebView.swift; path = Drape/Modules/Payment/Presentation/Views/PaymentWebView.swift; sourceTree = SOURCE_ROOT; };
+		2B6C3EEBC4C1981184B3D219 /* PaymentSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentSession.swift; path = Drape/Modules/Payment/Domain/Entities/PaymentSession.swift; sourceTree = SOURCE_ROOT; };
+		3A89202657B382EC38B3C942 /* StartPaymentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StartPaymentUseCase.swift; path = Drape/Modules/Payment/Domain/UseCases/StartPaymentUseCase.swift; sourceTree = SOURCE_ROOT; };
 		3E124DF82FFB36430000304E /* AddToCartDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartDTO.swift; sourceTree = "<group>"; };
 		3E124DFA2FFB37C60000304E /* AddToChartEndPoint .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddToChartEndPoint .swift"; sourceTree = "<group>"; };
 		3E15609A2FF02ACA00684C6A /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -411,6 +431,8 @@
 		41C9F0742FFE7FDB00B15F39 /* SendChatMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatMessageUseCase.swift; sourceTree = "<group>"; };
 		41C9F0772FFE800D00B15F39 /* ChatRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryProtocol.swift; sourceTree = "<group>"; };
 		41C9F07A2FFE802700B15F39 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		5B805B9C707A14992CFE0D3A /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentMethod.swift; path = Drape/Modules/Payment/Domain/Entities/PaymentMethod.swift; sourceTree = SOURCE_ROOT; };
+		66B37F302D063C293508BF7A /* PaymobEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymobEndpoint.swift; path = Drape/Modules/Payment/Data/DataSources/PaymobEndpoint.swift; sourceTree = SOURCE_ROOT; };
 		6D06211A2FF01C0300C9B2D2 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		6D1E881B2FF860F1005D6386 /* UIStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStates.swift; sourceTree = "<group>"; };
 		6D1E881E2FF86139005D6386 /* CheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewModel.swift; sourceTree = "<group>"; };
@@ -461,6 +483,9 @@
 		6D9C9AA32FF4406E00C8AA09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6DC0D4902FFDB26200D15192 /* ShopifyOrderRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopifyOrderRequestDTO.swift; sourceTree = "<group>"; };
 		6DC0D4922FFDB36D00D15192 /* OrderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderEntity.swift; sourceTree = "<group>"; };
+		72B270C756CF4440F914CF68 /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentRepository.swift; path = Drape/Modules/Payment/Data/Repositories/PaymentRepository.swift; sourceTree = SOURCE_ROOT; };
+		776A385C439C02E17E77A06B /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentViewModel.swift; path = Drape/Modules/Payment/Presentation/ViewModels/PaymentViewModel.swift; sourceTree = SOURCE_ROOT; };
+		897A93B01960E6CDBA95D8B9 /* PaymobDTOs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymobDTOs.swift; path = Drape/Modules/Payment/Data/DTOs/PaymobDTOs.swift; sourceTree = SOURCE_ROOT; };
 		6DCAF1B12FFF1B2900194B8B /* AddressDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDetailView.swift; sourceTree = "<group>"; };
 		9F12F9F02FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsLocalDataSource.swift; sourceTree = "<group>"; };
 		9F12F9F22FFB5B8E00C334C7 /* SavedProductsLocalDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsLocalDataSourceImpl.swift; sourceTree = "<group>"; };
@@ -516,6 +541,12 @@
 		9FD014B82FF6EB8F00602339 /* VendorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorDTO.swift; sourceTree = "<group>"; };
 		9FD014BA2FF6ED2C00602339 /* ImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDTO.swift; sourceTree = "<group>"; };
 		9FD014BC2FF6EEF400602339 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		B49A4FAE4E5DB3D02AF9F89F /* PaymobRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymobRemoteDataSource.swift; path = Drape/Modules/Payment/Data/DataSources/PaymobRemoteDataSource.swift; sourceTree = SOURCE_ROOT; };
+		C713994CE6163718957BD293 /* PaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentRequest.swift; path = Drape/Modules/Payment/Domain/Entities/PaymentRequest.swift; sourceTree = SOURCE_ROOT; };
+		DA4153FB7A395ACEF831EEC8 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentView.swift; path = Drape/Modules/Payment/Presentation/Views/PaymentView.swift; sourceTree = SOURCE_ROOT; };
+		DAB273809A3F8F293A026891 /* PaymentModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentModuleFactory.swift; path = Drape/Modules/Payment/PaymentModuleFactory.swift; sourceTree = SOURCE_ROOT; };
+		E3FA05CC502B6EB7F6845AF9 /* PaymentRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentRepositoryProtocol.swift; path = Drape/Modules/Payment/Domain/Repositories/PaymentRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
+		F62332CE898D2C3A8FCC9642 /* PaymobConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymobConfig.swift; path = Drape/Core/Config/PaymobConfig.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,7 +554,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DCAF1B02FFF14C700194B8B /* Kingfisher in Frameworks */,
+				3EF54B162FFF289400F09A18 /* Kingfisher in Frameworks */,
 				3E3DC1222FFE7574006EE065 /* (null) in Frameworks */,
 				3E3DC1262FFE9B24006EE065 /* FirebaseAuth in Frameworks */,
 			);
@@ -546,6 +577,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05383F343B871F30BE747214 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D8D7ADE3EACBD72F1D108681 /* DTOs */,
+				C5F5C66DD4118C03B3A37292 /* DataSources */,
+				F743AC3910AA1B4D1F22D30B /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0F27169E881454AD4FF36186 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				E3FA05CC502B6EB7F6845AF9 /* PaymentRepositoryProtocol.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		2FD1FD24D6582506D7D9F3BE /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				DAB273809A3F8F293A026891 /* PaymentModuleFactory.swift */,
+				05383F343B871F30BE747214 /* Data */,
+				D66DB6FC055387C197453694 /* Domain */,
+				DE1EDCF2313C4D91292ABAB4 /* Presentation */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
 		3E41F38A2FF70CBA00703397 /* Favourite */ = {
 			isa = PBXGroup;
 			children = (
@@ -972,6 +1032,7 @@
 		41B0DB2F2FF5B2320083D212 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2FD1FD24D6582506D7D9F3BE /* Payment */,
 				6D1E88172FF85EA5005D6386 /* Checkout */,
 				41C9F0532FFE7CD700B15F39 /* AI */,
 				9F49791A2FFBD31D008DE80A /* OrderList */,
@@ -1114,6 +1175,7 @@
 			isa = PBXGroup;
 			children = (
 				41BC1F922FF52BDC00985A5F /* ShopifyConfig.swift */,
+				F62332CE898D2C3A8FCC9642 /* PaymobConfig.swift */,
 				41C9F0542FFE7E0400B15F39 /* ChatConfig.swift */,
 			);
 			path = Config;
@@ -1997,6 +2059,86 @@
 			path = UIStates;
 			sourceTree = "<group>";
 		};
+		A0145DF6A7B6C7B158ABA00D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				776A385C439C02E17E77A06B /* PaymentViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A7D575ED28237C5F3B6030A6 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				3A89202657B382EC38B3C942 /* StartPaymentUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		C28655C45C26C2E5853D9B8D /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				5B805B9C707A14992CFE0D3A /* PaymentMethod.swift */,
+				C713994CE6163718957BD293 /* PaymentRequest.swift */,
+				1A4A1CBC459EA865689B0AC1 /* PaymentResult.swift */,
+				2B6C3EEBC4C1981184B3D219 /* PaymentSession.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		C5F5C66DD4118C03B3A37292 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				66B37F302D063C293508BF7A /* PaymobEndpoint.swift */,
+				B49A4FAE4E5DB3D02AF9F89F /* PaymobRemoteDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		C7DACBFCEFDD5FA74757C4F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DA4153FB7A395ACEF831EEC8 /* PaymentView.swift */,
+				24CF2D54F143268F361051D6 /* PaymentWebView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D66DB6FC055387C197453694 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C28655C45C26C2E5853D9B8D /* Entities */,
+				0F27169E881454AD4FF36186 /* Repositories */,
+				A7D575ED28237C5F3B6030A6 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D8D7ADE3EACBD72F1D108681 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				897A93B01960E6CDBA95D8B9 /* PaymobDTOs.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		DE1EDCF2313C4D91292ABAB4 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A0145DF6A7B6C7B158ABA00D /* ViewModels */,
+				C7DACBFCEFDD5FA74757C4F1 /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		F743AC3910AA1B4D1F22D30B /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				72B270C756CF4440F914CF68 /* PaymentRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2015,7 +2157,7 @@
 			name = Drape;
 			packageProductDependencies = (
 				3E3DC1252FFE9B24006EE065 /* FirebaseAuth */,
-				6DCAF1AF2FFF14C700194B8B /* Kingfisher */,
+				3EF54B152FFF289400F09A18 /* Kingfisher */,
 			);
 			productName = Drape;
 			productReference = 3E73C1532FF9A1F80011CC9D /* Drape.app */;
@@ -2091,7 +2233,7 @@
 			mainGroup = 41B03E822FEFCE2A00521C14;
 			packageReferences = (
 				3E3DC1242FFE9B24006EE065 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				6DCAF1AE2FFF14C700194B8B /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				3EF54B142FFF289400F09A18 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 41B03E822FEFCE2A00521C14;
 			projectDirPath = "";
@@ -2138,6 +2280,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3F1BA5FA879579BA157F7B /* PaymobConfig.swift in Sources */,
+				BC4E3CA25A4DA153FF566317 /* PaymobDTOs.swift in Sources */,
+				BD5C267008049462AEDA2536 /* PaymobEndpoint.swift in Sources */,
+				9E84BF258668A7FD244BC09D /* PaymobRemoteDataSource.swift in Sources */,
+				47D23E959A34E2B4A7FCF00C /* PaymentRepository.swift in Sources */,
+				76AC2402F9DDBACC0E83FF05 /* PaymentMethod.swift in Sources */,
+				2ED29EB3DFEA67F2A3CD4A53 /* PaymentRequest.swift in Sources */,
+				75200F3B5680864C68B389AA /* PaymentResult.swift in Sources */,
+				24C07F2ADD0CBE980B8208C1 /* PaymentSession.swift in Sources */,
+				EDAA647E19C2FB070AF9BD23 /* PaymentRepositoryProtocol.swift in Sources */,
+				7A5457B4CD1CFC125915CA70 /* StartPaymentUseCase.swift in Sources */,
+				78B3C1DA77676BF098AAAE58 /* PaymentViewModel.swift in Sources */,
+				8C9965644344D984F9C4E474 /* PaymentWebView.swift in Sources */,
+				8DB3FDC25D5E6453E6A6458B /* PaymentView.swift in Sources */,
+				C0BBB2B00E25047A2A9F7B18 /* PaymentModuleFactory.swift in Sources */,
 				6D1E88212FF8615F005D6386 /* CheckoutView.swift in Sources */,
 				411A48BC2FF922E800CA179E /* Decimal+Formatting.swift in Sources */,
 				41AA27102FF6A50E00BF6DA0 /* RangeSliderView.swift in Sources */,
@@ -2712,7 +2869,7 @@
 				minimumVersion = 12.14.0;
 			};
 		};
-		6DCAF1AE2FFF14C700194B8B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		3EF54B142FFF289400F09A18 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -2728,9 +2885,9 @@
 			package = 41BEBD602FFF8C78006529D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		6DCAF1AF2FFF14C700194B8B /* Kingfisher */ = {
+		3EF54B152FFF289400F09A18 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6DCAF1AE2FFF14C700194B8B /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = 3EF54B142FFF289400F09A18 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
