@@ -9,6 +9,7 @@ import Foundation
 
 final class CartRepositoryImpl: CartRepository {
     private let remoteDataSource: CartRemoteDataSourceProtocol
+    private var imageCache: [String: URL] = [:]
 
     init(remoteDataSource: CartRemoteDataSourceProtocol) {
         self.remoteDataSource = remoteDataSource
@@ -24,7 +25,9 @@ final class CartRepositoryImpl: CartRepository {
 
         do {
             let response = try await remoteDataSource.createDraftOrder(requestBody)
-            let cart = CartMapper.toDomain(response.draftOrder)
+            var cart = CartMapper.toDomain(response.draftOrder)
+            cart = try await attachImages(to: cart)
+            NotificationCenter.default.post(name: .cartUpdated, object: cart)
             return cart
         } catch {
             throw error
@@ -33,7 +36,10 @@ final class CartRepositoryImpl: CartRepository {
 
     func getDraftOrder(id: String) async throws -> Cart {
         let response = try await remoteDataSource.getDraftOrder(id: id)
-        return CartMapper.toDomain(response.draftOrder)
+        var cart = CartMapper.toDomain(response.draftOrder)
+        cart = try await attachImages(to: cart)
+        NotificationCenter.default.post(name: .cartUpdated, object: cart)
+        return cart
     }
 
     func updateLineItemQuantity(draftOrderId: String, variantId: String, quantity: Int) async throws -> Cart {
@@ -51,7 +57,10 @@ final class CartRepositoryImpl: CartRepository {
             )
         )
         let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
-        return CartMapper.toDomain(response.draftOrder)
+        var cart = CartMapper.toDomain(response.draftOrder)
+        cart = try await attachImages(to: cart)
+        NotificationCenter.default.post(name: .cartUpdated, object: cart)
+        return cart
     }
 
     func replaceLineItems(draftOrderId: String, items: [CartLineItem]) async throws -> Cart {
@@ -62,7 +71,10 @@ final class CartRepositoryImpl: CartRepository {
             )
         )
         let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
-        return CartMapper.toDomain(response.draftOrder)
+        var cart = CartMapper.toDomain(response.draftOrder)
+        cart = try await attachImages(to: cart)
+        NotificationCenter.default.post(name: .cartUpdated, object: cart)
+        return cart
     }
     
     func removeLineItem(draftOrderId: String, variantId: String) async throws -> Cart {
@@ -76,11 +88,15 @@ final class CartRepositoryImpl: CartRepository {
             )
         )
         let response = try await remoteDataSource.updateDraftOrder(id: draftOrderId, body: requestBody)
-        return CartMapper.toDomain(response.draftOrder)
+        var cart = CartMapper.toDomain(response.draftOrder)
+        cart = try await attachImages(to: cart)
+        NotificationCenter.default.post(name: .cartUpdated, object: cart)
+        return cart
     }
 
     func clearCart(draftOrderId: String) async throws {
         try await remoteDataSource.deleteDraftOrder(id: draftOrderId)
+        NotificationCenter.default.post(name: .cartUpdated, object: Cart(draftOrderId: draftOrderId, lineItems: [], subtotal: 0, tax: 0, shippingFee: 0, total: 0, invoiceURL: nil))
     }
 
     func checkStock(variantId: String) async throws -> Int {
@@ -89,6 +105,31 @@ final class CartRepositoryImpl: CartRepository {
             locationId: ShopifyConfig.defaultLocationId
         )
         return response.inventoryLevels?.first?.available ?? 0
+    }
+    
+    private func attachImages(to cart: Cart) async throws -> Cart {
+        var mutableCart = cart
+        let missingProductIds = mutableCart.lineItems.compactMap { $0.productId }.filter { imageCache[String($0)] == nil }
+        
+        if !missingProductIds.isEmpty {
+            let uniqueIds = Array(Set(missingProductIds))
+            let idsString = uniqueIds.map(String.init).joined(separator: ",")
+            if let response = try? await remoteDataSource.fetchProducts(ids: idsString) {
+                for product in response.products {
+                    if let firstImage = product.images.first, let url = URL(string: firstImage.src) {
+                        imageCache[String(product.id)] = url
+                    }
+                }
+            }
+        }
+        
+        for i in 0..<mutableCart.lineItems.count {
+            if let pid = mutableCart.lineItems[i].productId, let cachedURL = imageCache[String(pid)] {
+                mutableCart.lineItems[i].imageURL = cachedURL
+            }
+        }
+        
+        return mutableCart
     }
 }
 

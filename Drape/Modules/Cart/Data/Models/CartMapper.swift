@@ -30,7 +30,8 @@ enum CartMapper {
             size: dto.variantTitle,
             imageURL: dto.imageURLString.flatMap(URL.init(string:)),
             price: Decimal(string: dto.price ?? ""),
-            quantity: dto.quantity
+            quantity: dto.quantity,
+            productId: dto.productId
         )
     }
 

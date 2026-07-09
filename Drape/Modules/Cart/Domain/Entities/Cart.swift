@@ -22,9 +22,10 @@ struct CartLineItem: Identifiable {
     let lineItemId: Int      // Shopify's own line item id, needed when updating/removing
     let title: String?
     let size: String?
-    let imageURL: URL?
+    var imageURL: URL?
     let price: Decimal?
     var quantity: Int?
+    var productId: Int?
 }
 
 
@@ -49,4 +50,8 @@ extension CartLineItem {
             quantity: quantity
         )
     }
+}
+
+extension Notification.Name {
+    static let cartUpdated = Notification.Name("cartUpdated")
 }

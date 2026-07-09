@@ -63,4 +63,22 @@ final class ShopifyCustomerRepository: CustomerRepositoryProtocol {
             alreadyExisted: false
         )
     }
+    
+    func fetchDraftOrderId(customerId: String) async throws -> String? {
+        let result = try await dataSource.fetchMetafields(customerId: customerId)
+        let metafield = result.metafields.first { $0.namespace == "cart" && $0.key == "draft_order_id" }
+        return metafield?.value
+    }
+    
+    func updateDraftOrderId(customerId: String, draftOrderId: String) async throws {
+        let requestBody = UpdateMetafieldRequestDTO(
+            metafield: MetafieldRequestBody(
+                namespace: "cart",
+                key: "draft_order_id",
+                value: draftOrderId,
+                type: "single_line_text_field"
+            )
+        )
+        _ = try await dataSource.updateMetafield(customerId: customerId, body: requestBody)
+    }
 }

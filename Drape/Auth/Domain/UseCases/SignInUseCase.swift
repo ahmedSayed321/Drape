@@ -11,9 +11,12 @@ final class SignInUseCase {
     private let authRepository: AuthRepositoryProtocol
     private let customerRepository: CustomerRepositoryProtocol
 
-    init(authRepository: AuthRepositoryProtocol, customerRepository: CustomerRepositoryProtocol) {
+    private let keychain: KeychainTokenStorage
+
+    init(authRepository: AuthRepositoryProtocol, customerRepository: CustomerRepositoryProtocol, keychain: KeychainTokenStorage = KeychainTokenStorage()) {
         self.authRepository = authRepository
         self.customerRepository = customerRepository
+        self.keychain = keychain
     }
 
     
@@ -23,6 +26,12 @@ final class SignInUseCase {
 
         guard let shopifyCustomerID = try await customerRepository.fetchShopifyCustomerID(email: email) else {
             throw SignInError.shopifyCustomerNotFound
+        }
+
+        if keychain.getCartDraftOrderID() == nil {
+            if let serverDraftOrderId = try? await customerRepository.fetchDraftOrderId(customerId: shopifyCustomerID) {
+                keychain.saveCartDraftOrderID(serverDraftOrderId)
+            }
         }
 
         return shopifyCustomerID

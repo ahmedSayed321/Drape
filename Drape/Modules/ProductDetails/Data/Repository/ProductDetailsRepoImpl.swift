@@ -11,15 +11,18 @@ class ProductDetailsRepoImpl: ProductDetailsRepoProtocol {
     private let remoteDataSource: ProductDetailsDataSourceProtocol
     private let cartRepository: CartRepository
     private let keychain: KeychainTokenStorage
+    private let customerRepository: CustomerRepositoryProtocol
 
     init(
         remoteDataSource: ProductDetailsDataSourceProtocol = ProductDetailsDataSource(),
         cartRepository: CartRepository = CartRepositoryImpl(remoteDataSource: CartRemoteDataSource()),
-        keychain: KeychainTokenStorage = KeychainTokenStorage()
+        keychain: KeychainTokenStorage = KeychainTokenStorage(),
+        customerRepository: CustomerRepositoryProtocol = ShopifyCustomerRepository()
     ) {
         self.remoteDataSource = remoteDataSource
         self.cartRepository = cartRepository
         self.keychain = keychain
+        self.customerRepository = customerRepository
     }
 
     func fetchProductDetails(productId: Int) async throws -> ProductDetailsEntity {
@@ -63,6 +66,7 @@ class ProductDetailsRepoImpl: ProductDetailsRepoProtocol {
             )
 
             keychain.saveCartDraftOrderID(cart.draftOrderId)
+            try? await customerRepository.updateDraftOrderId(customerId: customerId, draftOrderId: cart.draftOrderId)
         }
 
         return cart

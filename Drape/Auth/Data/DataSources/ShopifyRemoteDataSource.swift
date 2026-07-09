@@ -22,6 +22,14 @@ final class ShopifyAuthRemoteDataSource {
     func createCustomer(_ body: ShopifyCreateCustomerRequestDTO) async throws -> ShopifyCreateResponseDTO {
         try await networkService.request(ShopifyAuthEndpoint.createCustomer(body: body))
     }
+    
+    func fetchMetafields(customerId: String) async throws -> MetafieldsListResponseDTO {
+        try await networkService.request(ShopifyAuthEndpoint.fetchMetafields(customerId: customerId))
+    }
+    
+    func updateMetafield(customerId: String, body: UpdateMetafieldRequestDTO) async throws -> MetafieldResponseDTO {
+        try await networkService.request(ShopifyAuthEndpoint.updateMetafield(customerId: customerId, body: body))
+    }
 }
 
 
@@ -49,4 +57,8 @@ struct ShopifyCreateCustomerRequestDTO: Encodable {
 
 struct ShopifyCreateResponseDTO: Decodable {
     let customer: ShopifyCustomerDTO
+}
+
+struct MetafieldsListResponseDTO: Decodable {
+    let metafields: [MetafieldDTO]
 }
