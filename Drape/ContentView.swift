@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var selectedTab = 0
+    @Environment(AppRouter.self) private var router
     @State private var isChatPresented = false
 
     var body: some View {
+        @Bindable var router = router
         ZStack(alignment: .bottomTrailing) {
-            TabView(selection: $selectedTab) {
+            TabView(selection: $router.selectedTab) {
                 HomeEntryPoint()
                     .tabItem { Label("Home", systemImage: "house.fill") }
                     .tag(0)
@@ -23,7 +23,7 @@ struct ContentView: View {
                     .tabItem { Label("Faourite", systemImage: "heart.fill") }
                     .tag(1)
 
-                CartView(viewModel: .live(draftOrderId: "1213139878074"))
+                CartView(viewModel: .live(draftOrderId: router.draftOrderId.isEmpty ? nil : router.draftOrderId))
                     .tabItem { Label("Cart", systemImage: "cart.fill") }
                     .tag(2)
 
@@ -49,5 +49,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(AppRouter())
         .modelContainer(for: SavedProductModel.self, inMemory: true)
 }

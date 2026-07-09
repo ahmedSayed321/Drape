@@ -12,6 +12,7 @@ import Observation
 final class AppRouter {
 
     var currentScreen: AppScreen = .splash
+    var selectedTab: Int = 0
     var cartItems: [CartItem] = []
     var draftOrderId: String = ""
     var selectedAddress: AddressItem?
@@ -35,6 +36,7 @@ final class AppRouter {
 
     func showHome() {
         currentScreen = .home
+        selectedTab = 0
     }
     
     func showCheckout() {
@@ -56,6 +58,7 @@ final class AppRouter {
         currentScreen = .addCard
     }
     func showCart() {
-        currentScreen = .cart
+        currentScreen = .home
+        selectedTab = 2
     }
 }
