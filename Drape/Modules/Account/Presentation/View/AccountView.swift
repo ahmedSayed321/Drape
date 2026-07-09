@@ -5,13 +5,21 @@
 //  Created by Moaz on 05/07/2026.
 //
 import SwiftUI
+import SwiftData
 
 struct AccountView: View {
-    @StateObject private var viewModel = AccountViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @StateObject private var viewModel: AccountViewModel
     @State private var showLogoutAlert = false
     @State private var showGuestAlert = false
     @State private var path = NavigationPath()
     @Environment(AppRouter.self) private var router
+
+    init() {
+        // Defer the actual use-case wiring to onAppear since @Environment
+        // isn't available at init time. Start with a bare ViewModel.
+        _viewModel = StateObject(wrappedValue: AccountViewModel())
+    }
     
     private let keychain = KeychainTokenStorage()
 
@@ -92,6 +100,7 @@ struct AccountView: View {
                             }
                         }
                     }
+                    .clipped()
                 }
                 .background(Color.white)
                 .navigationBarTitleDisplayMode(.inline)
@@ -143,6 +152,13 @@ struct AccountView: View {
                 }
             } message: {
                 Text("You need to login first to use account features.")
+            }
+            .onAppear {
+                if viewModel.clearFavoritesUseCase == nil {
+                    let dataSource = SavedProductsLocalDataSourceImpl(context: modelContext)
+                    let repository = SavedProductsRepositoryImpl(localDataSource: dataSource)
+                    viewModel.clearFavoritesUseCase = ClearAllSavedProductsUseCase(repository: repository)
+                }
             }
         }
     }

@@ -150,5 +150,6 @@ struct FilterSheetView: View {
            .padding(.top, 20)
        .padding(.bottom, 16)
         }
+        .clipped()
    }
 }

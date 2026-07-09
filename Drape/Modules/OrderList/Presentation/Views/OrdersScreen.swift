@@ -51,6 +51,7 @@ struct OrdersScreen: View {
                     }
                     .padding(.horizontal, 16)
                 }
+                .clipped()
             }
         }
         .background(Color.white.ignoresSafeArea())

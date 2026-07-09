@@ -56,6 +56,7 @@ struct BrandProductsView: View {
                         ProgressView().padding()
                     }
                 }
+                .clipped()
             }
         }
         .padding(.horizontal, 16)

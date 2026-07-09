@@ -197,6 +197,7 @@
 		6DCAF1B22FFF1B2900194B8B /* AddressDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCAF1B12FFF1B2900194B8B /* AddressDetailView.swift */; };
 		9F12F9F12FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F12F9F02FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift */; };
 		9F12F9F32FFB5B8E00C334C7 /* SavedProductsLocalDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F12F9F22FFB5B8E00C334C7 /* SavedProductsLocalDataSourceImpl.swift */; };
+		9F2E77092FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2E77082FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift */; };
 		9F3FB9C62FF9D8A00000DD67 /* SavedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C52FF9D8A00000DD67 /* SavedProduct.swift */; };
 		9F3FB9C82FF9D8C60000DD67 /* SavedProductsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C72FF9D8C60000DD67 /* SavedProductsRepository.swift */; };
 		9F3FB9CA2FF9D9600000DD67 /* SavedProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FB9C92FF9D9600000DD67 /* SavedProductModel.swift */; };
@@ -233,6 +234,7 @@
 		9F952CD52FF8EC040007C3F3 /* GetHomeScreenDataUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD42FF8EBFB0007C3F3 /* GetHomeScreenDataUseCase.swift */; };
 		9F952CD72FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F952CD62FF8F2C90007C3F3 /* LoadMoreProductsUseCaseProtocol.swift */; };
 		9F9F25362FFDD92000EAEAF1 /* ProductDetailsModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9F25352FFDD92000EAEAF1 /* ProductDetailsModuleFactory.swift */; };
+		9FA69AC62FFF4BA6008F9371 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9FA69AC52FFF4BA6008F9371 /* Kingfisher */; };
 		9FAC15D72FF87C73000EBE26 /* FavoriteTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC15D62FF87C73000EBE26 /* FavoriteTopBarView.swift */; };
 		9FAC15DA2FF87EC1000EBE26 /* ProductCardUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC15D92FF87EC1000EBE26 /* ProductCardUIState.swift */; };
 		9FAC15DF2FF885B1000EBE26 /* FavoriteProductsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAC15DE2FF885B1000EBE26 /* FavoriteProductsGridView.swift */; };
@@ -460,6 +462,7 @@
 		6DCAF1B12FFF1B2900194B8B /* AddressDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDetailView.swift; sourceTree = "<group>"; };
 		9F12F9F02FFB5B8600C334C7 /* SavedProductsLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsLocalDataSource.swift; sourceTree = "<group>"; };
 		9F12F9F22FFB5B8E00C334C7 /* SavedProductsLocalDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsLocalDataSourceImpl.swift; sourceTree = "<group>"; };
+		9F2E77082FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearAllSavedProductsUseCaseProtocol.swift; sourceTree = "<group>"; };
 		9F3FB9C52FF9D8A00000DD67 /* SavedProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProduct.swift; sourceTree = "<group>"; };
 		9F3FB9C72FF9D8C60000DD67 /* SavedProductsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductsRepository.swift; sourceTree = "<group>"; };
 		9F3FB9C92FF9D9600000DD67 /* SavedProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProductModel.swift; sourceTree = "<group>"; };
@@ -1666,6 +1669,7 @@
 		9F3FB9C32FF9D8130000DD67 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				9F2E77082FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift */,
 				9F529C612FFB37F900CF63DE /* RemoveSavedProductUseCase.swift */,
 				9F529C5F2FFB31BA00CF63DE /* GetSavedProductsUseCase.swift */,
 				9F3FB9CD2FF9DBAD0000DD67 /* ToggleSaveProductUseCase.swift */,
@@ -2211,6 +2215,7 @@
 				419B28F02FFBBAA9008B93E1 /* FAQItem.swift in Sources */,
 				41B9B8F32FF39890002CF176 /* HeaderHomeScreenView.swift in Sources */,
 				9F3FB9F72FFA194A0000DD67 /* EmptyProducts.swift in Sources */,
+				9F2E77092FFF9E080091B798 /* ClearAllSavedProductsUseCaseProtocol.swift in Sources */,
 				9FB047F32FF5F47400F24615 /* HomeRepositoryImpl.swift in Sources */,
 				9FB048002FF5FE7E00F24615 /* HomeViewModel.swift in Sources */,
 				41B9B8F02FF39625002CF176 /* CategoryChipView.swift in Sources */,
@@ -2707,7 +2712,7 @@
 		};
 		6DCAF1AE2FFF14C700194B8B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.10.0;

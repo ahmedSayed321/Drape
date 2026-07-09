@@ -92,6 +92,7 @@ struct PaymentMethodView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 24)
         }
+        .clipped()
         .safeAreaInset(edge: .top, spacing: 0) {
             StandardAppBar(
                 title: "Payment Method",

@@ -35,6 +35,7 @@ struct ChatView: View {
                         .padding(.horizontal)
                         .padding(.top, 12)
                     }
+                    .clipped()
                     .onChange(of: viewModel.messages) { _, _ in
                         if let last = viewModel.messages.last {
                             withAnimation {

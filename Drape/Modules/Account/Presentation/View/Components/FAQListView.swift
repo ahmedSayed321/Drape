@@ -37,6 +37,7 @@ struct FAQListView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 4)
             }
+            .clipped()
         }
         .onChange(of: selectedCategory) {
             expandedID = nil
