@@ -38,7 +38,6 @@ final class CartRepositoryImpl: CartRepository {
         let response = try await remoteDataSource.getDraftOrder(id: id)
         var cart = CartMapper.toDomain(response.draftOrder)
         cart = try await attachImages(to: cart)
-        NotificationCenter.default.post(name: .cartUpdated, object: cart)
         return cart
     }
 
