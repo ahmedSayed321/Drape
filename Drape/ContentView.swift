@@ -33,11 +33,13 @@ struct ContentView: View {
             }
             .accentColor(.black)
 
-            ChatFAB {
-                isChatPresented = true
+            if selectedTab == 0 {
+                ChatFAB {
+                    isChatPresented = true
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 70)
             }
-            .padding(.trailing, 20)
-            .padding(.bottom, 70)
         }
         .sheet(isPresented: $isChatPresented) {
             ChatView()
