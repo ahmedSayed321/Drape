@@ -10,6 +10,13 @@ import Foundation
 struct ProductsEndpoint: APIEndpoint {
     let limit: Int?
     let vendor: String?
+    let ids: String?
+    
+    init(limit: Int? = nil, vendor: String? = nil, ids: String? = nil) {
+        self.limit = limit
+        self.vendor = vendor
+        self.ids = ids
+    }
 
     var baseURL: String { ShopifyConfig.baseURL }
     var path: String { "/products.json" }
@@ -19,6 +26,7 @@ struct ProductsEndpoint: APIEndpoint {
         var params: [String: String] = [:]
         if let limit { params["limit"] = "\(limit)" }
         if let vendor { params["vendor"] = vendor }
+        if let ids { params["ids"] = ids }
         return params.isEmpty ? nil : params
     }
 }

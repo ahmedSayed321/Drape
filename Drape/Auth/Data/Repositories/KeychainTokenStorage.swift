@@ -11,7 +11,6 @@ final class KeychainTokenStorage: TokenStorageProtocol {
     private let tokenKey = "firebase_id_token"
     private let firebaseUIDKey = "firebase_uid"
     private let shopifyCustomerIDKey = "shopify_customer_id"
-    private let cartDraftOrderKey = "cart_draft_order_id"
 
     
     func saveToken(_ token: String) {
@@ -48,8 +47,6 @@ final class KeychainTokenStorage: TokenStorageProtocol {
         try? keychain.delete(forKey: tokenKey)
         try? keychain.delete(forKey: firebaseUIDKey)
         try? keychain.delete(forKey: shopifyCustomerIDKey)
-        try? keychain.delete(forKey: cartDraftOrderKey)
     }
-    
 }
 

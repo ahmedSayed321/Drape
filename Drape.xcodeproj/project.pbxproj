@@ -127,6 +127,8 @@
 		41BC1FA32FF52E1300985A5F /* SearchRepositoryProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BC1FA22FF52E1300985A5F /* SearchRepositoryProtocol .swift */; };
 		41BC1FA62FF52E3700985A5F /* FetchAllProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BC1FA52FF52E3700985A5F /* FetchAllProductsUseCase.swift */; };
 		41BC1FAC2FF52F3B00985A5F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BC1FAB2FF52F3B00985A5F /* SearchViewModel.swift */; };
+		41BEBD622FFF8C78006529D5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 41BEBD612FFF8C78006529D5 /* FirebaseAuth */; };
+		41BEBD642FFF8C78006529D5 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 41BEBD632FFF8C78006529D5 /* FirebaseFunctions */; };
 		41BFE08A2FFB1211000BB848 /* AccountItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFE0892FFB1211000BB848 /* AccountItemView.swift */; };
 		41BFE08C2FFB1227000BB848 /* HelpCenterItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFE08B2FFB1227000BB848 /* HelpCenterItemView.swift */; };
 		41BFE08E2FFB1237000BB848 /* HelpCenterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BFE08D2FFB1237000BB848 /* HelpCenterListView.swift */; };
@@ -2702,9 +2704,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3E3DC1242FFE9B24006EE065 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		41BEBD602FFF8C78006529D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 12.14.0;
@@ -2721,9 +2723,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3E3DC1252FFE9B24006EE065 /* FirebaseAuth */ = {
+		41BEBD612FFF8C78006529D5 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3E3DC1242FFE9B24006EE065 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 41BEBD602FFF8C78006529D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
 		6DCAF1AF2FFF14C700194B8B /* Kingfisher */ = {

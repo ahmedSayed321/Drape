@@ -47,9 +47,26 @@ final class CartViewModel: ObservableObject {
         self.clearCartUseCase = clearCartUseCase
         self.keychain = keychain
         self.draftOrderId = keychain.getCartDraftOrderID()
+        
+        NotificationCenter.default.addObserver(forName: .cartUpdated, object: nil, queue: .main) { [weak self] notification in
+            if let cart = notification.object as? Cart {
+                self?.handleCartUpdated(cart)
+            }
+        }
+    }
+    
+    private func handleCartUpdated(_ cart: Cart) {
+        self.draftOrderId = cart.draftOrderId
+        self.updateState(from: cart)
+    }
+    
+    private func updateState(from cart: Cart) {
+        let uiState = CartUIState(from: cart)
+        state = cart.lineItems.isEmpty ? .empty : .success(uiState)
     }
 
     func loadCart() async {
+        draftOrderId = keychain.getCartDraftOrderID()
         guard let draftOrderId else {
             state = .empty
             return
@@ -57,8 +74,7 @@ final class CartViewModel: ObservableObject {
         state = .loading
         do {
             let cart = try await getDraftOrderUseCase.execute(id: draftOrderId)
-            let uiState = CartUIState(from: cart)
-            state = cart.lineItems.isEmpty ? .empty : .success(uiState)
+            updateState(from: cart)
         } catch {
             state = .failure("Couldn't load your cart. Please try again.")
         }
@@ -70,8 +86,7 @@ final class CartViewModel: ObservableObject {
             let newCart = try await createDraftOrderUseCase.execute(items: items,customerId:keychain.getShopifyCustomerID() ?? "")
             draftOrderId = newCart.draftOrderId
             keychain.saveCartDraftOrderID(newCart.draftOrderId) 
-            let uiState = CartUIState(from: newCart)
-            state = newCart.lineItems.isEmpty ? .empty : .success(uiState)
+            updateState(from: newCart)
         } catch {
             state = .failure("Couldn't create your cart. Please try again.")
         }
@@ -114,9 +129,10 @@ final class CartViewModel: ObservableObject {
         guard let draftOrderId else { return }
         do {
             let cart = try await updateQuantityUseCase.execute(draftOrderId: draftOrderId, variantId: itemId, quantity: quantity)
-            let uiState = CartUIState(from: cart)
-            state = cart.lineItems.isEmpty ? .empty : .success(uiState)
+            if Task.isCancelled { return }
+            updateState(from: cart)
         } catch {
+            if Task.isCancelled { return }
             rollbackQuantity(itemId: itemId, to: previousQuantity)
             syncErrorMessage = "Couldn't update quantity. Please try again."
         }
@@ -137,7 +153,8 @@ final class CartViewModel: ObservableObject {
         
         let updatedLineItems = currentUIState.lineItems.filter { $0.id != item.id }
         if updatedLineItems.isEmpty {
-            state = .empty
+           await clearCart()
+            return
         } else {
             let updatedUIState = currentUIState.updating(lineItems: updatedLineItems)
             state = .success(updatedUIState)
@@ -145,8 +162,7 @@ final class CartViewModel: ObservableObject {
         
         do {
             let updatedCart = try await removeLineItemUseCase.execute(draftOrderId: draftOrderId, variantId: item.id)
-            let uiState = CartUIState(from: updatedCart)
-            state = updatedCart.lineItems.isEmpty ? .empty : .success(uiState)
+            updateState(from: updatedCart)
         } catch {
             state = .failure("Couldn't remove item. Please try again.")
             state = previousState
