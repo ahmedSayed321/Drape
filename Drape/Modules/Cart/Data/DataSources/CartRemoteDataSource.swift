@@ -11,7 +11,7 @@ protocol CartRemoteDataSourceProtocol {
     func updateDraftOrder(id: String, body: CreateDraftOrderRequestDTO) async throws -> DraftOrderResponseDTO
     func deleteDraftOrder(id: String) async throws
     func checkStock(inventoryItemId: String, locationId: String) async throws -> InventoryLevelResponseDTO
-    func fetchProducts(ids: String) async throws -> ProductsResponseDTO
+    func fetchProducts(ids: String) async throws -> ProductsResponse
 }
 
 final class CartRemoteDataSource: CartRemoteDataSourceProtocol {
@@ -41,7 +41,7 @@ final class CartRemoteDataSource: CartRemoteDataSourceProtocol {
         try await networkService.request(CartEndpoint.checkStock(inventoryItemId: inventoryItemId, locationId: locationId))
     }
     
-    func fetchProducts(ids: String) async throws -> ProductsResponseDTO {
+    func fetchProducts(ids: String) async throws -> ProductsResponse {
         try await networkService.request(ProductsEndpoint(ids: ids))
     }
 }

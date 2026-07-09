@@ -153,7 +153,8 @@ final class CartViewModel: ObservableObject {
         
         let updatedLineItems = currentUIState.lineItems.filter { $0.id != item.id }
         if updatedLineItems.isEmpty {
-            state = .empty
+           await clearCart()
+            return
         } else {
             let updatedUIState = currentUIState.updating(lineItems: updatedLineItems)
             state = .success(updatedUIState)

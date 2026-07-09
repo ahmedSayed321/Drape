@@ -116,7 +116,7 @@ final class CartRepositoryImpl: CartRepository {
             let idsString = uniqueIds.map(String.init).joined(separator: ",")
             if let response = try? await remoteDataSource.fetchProducts(ids: idsString) {
                 for product in response.products {
-                    if let firstImage = product.images.first, let url = URL(string: firstImage.src) {
+                    if let firstImage = product.image, let url = URL(string: firstImage.src) {
                         imageCache[String(product.id)] = url
                     }
                 }
