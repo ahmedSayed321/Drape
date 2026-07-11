@@ -12,7 +12,7 @@ struct Cart {
     var lineItems: [CartLineItem]
     let subtotal: Decimal
     let tax: Decimal
-    let shippingFee: Decimal
+    let shippingFee: Decimal = 80
     let total: Decimal
     let invoiceURL: URL?
 }

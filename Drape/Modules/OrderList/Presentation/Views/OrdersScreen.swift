@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct OrdersScreen: View {
+    @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel: OrdersViewModel
     @State private var selectedTab: Tab = .ongoing
 
@@ -18,7 +19,7 @@ struct OrdersScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            header
+//            header
 
             Picker("", selection: $selectedTab) {
                 Text("Ongoing").tag(Tab.ongoing)
@@ -26,7 +27,7 @@ struct OrdersScreen: View {
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, 16)
-            .padding(.bottom, 16)
+            .padding(.vertical, 16)
 
             if viewModel.isLoading {
                 Spacer()
@@ -58,33 +59,53 @@ struct OrdersScreen: View {
         .task {
             await viewModel.loadOrders()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: {
+                    dismiss()
+                }){
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundStyle(.black)
+                }
+            }
+            
+            ToolbarItem(placement: .principal) {
+                Text("My Orders")
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundStyle(.black)
+            }
+        }
+        
     }
 
     private var currentOrders: [OrderUIState] {
         selectedTab == .ongoing ? viewModel.ongoingOrders : viewModel.completedOrders
     }
 
-    private var header: some View {
-        HStack {
-            Spacer()
-            Text("My Orders")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-            Spacer()
-        }
-        .overlay(alignment: .trailing) {
-            Button(action: {}) {
-                Image(systemName: "bell")
-                    .font(.title2)
-                    .foregroundColor(.black)
-            }
-            .padding(.trailing)
-        }
-        .padding(.horizontal)
-        .padding(.top, 10)
-        .padding(.bottom, 20)
-    }
+//    private var header: some View {
+//        HStack {
+//            Spacer()
+//            Text("My Orders")
+//                .font(.title2)
+//                .fontWeight(.bold)
+//                .foregroundColor(.black)
+//            Spacer()
+//        }
+//        .overlay(alignment: .trailing) {
+//            Button(action: {}) {
+//                Image(systemName: "bell")
+//                    .font(.title2)
+//                    .foregroundColor(.black)
+//            }
+//            .padding(.trailing)
+//        }
+//        .padding(.horizontal)
+//        .padding(.top, 10)
+//        .padding(.bottom, 20)
+//    }
 }
 
 //#Preview {

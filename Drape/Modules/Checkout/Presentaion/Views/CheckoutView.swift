@@ -268,6 +268,8 @@ private extension CheckoutView {
                     action: {
                         viewModel.dismissSuccess()
                         router.showHome()
+                        let keychain = KeychainTokenStorage()
+                        keychain.clearCartDraftOrderID()
                     },
                     status: .enable
                 )
