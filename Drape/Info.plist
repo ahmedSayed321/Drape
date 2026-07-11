@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.572390140980-r2fsh8g9li1hvr5k5koe9cg1n7pjbkhv</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+		</dict>
+	</array>
 	<key>PAYMOB_API_KEY</key>
 	<string>$(PAYMOB_API_KEY)</string>
 	<key>PAYMOB_IFRAME_ID</key>
@@ -10,5 +25,7 @@
 	<string>$(PAYMOB_INTEGRATION_ID)</string>
 	<key>SHOPIFY_ACCESS_TOKEN</key>
 	<string>$(SHOPIFY_ACCESS_TOKEN)</string>
+	<key>GIDClientID</key>
+	<string>572390140980-r2fsh8g9li1hvr5k5koe9cg1n7pjbkhv.apps.googleusercontent.com</string>
 </dict>
 </plist>

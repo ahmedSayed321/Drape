@@ -7,6 +7,8 @@
 
 import Foundation
 import FirebaseAuth
+import GoogleSignIn
+import UIKit
 
 final class FirebaseAuthRepository: AuthRepositoryProtocol {
     private let tokenStorage = KeychainTokenStorage()
@@ -133,6 +135,39 @@ final class FirebaseAuthRepository: AuthRepositoryProtocol {
         } catch let error as NSError {
             throw SignOutError.unknown(error.localizedDescription)
         }
+    }
+    
+    @MainActor
+    func signInWithGoogle() async throws -> (email: String, fullName: String) {
+        // 1. Get Root View Controller
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first,
+              let rootViewController = window.rootViewController else {
+            throw SignInError.unknown("Could not find root view controller")
+        }
+        
+        // 2. Start Google Sign In
+        let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+        let user = result.user
+        
+        guard let idToken = user.idToken?.tokenString else {
+            throw SignInError.unknown("No ID token found from Google")
+        }
+        let accessToken = user.accessToken.tokenString
+        
+        // 3. Authenticate with Firebase
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+        let authResult = try await Auth.auth().signIn(with: credential)
+        
+        // 4. Save tokens
+        let firebaseIdToken = try await authResult.user.getIDToken()
+        tokenStorage.saveToken(firebaseIdToken)
+        tokenStorage.saveFirebaseUID(authResult.user.uid)
+        
+        let email = authResult.user.email ?? user.profile?.email ?? ""
+        let fullName = authResult.user.displayName ?? user.profile?.name ?? "Google User"
+        
+        return (email: email, fullName: fullName)
     }
 }
  
