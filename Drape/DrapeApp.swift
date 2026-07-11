@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseCore
 import SwiftData
+import GoogleSignIn
 
 @main
 struct DrapeApp: App {
@@ -29,48 +30,47 @@ struct DrapeApp: App {
 
     var body: some Scene {
         WindowGroup {
-
-            switch router.currentScreen {
-
-            case .splash:
-                SplashScreen()
-                    .environment(router)
-
-            case .signIn:
-                SignInView()
-                    .environment(router)
-
-            case .signUp:
-                SignupView()
-                    .environment(router)
-
-            case .onBoarding:
-                OnBoardingScreen()
-                    .environment(router)
-            case .home:
-                ContentView()
-                    .environment(router)
-            case .checkout:
-                CheckoutView(cartItems: router.cartItems, draftOrderId: router.draftOrderId)
-                    .environment(router)
-            case .address:
-                AddressView()
-                    .environment(router)
-            case .addAddress:
-                AddAddressView()
-                    .environment(router)
-            case .payment:
-                PaymentMethodView()
-                    .environment(router)
-            case .addCard:
-                AddCardView()
-                    .environment(router)
-            case .cart:
-                CartView(viewModel: .live(draftOrderId: router.draftOrderId.isEmpty ? nil : router.draftOrderId))
-                    .environment(router)
+            Group {
+                switch router.currentScreen {
+                case .splash:
+                    SplashScreen()
+                        .environment(router)
+                case .signIn:
+                    SignInView()
+                        .environment(router)
+                case .signUp:
+                    SignupView()
+                        .environment(router)
+                case .onBoarding:
+                    OnBoardingScreen()
+                        .environment(router)
+                case .home:
+                    ContentView()
+                        .environment(router)
+                case .checkout:
+                    CheckoutView(cartItems: router.cartItems, draftOrderId: router.draftOrderId)
+                        .environment(router)
+                case .address:
+                    AddressView()
+                        .environment(router)
+                case .addAddress:
+                    AddAddressView()
+                        .environment(router)
+                case .payment:
+                    PaymentMethodView()
+                        .environment(router)
+                case .addCard:
+                    AddCardView()
+                        .environment(router)
+                case .cart:
+                    CartView(viewModel: .live(draftOrderId: router.draftOrderId.isEmpty ? nil : router.draftOrderId))
+                        .environment(router)
+                }
             }
-
+            .modelContainer(container)
+            .onOpenURL { url in
+                GIDSignIn.sharedInstance.handle(url)
+            }
         }
-        .modelContainer(container)
     }
 }

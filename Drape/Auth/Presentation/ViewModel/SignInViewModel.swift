@@ -32,6 +32,11 @@ final class SignInViewModel {
         authRepository: FirebaseAuthRepository(),
         customerRepository: ShopifyCustomerRepository()
     )
+    
+    private let googleSignInUseCase = GoogleSignInUseCase(
+        authRepository: FirebaseAuthRepository(),
+        customerRepository: ShopifyCustomerRepository()
+    )
  
     var isFormValid: Bool {
         emailState == .success && passwordState == .success
@@ -71,6 +76,20 @@ final class SignInViewModel {
             let id = try await signInUseCase.execute(email: email, password: password)
             shopifyCustomerID = id
             // TODO: navigate to home now that sign-in succeeded
+        } catch {
+            alertMessage = error.localizedDescription
+            showAlert = true
+        }
+    }
+    
+    @MainActor
+    func signInWithGoogle() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            let id = try await googleSignInUseCase.execute()
+            shopifyCustomerID = id
         } catch {
             alertMessage = error.localizedDescription
             showAlert = true

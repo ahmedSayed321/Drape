@@ -112,7 +112,12 @@ struct SignInView: View {
                 ),
                 text: "Login with Google",
                 action: {
-                    
+                    Task {
+                        await viewModel.signInWithGoogle()
+                        if viewModel.shopifyCustomerID != nil {
+                            router.showHome()
+                        }
+                    }
                 },
                 leading: Image("google")
             )

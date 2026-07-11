@@ -27,8 +27,15 @@ final class SignupViewModel {
     var signedUpUser: AppUser?
     var showAlert = false
     var didSignUpSuccessfully = false
+    var shopifyCustomerID: String?
+    var didGoogleSignUpSucceed = false
     
     private let signUpUseCase = SignUpUseCase(
+        authRepository: FirebaseAuthRepository(),
+        customerRepository: ShopifyCustomerRepository()
+    )
+    
+    private let googleSignInUseCase = GoogleSignInUseCase(
         authRepository: FirebaseAuthRepository(),
         customerRepository: ShopifyCustomerRepository()
     )
@@ -104,8 +111,21 @@ final class SignupViewModel {
         }
     }
     
-    func signUpWithGoogle() {
+    func signUpWithGoogle() async {
+        isLoading = true
+        signUpError = nil
+        defer { isLoading = false }
         
+        do {
+            let id = try await googleSignInUseCase.execute()
+            shopifyCustomerID = id
+            print("Google Signup succeeded with Shopify ID: \(id)")
+            didGoogleSignUpSucceed = true
+        } catch {
+            signUpError = error.localizedDescription
+            print("Google Sign Up Error: \(error.localizedDescription)")
+            showAlert = true
+        }
     }
     
     func signUpWithFacebook() {

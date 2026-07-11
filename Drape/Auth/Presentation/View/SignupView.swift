@@ -28,6 +28,10 @@ struct SignupView: View {
             if viewModel.didSignUpSuccessfully {
                 router.showSignIn()
             }
+        }.onChange(of: viewModel.didGoogleSignUpSucceed) {
+            if viewModel.didGoogleSignUpSucceed {
+                router.showHome()  
+            }
         }
         .alert(
             "Sign Up Failed",
@@ -125,7 +129,9 @@ struct SignupView: View {
                 type: .custom(textColor: .black, buttonColor: .white),
                 text: "Sign Up with Google",
                 action: {
-                    viewModel.signUpWithGoogle()
+                    Task {
+                        await viewModel.signUpWithGoogle()
+                    }
                 },
                 status: .enable,
                 leading: Image("google")
